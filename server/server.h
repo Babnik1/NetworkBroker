@@ -7,7 +7,10 @@
 
 #include <boost/asio.hpp>
 #include <memory>
+#include <unordered_map>
+#include <vector>
 #include "../logs/log.h"
+#include "session.h"
 
 
 class Server
@@ -23,7 +26,7 @@ public:
 private:
     boost::asio::io_context ioContext_; 
     boost::asio::ip::tcp::acceptor acceptor_;
-    // SessionsManagerPtr sessionsManager_;
+    std::unordered_map< ClientId, SessionPtr > sessions_;
 
     void DoAccept();
     

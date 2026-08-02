@@ -38,7 +38,11 @@ void Server::DoAccept()
             if ( !error )
             {
                 INFO_ALL( "Client " << socket << " connected succesfully" );
-                /// @todo Делаем сессии менеджером сессий.
+                /// Тут будем отправлять запрос хочет он зарегаться или залогиниться.
+                /// Модуль ауфа будет это все обрабатывать.
+                
+                auth_->CheckClient();
+
             }
             else
             {
@@ -52,6 +56,18 @@ void Server::DoAccept()
             }
             DoAccept();
         } );                                    
+}
+
+
+
+ReturnCodes AttachSession()
+{
+
+}
+
+ReturnCodes DetachSession()
+{
+
 }
 
 
