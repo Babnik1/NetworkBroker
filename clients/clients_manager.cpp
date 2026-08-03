@@ -37,6 +37,8 @@ void ClientManager::CreateClient( std::string name )
     db_->SaveClient( client ); 
 }
 
+
+/// @todo В момент удаления клиента. База данных может записывать по аптайму.
 void ClientManager::RemoveClient( ClientId id )
 {
     auto it = clients_.find( id );
@@ -46,8 +48,8 @@ void ClientManager::RemoveClient( ClientId id )
         return;
     }
     it->second->Stop();
+    db_->DeleteClient( it->second->GetId() );
     clients_.erase( it );
-    db_->DeleteClient( client );
 }
 
 void ClientManager::LoadClients()

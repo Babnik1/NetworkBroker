@@ -1,16 +1,13 @@
 #include <memory>
 #include <boost/asio.hpp>
+#include "../broker/message_broker.h"
 
 using SessionId = uint64_t;
 
 class Session
 {
 public:
-    Session( SessionId id, boost::asio::ip::tcp::socket socket );
-
-    void Start();
-
-    void Stop();
+    Session( boost::asio::ip::tcp::socket socket );
 
     SessionId GetId() const;
 
@@ -18,12 +15,11 @@ private:
 
     void Read();
 
-    void Write();
+    void Send( std::string& msg );
 
     boost::asio::ip::tcp::socket socket_;
     SessionId id_;
     MessageQueue outgoing_;
-
 };
 
 using SessionPtr = std::shared_ptr< Session >;

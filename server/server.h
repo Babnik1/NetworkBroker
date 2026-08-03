@@ -11,13 +11,14 @@
 #include <vector>
 #include "../logs/log.h"
 #include "session.h"
+#include "../fwd.h"
 
 
 class Server
 {
 public:
 
-    Server( short port );
+    Server( short port, std::shared_ptr< MessageBroker > broker );
 
     void Start();
 
@@ -27,6 +28,7 @@ private:
     boost::asio::io_context ioContext_; 
     boost::asio::ip::tcp::acceptor acceptor_;
     std::unordered_map< ClientId, SessionPtr > sessions_;
+    std::shared_ptr< MessageBroker > broker_;
 
     void DoAccept();
     

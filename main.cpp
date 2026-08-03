@@ -2,6 +2,10 @@
 #include "logs/log.h"
 #include "server/server.h"
 #include "configurator/configurator.h"
+#include "db/json_repository.h"
+#include "clients/clients_manager.h"
+#include "topics/topic_manager.h"
+#include "broker/message_broker.h"
 #include <memory>
 #include <string>
 
@@ -9,6 +13,8 @@ const std::string configFile = "config.json";
 
 int main()
 {
+    INFO_ALL( "Application is running... " );
+
     ConfiguratorPtr configurator = std::make_unique< Configurator >( configFile );
     ReturnCodes rc = configurator->ReadConfig();
     if ( rc != ReturnCodes::Ok )
@@ -16,10 +22,19 @@ int main()
         return 1;
     }
     LogManager::Init( configurator->GetConfigs().nameFileLog );
-    std::string msg = "Hello";
-    INFO_ALL( "Broker was started: " << msg );
-    ServerPtr server = std::make_unique< Server >( configurator->GetConfigs().port );
+    INFO_LOG( "Configurator was started succesfully" );
+    INFO_LOG( "Log manager was started succesfully" );
+    INFO_SHELL( "Console log session was started" );
+    INFO_LOG( "File log session was started" );
+
+    auto repository = std::make_unique< JsonRepository >( "database.json" ); 
+    auto clientManager = std::make_shared< ClientManager >( std::move( repository ) );
+
+    auto topicManager = std::make_shared< TopicManager >();
+
+    auto broker = std::make_shared< MessageBroker >( clientManager, topicManager );
+
+    ServerPtr server = std::make_unique< Server >( configurator->GetConfigs().port, broker );
     server->Start();
-    server->Stop();
     return 0;
 }

@@ -44,7 +44,7 @@ ReturnCodes Configurator::ReadConfig()
         std::cout << "Configs unknown error: " << e.what() << "\n";
         return ReturnCodes::UnknownError;
     }
-    SetConfigs( configs );
+    SetConfigs( configs );\
     return ReturnCodes::Ok;
 }
 

@@ -1,0 +1,9 @@
+
+
+
+class TopicManager
+{
+public:
+
+    TopicManager();
+};

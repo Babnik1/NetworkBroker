@@ -1,7 +1,7 @@
 #include <memory>
 #include <unordered_map>
 #include "client.h"
-#include "../db/i_client_repository.h"
+#include "../fwd.h"
 
 
 
@@ -24,5 +24,3 @@ private:
 
     void LoadClients();
 };
-
-using ClientManagerPtr = std::unique_ptr< ClientManager >;

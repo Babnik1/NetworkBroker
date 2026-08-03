@@ -8,13 +8,11 @@ class JsonRepository : public IClientRepository
 public:
     JsonRepository( std::string dbFile );
 
-    virtual std::vector< Client > LoadClients();
+    virtual std::vector< Client > LoadClients() override;
 
-    virtual void SaveClient( const Client& client );
+    virtual void SaveClient( const Client& client ) override;
 
-    virtual void DeleteClient( ClientId id );
+    virtual void DeleteClient( ClientId id ) override;
 private:
     std::string dbFile_;
 };
-
-using IClientRepositoryPtr = std::shared_ptr< IClientRepository >;
