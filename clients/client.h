@@ -7,6 +7,7 @@
 
 #include "../server/session.h"
 #include <memory>
+#include <optional>
 #include <unordered_set>
 
 using ClientId = uint64_t;  /// ID клиента.
@@ -23,9 +24,12 @@ struct Client
 
     std::string GetName();
 
+    void Disconnect();
+
     ClientId id;
     std::unordered_set< Topic > subscriptions;
-    SessionPtr session; 
+    std::optional< SessionId > sesId;
+    SessionWeakPtr session; 
 };
 
 

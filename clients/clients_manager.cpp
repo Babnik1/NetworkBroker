@@ -5,6 +5,7 @@
 
 
 #include "clients_manager.h"
+#include "../db/i_client_repository.h"
 #include "../logs/log.h"
 #include <cstddef>
 #include <cstdint>
@@ -14,12 +15,12 @@
 
 
 ClientManager::ClientManager( IClientRepositoryPtr db )
-    : db_{ db }
+    : db_{ std::move( db ) }
 {
     LoadClients();
 }
 
-void ClientManager::CreateClient( std::string name )
+ClientsCodes ClientManager::CreateClient( const std::string& name )
 {
     std::random_device rd;
     std::mt19937 gen( rd() );
@@ -46,16 +47,19 @@ void ClientManager::CreateClient( std::string name )
 
 
 /// @todo В момент удаления клиента. База данных может записывать по аптайму.
-void ClientManager::RemoveClient( ClientId id )
+ClientsCodes ClientManager::RemoveClient( ClientId id )
 {
     auto it = clients_.find( id );
     if ( it == clients_.end() )
     {
         ERROR_ALL( "Failed to remove client: " << id );
-        return;
+        return ClientsCodes::ClientNotFound;
     }
-    it->second->Stop();
-    db_->DeleteClient( it->second->GetId() );
+    if ( it->second.sesId )
+    {
+        it->second.Disconnect();
+    }
+    db_->DeleteClient( it->second.GetId() );
     clients_.erase( it );
 }
 
@@ -69,17 +73,18 @@ void ClientManager::LoadClients()
     }
 }
 
-ClientId ClientManager::ConnectClient( std::string name, SessionPtr session )
+ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session )
 {
     for( auto& [ id, client ] : clients_ )
     {
         if ( client.GetName() == name )
         {
+            client.sesId = id;
             client.session = session;
-            return client.GetId();
+            return ClientsCodes::Ok;
         }
     }
-    return -1; // not found
+    return ClientsCodes::ClientNotFound;
 }
 
 void ClientManager::DisconnectClient( ClientId id )
@@ -90,5 +95,5 @@ void ClientManager::DisconnectClient( ClientId id )
         ERROR_ALL( "Failed to disconnect client: " << id << ", not found" );
         return;
     }
-    it->second.session = nullptr;
+    it->second.sesId = std::nullopt;
 }

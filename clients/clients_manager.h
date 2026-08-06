@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include "client.h"
 #include "../fwd.h"
+#include "rc.h"
 
 
 class ClientManager
@@ -16,13 +17,13 @@ class ClientManager
 public:
     ClientManager( IClientRepositoryPtr db );
 
-    void CreateClient( std::string name );
+    ClientsCodes CreateClient( const std::string& name );
 
-    ClientId ConnectClient( std::string name, SessionPtr session  );
+    ClientsCodes ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session );
 
     void DisconnectClient( ClientId id );
 
-    void RemoveClient( ClientId id );
+    ClientsCodes RemoveClient( const ClientId id );
 
 private:
     std::unordered_map< ClientId, Client > clients_;

@@ -48,7 +48,7 @@ void Server::DoAccept()
                     SessionData{ AuthType::NonAuthorized, 
                               session, 
                                    0 } );
-
+                session->SetSelf( session );
                 session->Start();
             }
             else

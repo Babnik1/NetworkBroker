@@ -39,6 +39,10 @@ public:
     /// @param [in] msg Сообщение.
     void Send( const std::string& msg );
 
+    /// @brief Установка указателя на себя.
+    /// @param [in] self Указатель на себя.
+    void SetSelf( std::weak_ptr< Session > self );
+
 private:
 
     /// @brief Прочитать сообщение от клиента.
@@ -56,6 +60,8 @@ private:
     SessionId id_;                          /// ID сессии.
     MessageQueue outgoing_;                 /// Очередь на отправку.
     MessageBrokerPtr broker_;               /// Указатель на брокер.
+    std::weak_ptr< Session > self_;         /// Указатель на саму себя.
 };
 
 using SessionPtr = std::shared_ptr< Session >;
+using SessionWeakPtr = std::weak_ptr< Session >;

@@ -23,4 +23,6 @@ using JsonRepositoryPtr = std::unique_ptr< JsonRepository >;
 
 using SessionPtr = std::shared_ptr< Session >;
 
+using SessionWeakPtr = std::weak_ptr< Session >;
+
 using MessageBrokerPtr = std::shared_ptr< MessageBroker >;

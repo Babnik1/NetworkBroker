@@ -23,7 +23,7 @@ public:
     /// @param[in] id ID сессии.
     /// @param[in] command Сообщение.
     /// @return Строка-ответ.
-    std::string HandleCommand( SessionId id, const std::string& command );
+    std::string HandleCommand( SessionId id, const std::string& command, SessionWeakPtr session );
 
     /// @brief Отключение клиента.
     /// @param[in] id ID сессии.
@@ -34,13 +34,13 @@ private:
     /// @param[in] id ID сессии.
     /// @param[in] name Имя пользователя.
     /// @return Код возврата.
-    BrokerCodes Login( SessionId id, const std::string& name );
+    BrokerCodes Login( SessionId id, const std::string& name, SessionWeakPtr session );
 
     /// @brief Регистрация клиента.
     /// @param[in] id ID сессии.
     /// @param[in] name Имя пользователя.
     /// @return Код возврата.
-    BrokerCodes Register( SessionId id, const std::string& name );
+    BrokerCodes Register( SessionId id, const std::string& name, SessionWeakPtr session );
 
     /// @brief Публикация от клиента.
     /// @param[in] topic Топик.

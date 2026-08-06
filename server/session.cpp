@@ -67,7 +67,7 @@ void Session::Read()
             std::string command;
             std::getline( is, command );
 
-            std::string response = broker_->HandleCommand( id_, command );
+            std::string response = broker_->HandleCommand( id_, command, self_ );
             if ( !response.empty() )
             {
                 Send( response );
@@ -113,5 +113,10 @@ void Session::Disconnect()
         ERROR_ALL( "Failed to close socket for session: " << id_ );
     }
     broker_->Disconnect( id_ );
+}
+
+void Session::SetSelf( std::weak_ptr< Session > self )
+{
+    self_ = self;
 }
 
