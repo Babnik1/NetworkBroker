@@ -23,9 +23,9 @@ enum class LogLevels
 /// @brief Перечислений мест назначение вывода.
 enum class LogDirection
 {
-    CONSOLE = 0,
-    LOG     = 1,
-    ALL     = 2,
+    CONSOLE = 0,    /// Вывод в консоль.
+    LOG     = 1,    /// Вывод в файл.
+    ALL     = 2,    /// Вывод и в консоль и в файл.
 };
 
 

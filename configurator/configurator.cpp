@@ -1,9 +1,17 @@
+/// @file configurator.cpp
+///
+/// Загрузчик конфигурации. Реализация.
+///
+
 #include "configurator.h"
 
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <nlohmann/json_fwd.hpp>
+
+namespace configurator
+{
 
 
 Configurator::Configurator( std::string config )
@@ -57,3 +65,5 @@ Configs Configurator::GetConfigs() const
 {
     return configs_;
 }
+
+// namespace configurator

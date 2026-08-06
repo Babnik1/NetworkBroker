@@ -25,7 +25,7 @@ ReturnCodes MessageBroker::Register( SessionPtr session, std::string& name )
 {
     if ( cliManager_->CreateClient( name ) == -1 )
     {
-
+        return 
     }
 }
 

@@ -4,7 +4,8 @@
 #include "../fwd.h"
 
 
-
+namespace client_manager
+{
 class ClientManager
 {
 public:
@@ -24,3 +25,5 @@ private:
 
     void LoadClients();
 };
+
+} // namespace client_manager

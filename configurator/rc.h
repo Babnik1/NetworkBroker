@@ -1,11 +1,15 @@
+/// @file rc.h
+///
+/// Коды возврата конфигуратора.
+///
 
-
+/// @brief Структура кодов возврата конфигуратора.
 enum class ReturnCodes
 {
-    Ok              = 0,
-    ErrFileNotFound = 1,
-    ErrReadFile     = 2,
-    ErrInvalidArg   = 3,
-    ErrInvalidKey   = 4,
-    UnknownError    = 5,
+    Ok              = 0,    /// Успешно.
+    ErrFileNotFound = 1,    /// Файл не найден.
+    ErrReadFile     = 2,    /// Ошибка чтения файла.
+    ErrInvalidArg   = 3,    /// Неверный параметр конфигурации.
+    ErrInvalidKey   = 4,    /// Неверный ключ параметра конфигурации.
+    UnknownError    = 5,    /// Неизвестная ошибка.
 };

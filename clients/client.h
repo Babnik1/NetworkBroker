@@ -2,6 +2,9 @@
 #include <memory>
 #include <unordered_set>
 
+namespace client_manager
+{
+
 using ClientId = uint64_t;
 
 struct Client
@@ -16,4 +19,6 @@ struct Client
     std::unordered_set< Topic > subscriptions;
     SessionPtr session; 
 };
+
+}
 
