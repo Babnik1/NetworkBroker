@@ -1,7 +1,8 @@
 #include "protocol_handler.h"
 #include "../broker/message_broker.h"
 
-
+namespace protocol
+{
 
 void ProtocolHandler::Handle( SessionPtr session, const std::string& message )
 {
@@ -35,3 +36,5 @@ void ProtocolHandler::Handle( SessionPtr session, const std::string& message )
         }
     }
 }
+
+} // namespace protocol

@@ -16,8 +16,8 @@ int main()
     INFO_ALL( "Application is running... " );
 
     ConfiguratorPtr configurator = std::make_unique< Configurator >( configFile );
-    ReturnCodes rc = configurator->ReadConfig();
-    if ( rc != ReturnCodes::Ok )
+    ConfigCodes rc = configurator->ReadConfig();
+    if ( rc != ConfigCodes::Ok )
     {
         return 1;
     }

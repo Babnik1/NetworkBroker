@@ -3,8 +3,9 @@
 /// Коды возврата конфигуратора.
 ///
 
+
 /// @brief Структура кодов возврата конфигуратора.
-enum class ReturnCodes
+enum class ConfigCodes
 {
     Ok              = 0,    /// Успешно.
     ErrFileNotFound = 1,    /// Файл не найден.

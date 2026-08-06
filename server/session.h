@@ -1,25 +1,61 @@
+#pragma once
+/// @file session.h
+///
+/// Сетевая сессия. Объявление.
+///
+
+
+#include <deque>
 #include <memory>
 #include <boost/asio.hpp>
 #include "../broker/message_broker.h"
 
+/// @brief ID сессии.
 using SessionId = uint64_t;
 
+/// @brief Очередь сообщений клиенту.
+using MessageQueue = std::deque< std::string >;
+
+
+/// @brief Класс сессии.
 class Session
 {
 public:
-    Session( boost::asio::ip::tcp::socket socket );
 
+    /// @brief Конструктор.
+    /// @param[in] id ID сессии.
+    /// @param[in] socket Сокет.
+    /// @param[in] broker Указатель на брокер.
+    Session( SessionId id, boost::asio::ip::tcp::socket socket, MessageBrokerPtr broker );
+
+    /// @brief Старт сессии.
+    void Start();
+
+    /// @brief Получить ID сессии.
+    /// @return ID сессии.
     SessionId GetId() const;
+
+    /// @brief Отправка сообщения клиенту.
+    /// @param [in] msg Сообщение.
+    void Send( const std::string& msg );
 
 private:
 
+    /// @brief Прочитать сообщение от клиента.
     void Read();
 
-    void Send( std::string& msg );
+    /// @brief Записать сообщение на отправку.
+    void DoWrite();
 
-    boost::asio::ip::tcp::socket socket_;
-    SessionId id_;
-    MessageQueue outgoing_;
+    /// @brief Отключение сессии.
+    void Disconnect();
+
+    boost::asio::ip::tcp::socket socket_;   /// Сокет.
+    boost::asio::streambuf buffer_;         /// Указатель на брокер.
+
+    SessionId id_;                          /// ID сессии.
+    MessageQueue outgoing_;                 /// Очередь на отправку.
+    MessageBrokerPtr broker_;               /// Указатель на брокер.
 };
 
 using SessionPtr = std::shared_ptr< Session >;

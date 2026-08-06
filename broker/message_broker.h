@@ -1,26 +1,61 @@
+#pragma once
+/// @file message_broker.h
+///
+/// Брокер. Объявление.
+///
+
+
 #include "../fwd.h"
 #include "rc.h"
 
-namespace broker 
-{
-
+/// @brief Класс брокера.
 class MessageBroker
 {
 public:
 
+    /// @brief Конструктор.
+    /// @param[in] cliManager Менеджер клиентов.
+    /// @param[in] topManager Менеджер топиков.
+    /// @return Код возврата.
     MessageBroker( ClientManagerPtr cliManager, TopicManagerPtr topManager );
 
-    ReturnCodes Login( SessionPtr session, std::string& name );
+    /// @brief Обработка команды.
+    /// @param[in] id ID сессии.
+    /// @param[in] command Сообщение.
+    /// @return Строка-ответ.
+    std::string HandleCommand( SessionId id, const std::string& command );
 
-    ReturnCodes Register( SessionPtr session, std::string& name );
-
-    ReturnCodes Publish( Topic& topic, std::string& name, std::string& message );
-
-    ReturnCodes Subscribe( Topic& topic, std::string& name );
+    /// @brief Отключение клиента.
+    /// @param[in] id ID сессии.
+    void Disconnect( SessionId id );
 
 private:
-    ClientManagerPtr cliManager_;
-    TopicManagerPtr topManager_;
-};
+    /// @brief Авторизация клиента.
+    /// @param[in] id ID сессии.
+    /// @param[in] name Имя пользователя.
+    /// @return Код возврата.
+    BrokerCodes Login( SessionId id, const std::string& name );
 
-} // namespace broker
+    /// @brief Регистрация клиента.
+    /// @param[in] id ID сессии.
+    /// @param[in] name Имя пользователя.
+    /// @return Код возврата.
+    BrokerCodes Register( SessionId id, const std::string& name );
+
+    /// @brief Публикация от клиента.
+    /// @param[in] topic Топик.
+    /// @param[in] name Имя пользователя.
+    /// @param[in] message Сообщение.
+    /// @return Код возврата.
+    BrokerCodes Publish( SessionId id, const std::string& message );
+
+    /// @brief Подписка от клиента.
+    /// @param[in] topic Топик.
+    /// @param[in] name Имя пользователя.
+    /// @return Код возврата.
+    BrokerCodes Subscribe( SessionId id, const std::string& message );
+
+private:
+    ClientManagerPtr cliManager_;       /// Менеджер клиентов.
+    TopicManagerPtr topManager_;        /// Менеджер топиков.
+};

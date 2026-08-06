@@ -1,11 +1,16 @@
+#pragma once
+/// @file client_manager.h
+///
+/// Менеджер клиентов. Объявление.
+///
+
+
 #include <memory>
 #include <unordered_map>
 #include "client.h"
 #include "../fwd.h"
 
 
-namespace client_manager
-{
 class ClientManager
 {
 public:
@@ -25,5 +30,3 @@ private:
 
     void LoadClients();
 };
-
-} // namespace client_manager

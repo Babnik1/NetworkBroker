@@ -1,14 +1,22 @@
+#pragma once
+/// @file client.h
+///
+/// Клиент.
+///
+
+
 #include "../server/session.h"
 #include <memory>
 #include <unordered_set>
 
-namespace client_manager
-{
+using ClientId = uint64_t;  /// ID клиента.
 
-using ClientId = uint64_t;
-
+/// @brief Стуктура клиента.
 struct Client
 {
+    /// @brief Конструктор.
+    /// @param[in] id ID клиента.
+    /// @param[in] name Имя клиента.
     Client( ClientId id, std::string name );
 
     ClientId GetId() const;
@@ -20,5 +28,4 @@ struct Client
     SessionPtr session; 
 };
 
-}
 

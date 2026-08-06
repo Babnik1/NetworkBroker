@@ -13,6 +13,20 @@
 #include "session.h"
 #include "../fwd.h"
 
+enum class AuthType
+{
+    Authorized      = 0,
+    NonAuthorized   = 1,
+};
+
+/// @todo Не нужно так наверн. Подумать.
+struct SessionData
+{
+    AuthType auth;
+    SessionPtr session;
+    ClientId id;
+};
+
 
 class Server
 {
@@ -24,10 +38,13 @@ public:
 
     void Stop();
 
+    void RemoveSession( SessionId id );
+
 private:
+    SessionId nextSessionId_{ 1 };
     boost::asio::io_context ioContext_; 
     boost::asio::ip::tcp::acceptor acceptor_;
-    std::unordered_map< ClientId, SessionPtr > sessions_;
+    std::unordered_map< SessionId, SessionData > sessions_;
     std::shared_ptr< MessageBroker > broker_;
 
     void DoAccept();

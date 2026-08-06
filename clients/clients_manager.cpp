@@ -1,3 +1,9 @@
+/// @file client_manager.cpp
+///
+/// Менеджер клиентов. Реализация.
+///
+
+
 #include "clients_manager.h"
 #include "../logs/log.h"
 #include <cstddef>
@@ -6,8 +12,6 @@
 #include <random>
 #include <vector>
 
-namespace client_manager
-{
 
 ClientManager::ClientManager( IClientRepositoryPtr db )
     : db_{ db }
@@ -88,5 +92,3 @@ void ClientManager::DisconnectClient( ClientId id )
     }
     it->second.session = nullptr;
 }
-
-} // namespace client_manager

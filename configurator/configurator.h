@@ -7,6 +7,8 @@
 #include <string>
 #include "rc.h"
 
+
+
 /// @brief Структура конфигурации.
 struct Configs
 {
@@ -24,7 +26,7 @@ public:
 
     /// @brief Чтение конфигурации из файла.
     /// @return Возвращает код выполнения. 0 = успех.
-    ReturnCodes ReadConfig();
+    ConfigCodes ReadConfig();
 
     /// @brief Получить конфигурацию.
     /// @return Возвращает структуру конфигурации.

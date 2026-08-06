@@ -6,7 +6,10 @@
 #include "server.h"
 #include <boost/asio/io_context.hpp>
 #include <boost/system/detail/error_code.hpp>
+#include <cstdint>
 #include <memory>
+
+#include "../broker/message_broker.h"
 
 
 Server::Server( short port, std::shared_ptr< MessageBroker > broker )
@@ -32,18 +35,21 @@ void Server::Stop()
 
 void Server::DoAccept()
 {
+    SessionId id = nextSessionId_++;
     auto socket = std::make_shared< boost::asio::ip::tcp::socket >( ioContext_ );
     acceptor_.async_accept( *socket, [ this, socket ]( const boost::system::error_code& error )
         {
             if ( !error )
             {
                 INFO_ALL( "Client " << socket->remote_endpoint().address() << " connected succesfully" );
-                auto session = std::make_shared< Session >( std::move( *socket ) );
+                auto session = std::make_shared< Session >( id, std::move( *socket ), broker_ );
+                sessions_.emplace(
+                    session->GetId(),
+                    SessionData{ AuthType::NonAuthorized, 
+                              session, 
+                                   0 } );
 
-                if ( broker_->GetClientManager()->ConnectClient( session ) )
-                {
-                    sessions_.emplace( session->GetId(), session );
-                }
+                session->Start();
             }
             else
             {
@@ -57,6 +63,11 @@ void Server::DoAccept()
             }
             DoAccept();
         } );                                    
+}
+
+void Server::RemoveSession( SessionId id )
+{
+    sessions_.erase( id );
 }
 
 

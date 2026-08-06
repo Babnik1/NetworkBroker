@@ -1,24 +1,25 @@
+#pragma once
+/// @file rc.h
+/// 
+/// Кооды возврата брокера.
+///
 
-namespace broker 
+/// @brief Коды возврата брокера.
+enum class BrokerCodes
 {
+    Ok                      = 0,    /// Успешно.
 
-enum class ReturnCodes
-{
-    Ok,
+    ClientAlreadyExists     = 1,    /// Клиент уже существует.
+    ClientNotFound          = 2,    /// Клиент не найден.
+    ClientAlreadyConnected  = 3,    /// Клиент уже подключен.
 
-    ClientAlreadyExists,
-    ClientNotFound,
-    ClientAlreadyConnected,
+    TopicAlreadyExists      = 4,    /// Тема уже существует.
+    TopicNotFound           = 5,    /// Тема не найдена.
 
-    TopicAlreadyExists,
-    TopicNotFound,
+    NotSubscribed           = 6,    /// Не подписан.
 
-    NotSubscribed,
+    InvalidCommand          = 7,    /// Неверная команда.
+    Unauthorized            = 8,    /// Не авторизован.
 
-    InvalidCommand,
-    Unauthorized,
-
-    InternalError
+    InternalError           = 9,    /// Другая ошибка.
 };
-
-} // namespace broker

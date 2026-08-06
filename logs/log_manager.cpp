@@ -11,8 +11,6 @@
 
 #include "log_manager.h"
 
-namespace logs
-{
 
 std::unique_ptr< LogManager > LogManager::instance_ = nullptr;
 
@@ -52,5 +50,3 @@ LogManager& LogManager::Instance()
     }
     return *instance_;
 }
-
-} // namespace logs

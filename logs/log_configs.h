@@ -5,6 +5,7 @@
 /// Структуры конфигурации логгера.
 ///
 
+
 #include <map>
 #include <string>
 
@@ -38,3 +39,4 @@ const std::map< LogLevels, std::string > loggerMap
     { LogLevels::ERROR,     "ERROR"     },
     { LogLevels::FATAL,     "FATAL"     }
 };
+

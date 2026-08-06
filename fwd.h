@@ -11,6 +11,7 @@ class Server;
 
 using ClientId = uint64_t;
 using Topic = std::string;
+using SessionId = uint64_t;
 
 using TopicManagerPtr = std::shared_ptr< TopicManager >;
 

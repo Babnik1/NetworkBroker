@@ -10,8 +10,6 @@
 #include "shell_printer.h"
 
 
-namespace logs
-{
 class LogManager
 {
 public:
@@ -47,5 +45,3 @@ private:
     /// @param[in] file Лог-файл.
     LogManager( const std::string& file );      
 };
-
-} // namespace logs

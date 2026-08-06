@@ -10,21 +10,19 @@
 #include <nlohmann/json.hpp>
 #include <nlohmann/json_fwd.hpp>
 
-namespace configurator
-{
 
 
 Configurator::Configurator( std::string config )
     : configFile_{ config }
 {}
 
-ReturnCodes Configurator::ReadConfig()
+ConfigCodes Configurator::ReadConfig()
 {
     Configs configs;
     std::ifstream file( configFile_ );
     if ( !file.is_open() )
     {
-        return ReturnCodes::ErrFileNotFound;
+        return ConfigCodes::ErrFileNotFound;
     }
     try
     {
@@ -35,25 +33,25 @@ ReturnCodes Configurator::ReadConfig()
     catch ( const nlohmann::json::parse_error& e ) 
     {
         std::cout << "Configs parse error: " << e.what() << "\n";
-        return ReturnCodes::ErrReadFile;
+        return ConfigCodes::ErrReadFile;
     }
     catch ( const nlohmann::json::out_of_range& e )
     {
         std::cout << "Configs invalid key error: " << e.what() << "\n";
-        return ReturnCodes::ErrInvalidKey;
+        return ConfigCodes::ErrInvalidKey;
     }
     catch ( const nlohmann::json::type_error& e )
     {
         std::cout << "Configs invalid argument error: " << e.what() << "\n";
-        return ReturnCodes::ErrInvalidArg;
+        return ConfigCodes::ErrInvalidArg;
     }
     catch ( const nlohmann::json::exception& e )
     {
         std::cout << "Configs unknown error: " << e.what() << "\n";
-        return ReturnCodes::UnknownError;
+        return ConfigCodes::UnknownError;
     }
     SetConfigs( configs );\
-    return ReturnCodes::Ok;
+    return ConfigCodes::Ok;
 }
 
 void Configurator::SetConfigs( const Configs configs )
@@ -66,4 +64,3 @@ Configs Configurator::GetConfigs() const
     return configs_;
 }
 
-// namespace configurator

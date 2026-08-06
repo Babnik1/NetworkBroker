@@ -1,4 +1,117 @@
-#include "session.h"
-#include <memory>
+/// @file session.cpp
+///
+/// Сетевая сессия. Реализация.
+///
 
+
+#include "session.h"
+#include "server.h"
+#include <boost/asio/impl/read.hpp>
+#include <boost/asio/impl/read_until.hpp>
+#include <boost/asio/impl/write.hpp>
+#include <boost/system/detail/error_code.hpp>
+#include <memory>
+#include "../logs/log.h"
+
+Session::Session( SessionId id,
+                  boost::asio::ip::tcp::socket socket,
+                  MessageBrokerPtr broker )
+            : id_{ id }
+            , socket_{ std::move( socket ) }
+            , broker_{ broker }
+{}
+
+SessionId Session::GetId() const
+{
+    return id_;
+}
+
+void Session::Start()
+{
+    std::string msg = "Welcome to MessageBroker\n"
+                      "Available commands:\n"
+                      "REGISTER <name>\n"
+                      "LOGIN <name>\n";
+    Send( msg );
+    Read();
+}
+
+void Session::Send( const std::string& msg )
+{
+    bool writing = !outgoing_.empty();
+    outgoing_.push_back( msg );
+
+    if ( !writing )
+    {
+        DoWrite();
+    }
+}
+
+void Session::Read()
+{
+    auto buffer = std::make_shared< boost::asio::streambuf >();
+
+    boost::asio::async_read_until( 
+        socket_,
+        *buffer,
+        '\n',
+        [ this, buffer ]( const boost::system::error_code& ec, std::size_t )
+        {
+            if ( ec )
+            {
+                Disconnect();
+                return;
+            }
+
+            std::istream is( buffer.get() );
+            std::string command;
+            std::getline( is, command );
+
+            std::string response = broker_->HandleCommand( id_, command );
+            if ( !response.empty() )
+            {
+                Send( response );
+            }
+            Read();
+        } 
+    );
+}
+
+void Session::DoWrite()
+{
+    boost::asio::async_write(
+        socket_,
+        boost::asio::buffer( outgoing_.front() ),
+        [ this ]( const boost::system::error_code& ec, std::size_t )
+        {
+            if ( ec )
+            {
+                Disconnect();
+                return;
+            }
+
+            outgoing_.pop_front();
+            if ( !outgoing_.empty() )
+            {
+                DoWrite();
+            }
+        }
+    );
+}
+
+void Session::Disconnect()
+{
+    boost::system::error_code ec;
+    ec = socket_.shutdown( boost::asio::ip::tcp::socket::shutdown_both,ec );
+    if ( ec )
+    {
+        ERROR_ALL( "Failed to close socket for session: " << id_ );
+    }
+    ec = socket_.close( ec );
+    if ( ec )
+    {
+        ERROR_ALL( "Failed to close socket for session: " << id_ );
+    }
+    broker_->Disconnect( id_ );
+}
 

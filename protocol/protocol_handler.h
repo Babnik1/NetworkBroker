@@ -1,6 +1,9 @@
 #include "../fwd.h"
 #include "string"
 
+namespace protocol
+{
+
 enum class CommandType
 {
     Login = 0,
@@ -19,3 +22,6 @@ public:
 private:
     MessageBrokerPtr broker_;
 };
+
+
+} // namespace protocol
