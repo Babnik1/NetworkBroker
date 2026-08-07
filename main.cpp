@@ -2,7 +2,7 @@
 #include "logs/log.h"
 #include "server/server.h"
 #include "configurator/configurator.h"
-#include "db/json_repository.h"
+#include "db/json_client_repository.h"
 #include "clients/clients_manager.h"
 #include "topics/topic_manager.h"
 #include "broker/message_broker.h"
@@ -27,10 +27,11 @@ int main()
     INFO_SHELL( "Console log session was started" );
     INFO_LOG( "File log session was started" );
 
-    auto repository = std::make_unique< JsonRepository >( "database.json" ); 
-    auto clientManager = std::make_shared< ClientManager >( std::move( repository ) );
+    auto clientsRepository = std::make_unique< JsonRepository >( "clientsbase.json" ); 
+    auto clientManager = std::make_shared< ClientManager >( std::move( clientsRepository ) );
 
-    auto topicManager = std::make_shared< TopicManager >();
+    auto topicsRepository = std::make_unique< JsonRepository >( "topicsbase.json" ); 
+    auto topicManager = std::make_shared< TopicManager >( topicsRepository );
 
     auto broker = std::make_shared< MessageBroker >( clientManager, topicManager );
 

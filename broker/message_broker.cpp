@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <unordered_map>
 #include <vector>
+#include "../topics/topic_manager.h"
 
 enum class Actions
 {
@@ -152,7 +153,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
 BrokerCodes MessageBroker::Login( SessionId id, const std::string& name, SessionWeakPtr session )
 {
-    if ( cliManager_->ConnectClient( name , id, session ))
+    if ( cliManager_->ConnectClient( name , id, session ) )
     {
         return BrokerCodes::ClientNotFound;
     }
@@ -185,7 +186,7 @@ BrokerCodes MessageBroker::Publish( SessionId id, const std::string& topic, cons
     {
         return BrokerCodes::Unauthorized;
     }
-    return topManager_->Publish( clientId, topic, message );
+    return static_cast< BrokerCodes >( topManager_->Publish( clientId, topic, message ) );
 }
 
 BrokerCodes MessageBroker::Subscribe( SessionId id, const std::string& topic )
@@ -195,5 +196,5 @@ BrokerCodes MessageBroker::Subscribe( SessionId id, const std::string& topic )
     {
         return BrokerCodes::Unauthorized;
     }
-    return topManager_->Subscribe( clientId, topic );
+    return static_cast< BrokerCodes >( topManager_->Subscribe( clientId, topic ) );
 }

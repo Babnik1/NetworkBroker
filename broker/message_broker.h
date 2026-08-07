@@ -22,6 +22,8 @@ public:
     /// @brief Обработка команды.
     /// @param[in] id ID сессии.
     /// @param[in] command Сообщение.
+    /// @param[in] session Слабая ссылка на сессию.
+    /// @details Получает слабую ссылку на сессию, чтобы потом была возможность отправлять ответ.
     /// @return Строка-ответ.
     std::string HandleCommand( SessionId id, const std::string& command, SessionWeakPtr session );
 
@@ -33,25 +35,27 @@ private:
     /// @brief Авторизация клиента.
     /// @param[in] id ID сессии.
     /// @param[in] name Имя пользователя.
+    /// @param[in] session Слабая ссылка на сессию.
     /// @return Код возврата.
     BrokerCodes Login( SessionId id, const std::string& name, SessionWeakPtr session );
 
     /// @brief Регистрация клиента.
     /// @param[in] id ID сессии.
     /// @param[in] name Имя пользователя.
+    /// @param[in] session Слабая ссылка на сессию.
     /// @return Код возврата.
     BrokerCodes Register( SessionId id, const std::string& name, SessionWeakPtr session );
 
     /// @brief Публикация от клиента.
+    /// @param[in] id ID сессии.
     /// @param[in] topic Топик.
-    /// @param[in] name Имя пользователя.
     /// @param[in] message Сообщение.
     /// @return Код возврата.
-    BrokerCodes Publish( SessionId id, const std::string& message );
+    BrokerCodes Publish( SessionId id, const std::string& topic, const std::string& message );
 
     /// @brief Подписка от клиента.
     /// @param[in] topic Топик.
-    /// @param[in] name Имя пользователя.
+    /// @param[in] message Сообщение.
     /// @return Код возврата.
     BrokerCodes Subscribe( SessionId id, const std::string& message );
 
