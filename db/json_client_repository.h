@@ -16,7 +16,7 @@ class JsonRepository : public IClientRepository
 public:
     /// @brief Конструктор.
     /// @param[in] dbFile Путь к базе данных.
-    JsonRepository( std::string dbFile );
+    JsonRepository( const std::string dbFile );
 
     /// @copydoc IClientRepository::LoadClients
     virtual std::vector< Client > LoadClients() override;

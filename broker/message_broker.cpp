@@ -153,7 +153,8 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
 BrokerCodes MessageBroker::Login( SessionId id, const std::string& name, SessionWeakPtr session )
 {
-    if ( cliManager_->ConnectClient( name , id, session ) )
+    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, session ) );
+    if ( rc != BrokerCodes::Ok )
     {
         return BrokerCodes::ClientNotFound;
     }

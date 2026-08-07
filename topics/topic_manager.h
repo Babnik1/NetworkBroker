@@ -18,7 +18,7 @@ public:
     TopicCodes Subscribe( ClientId id, Topic topic );
 
 private:
-    std::string db_; 
+    ITopicRepositoryPtr db_; 
 };
 
 using TopicManagerPtr = std::shared_ptr< TopicManager >;

@@ -25,6 +25,8 @@ public:
 
     ClientsCodes RemoveClient( const ClientId id );
 
+    ClientId GetClientId( SessionId id );
+
 private:
     std::unordered_map< ClientId, Client > clients_;
     IClientRepositoryPtr db_;

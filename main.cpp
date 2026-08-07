@@ -3,6 +3,7 @@
 #include "server/server.h"
 #include "configurator/configurator.h"
 #include "db/json_client_repository.h"
+#include "db/json_topic_repository.h"
 #include "clients/clients_manager.h"
 #include "topics/topic_manager.h"
 #include "broker/message_broker.h"
@@ -30,8 +31,8 @@ int main()
     auto clientsRepository = std::make_unique< JsonRepository >( "clientsbase.json" ); 
     auto clientManager = std::make_shared< ClientManager >( std::move( clientsRepository ) );
 
-    auto topicsRepository = std::make_unique< JsonRepository >( "topicsbase.json" ); 
-    auto topicManager = std::make_shared< TopicManager >( topicsRepository );
+    auto topicsRepository = std::make_unique< JsonTopicRepository >( "topicsbase.json" ); 
+    auto topicManager = std::make_shared< TopicManager >( std::move( topicsRepository ) );
 
     auto broker = std::make_shared< MessageBroker >( clientManager, topicManager );
 

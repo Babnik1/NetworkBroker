@@ -16,6 +16,7 @@ class TopicManager;
 class IClientRepository;
 class JsonRepository;
 class Server;
+class ITopicRepository;
 
 using ClientId = uint64_t;
 using Topic = std::string;
@@ -26,6 +27,8 @@ using TopicManagerPtr = std::shared_ptr< TopicManager >;
 using ClientManagerPtr = std::shared_ptr< ClientManager >;
 
 using IClientRepositoryPtr = std::unique_ptr< IClientRepository >;
+
+using ITopicRepositoryPtr = std::unique_ptr< ITopicRepository >;
 
 using JsonRepositoryPtr = std::unique_ptr< JsonRepository >;
 

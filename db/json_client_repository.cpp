@@ -13,7 +13,7 @@
 #include "../logs/log.h"
 
 
-JsonRepository::JsonRepository( std::string dbFile )
+JsonRepository::JsonRepository( const std::string dbFile )
     : dbFile_{ dbFile }
 {}
 
