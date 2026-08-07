@@ -13,21 +13,29 @@
 #include <mutex>
 #include <thread>
 
+
+/// @brief Класс вывода сообщений в консоль сервера.
 class ShellPrinter
 {
 public:
+
+    /// @brief Конструктор.
     ShellPrinter();
 
+    /// @brief Деструктор.
     ~ShellPrinter();
 
+    /// @brief Поставить в очередь на запись в консоль.
+    /// @param[in] msg Сообщение.
     void SetQueue( const std::string& msg );
 
 private:
-    std::queue< std::string > queue_;
-    std::mutex mutex_;
-    std::atomic< bool > stop_;
-    std::thread writer_;
+    std::queue< std::string > queue_;       /// Очередь сообщений.
+    std::mutex mutex_;                      /// Мьютекс вывода.
+    std::atomic< bool > stop_;              /// Сигнал об остановке программы.
+    std::thread writer_;                    /// Пишущий поток.
 
+    /// @brief Залогировать сообщение.
     void Log();
 };
 

@@ -1,3 +1,11 @@
+#pragma once
+
+/// @file fwd.h
+///
+/// Форвардная декларация.
+///
+
+
 #include <memory>
 #include <cstdint>
 

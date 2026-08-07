@@ -1,3 +1,9 @@
+#pragma once
+/// @file log.h
+///
+/// Объявление макросов для логирования.
+///
+
 #include <sstream>
 #include "log_manager.h"
 

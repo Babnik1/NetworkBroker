@@ -10,6 +10,7 @@
 #include "shell_printer.h"
 
 
+/// @brief Класс логирования сообщений.
 class LogManager
 {
 public:
