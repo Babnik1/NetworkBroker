@@ -1,7 +1,15 @@
+/// @file json_repository.cpp
+///
+/// База данных в JSON. Реализация.
+///
+
+
 #include "json_repository.h"
+#include <cstdint>
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include <string>
+#include <vector>
 #include "../logs/log.h"
 
 
@@ -11,7 +19,36 @@ JsonRepository::JsonRepository( std::string dbFile )
 
 std::vector< Client > JsonRepository::LoadClients()
 {
+    std::vector< Client > clients;
+    nlohmann::json jsonClients;
+    std::ifstream file( dbFile_ );
+    if ( !file.is_open() )
+    {
+        ERROR_LOG( "Failed to open data base file for read: " << dbFile_ );
+        return {};
+    }
+    try
+    {
+        file >> jsonClients;
+        file.close();
+   
+        for ( const auto& [ key, value ] : jsonClients.items() )
+        {
+            Client client
+            {  
+                std::stoull( key ), 
+                value[ "name" ].get< std::string >() 
+            };
 
+            clients.push_back( client );
+        }
+    }
+    catch ( const std::exception& e )
+    {
+        ERROR_LOG( "Failed to parse clients: " << e.what() );
+        return {};
+    }
+    return clients;
 }
 
 bool JsonRepository::SaveClient( const Client& client )
