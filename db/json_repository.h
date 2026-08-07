@@ -10,9 +10,9 @@ public:
 
     virtual std::vector< Client > LoadClients() override;
 
-    virtual void SaveClient( const Client& client ) override;
+    virtual bool SaveClient( const Client& client ) override;
 
-    virtual void DeleteClient( ClientId id ) override;
+    virtual bool DeleteClient( ClientId id ) override;
 private:
     std::string dbFile_;
 };

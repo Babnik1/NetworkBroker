@@ -27,6 +27,7 @@ struct Client
     void Disconnect();
 
     ClientId id;
+    std::string name;
     std::unordered_set< Topic > subscriptions;
     std::optional< SessionId > sesId;
     SessionWeakPtr session; 

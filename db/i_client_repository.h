@@ -8,7 +8,7 @@ public:
 
     virtual std::vector< Client > LoadClients() = 0;
 
-    virtual void SaveClient( const Client& client ) = 0;
+    virtual bool SaveClient( const Client& client ) = 0;
 
-    virtual void DeleteClient( ClientId id ) = 0;
+    virtual bool DeleteClient( ClientId id ) = 0;
 };
