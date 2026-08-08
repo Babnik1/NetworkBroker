@@ -1,7 +1,7 @@
 #pragma once
 /// @file json_client_repository.h
 ///
-/// База данных в JSON. Объявление.
+/// База данных клиентов в JSON. Объявление.
 ///
 
 

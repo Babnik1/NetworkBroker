@@ -1,14 +1,14 @@
 #pragma once
 /// @file i_client_repisitory.h
 ///
-/// Интерфейс базы данных.
+/// Интерфейс базы данных клиентов.
 ///
 
 
 #include <vector>
 #include "../clients/client.h"
 
-/// @brief Абстрактный класс базы данных.
+/// @brief Абстрактный класс базы данных клиентов.
 class IClientRepository
 {
 public:
