@@ -82,21 +82,25 @@ ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id
         if ( client.GetName() == name )
         {
             client.SetSession( session );
+            INFO_ALL( "Client ID: " << client.GetId() <<", name: " << name << " authorized successfully" );
             return ClientsCodes::Ok;
         }
     }
+    WARNING_ALL( "Failed to authorize client: " << name << ". Client is not found." );
     return ClientsCodes::ClientNotFound;
 }
 
 void ClientManager::DisconnectClient( SessionId id )
 {
-    auto it = clients_.find( id );
-    if ( it == clients_.end() )
+    for ( auto& client : clients_ )
     {
-        ERROR_ALL( "Failed to disconnect client: " << id << ", not found" );
-        return;
+        if ( client.second.GetSessionId() == id )
+        {
+            client.second.Disconnect();
+            INFO_ALL( "Client ID: " << client.second.GetId() <<", name: " << client.second.GetName() << " disconnected successfully" );
+        }
     }
-    it->second.Disconnect();
+    ERROR_ALL( "Failed to disconnect session: " << id );
 }
 
 ClientsCodes ClientManager::GetClientId( SessionId id, ClientId& clientId )
