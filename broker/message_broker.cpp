@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <vector>
 #include "../topics/topic_manager.h"
+#include "../logs/log.h"
 
 enum class Actions
 {
@@ -19,6 +20,7 @@ enum class Actions
     SUBSCRIBE   = 1,
     LOGIN       = 2,
     REGISTER    = 3,
+    CREATE      = 4,
 };
 
 static const std::unordered_map< std::string, Actions > commands =
@@ -26,7 +28,8 @@ static const std::unordered_map< std::string, Actions > commands =
     { "LOGIN",      Actions::LOGIN      },
     { "REGISTER",   Actions::REGISTER   },
     { "PUBLISH",    Actions::PUBLISH    },
-    { "SUBSCRIBE",  Actions::SUBSCRIBE  }
+    { "SUBSCRIBE",  Actions::SUBSCRIBE  },
+    { "CREATE",     Actions::CREATE     }
 };
 
 
@@ -81,6 +84,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
     if ( !( iss >> action ) )
     {
         return CodeToString( BrokerCodes::InvalidCommand );
+        DEBUG_LOG( "Failed stream to action" );
     }
     
 
@@ -93,6 +97,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
     if ( argument.empty() )
     {
+        DEBUG_LOG( "Argument is empty" );
         return CodeToString( BrokerCodes::InvalidCommand );
     }
 
@@ -100,6 +105,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
     if ( it == commands.end() )
     {
+        DEBUG_LOG( "There is not command in map: " << action );
         return CodeToString( BrokerCodes::InvalidCommand );
     }
     BrokerCodes rc = BrokerCodes::InvalidCommand;
@@ -107,18 +113,22 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
     switch ( it->second )
     {
         case Actions::LOGIN:
+        {
             rc = Login( id, argument, session );
             break;
-
+        }
         case Actions::REGISTER:
+        {
             rc = Register( id, argument, session );
             break;
-
+        }
         case Actions::SUBSCRIBE:
+        {
             rc = Subscribe( id, argument );
             break;
-
+        }
         case Actions::PUBLISH:
+        {
             std::istringstream pub( argument );
 
             std::string topic;
@@ -127,6 +137,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
             pub >> topic;
             if ( topic.empty() )
             {
+                DEBUG_LOG( "PUBLISH: Topic is empty" );
                 return CodeToString( BrokerCodes::InvalidCommand );
             }
 
@@ -139,6 +150,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
             if ( message.empty() )
             {
+                DEBUG_LOG( "PUBLISH: Message is empty" );
                 return CodeToString( BrokerCodes::InvalidCommand );
             }
 
@@ -149,6 +161,12 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
             rc = Publish( id, topic, message );
             break;
+        }
+        case Actions::CREATE:
+        {
+            rc = Create( id, argument );
+            break;
+        }
     }
 
     return CodeToString( rc );
@@ -203,6 +221,17 @@ BrokerCodes MessageBroker::Subscribe( SessionId id, const Topic& topic )
         return BrokerCodes::Unauthorized;
     }
     return static_cast< BrokerCodes >( topManager_->Subscribe( clientId, topic ) );
+}
+
+BrokerCodes MessageBroker::Create( SessionId id, const Topic& topic )
+{
+    ClientId clientId;
+    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
+    if ( clientId == invalidClientId )
+    {
+        return BrokerCodes::Unauthorized;
+    }
+    return static_cast< BrokerCodes >( topManager_->Create( clientId, topic ) );
 }
 
 void MessageBroker::Disconnect( SessionId id )

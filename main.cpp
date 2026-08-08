@@ -22,7 +22,7 @@ int main()
     {
         return 1;
     }
-    LogManager::Init( configurator->GetConfigs().nameFileLog );
+    LogManager::Init( configurator->GetConfigs().nameFileLog, configurator->GetConfigs().loglevel );
     INFO_LOG( "Configurator was started succesfully" );
     INFO_LOG( "Log manager was started succesfully" );
     INFO_SHELL( "Console log session was started" );

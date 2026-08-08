@@ -59,6 +59,12 @@ private:
     /// @return Код возврата.
     BrokerCodes Subscribe( SessionId id, const Topic& topic );
 
+    /// @brief Создание топика.
+    /// @param[in] id ID сессии.
+    /// @param[in] topic Топик.
+    /// @return Код возврата.
+    BrokerCodes Create( SessionId id, const Topic& topic  );
+
 private:
     ClientManagerPtr cliManager_;       /// Менеджер клиентов.
     TopicManagerPtr topManager_;        /// Менеджер топиков.
