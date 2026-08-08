@@ -27,8 +27,9 @@ public:
     static LogManager& Instance();
 
     /// @brief Инициализация логгера.
-    /// @param file Лог-файл.
-    static void Init( const std::string& file );
+    /// @param[in] file Лог-файл.
+    /// @param[in] loglevel Уровень логирования.
+    static void Init( const std::string& file, const std::string& loglevel );
 
     /// @brief Удаленный конструтор перемещения.
     LogManager( const LogManager& ) = delete;
@@ -39,10 +40,12 @@ public:
 private:
     LoggerPtr logger_;                                  /// Обработчик записи в файл.
     ShellPrinterPtr shellPrinter_;                      /// Обработчик записи в консоль.
+    LogLevels level_;                                   /// Уровень логирования.
 
     static std::unique_ptr< LogManager > instance_;     /// Инстанс.
 
     /// @brief Конструктор.
     /// @param[in] file Лог-файл.
-    LogManager( const std::string& file );      
+    /// @param[in] loglevel Уровень логирования.
+    LogManager( const std::string& file, const std::string& loglevel );      
 };

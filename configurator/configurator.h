@@ -15,6 +15,7 @@ struct Configs
     std::string nameFileLog;
     std::string clientDb;
     std::string topicDb;
+    std::string loglevel;
     short port;
 };
 
