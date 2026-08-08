@@ -18,7 +18,7 @@ JsonTopicRepository::JsonTopicRepository( const std::string dbFile_ )
     : dbFile_{ dbFile_ }
 {}
 
-bool JsonTopicRepository::SaveTopic( Topic& topic, ClientId id )
+bool JsonTopicRepository::SaveTopic( const Topic& topic, const ClientId id )
 {
     nlohmann::json jsonTopics;
     std::ifstream file( dbFile_ );
@@ -64,7 +64,7 @@ bool JsonTopicRepository::SaveTopic( Topic& topic, ClientId id )
     return true;
 }
 
-bool JsonTopicRepository::CreateTopic( Topic& topic, ClientId id )
+bool JsonTopicRepository::CreateTopic( const Topic& topic, const ClientId id )
 {
     nlohmann::json jsonTopics;
     std::ifstream file( dbFile_ );

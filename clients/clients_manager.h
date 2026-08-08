@@ -21,11 +21,15 @@ public:
 
     ClientsCodes ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session );
 
-    void DisconnectClient( ClientId id );
+    void DisconnectClient( SessionId id );
 
     ClientsCodes RemoveClient( const ClientId id );
 
-    ClientId GetClientId( SessionId id );
+    /// @brief Получение ID клиента.
+    /// @param[in] id
+    /// @param[out] clientId ID клиента.
+    /// @return Код возврата. Ok - Успех.
+    ClientsCodes GetClientId( SessionId id, ClientId& clientId );
 
 private:
     std::unordered_map< ClientId, Client > clients_;

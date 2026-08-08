@@ -51,13 +51,13 @@ private:
     /// @param[in] topic Топик.
     /// @param[in] message Сообщение.
     /// @return Код возврата.
-    BrokerCodes Publish( SessionId id, const std::string& topic, const std::string& message );
+    BrokerCodes Publish( SessionId id, const Topic& topic, const std::string& message );
 
     /// @brief Подписка от клиента.
+    /// @param[in] id ID сессии.
     /// @param[in] topic Топик.
-    /// @param[in] message Сообщение.
     /// @return Код возврата.
-    BrokerCodes Subscribe( SessionId id, const std::string& message );
+    BrokerCodes Subscribe( SessionId id, const Topic& topic );
 
 private:
     ClientManagerPtr cliManager_;       /// Менеджер клиентов.

@@ -5,6 +5,7 @@
 ///
 
 
+#include <cstdint>
 #include <deque>
 #include <memory>
 #include <boost/asio.hpp>
@@ -16,6 +17,7 @@ using SessionId = uint64_t;
 /// @brief Очередь сообщений клиенту.
 using MessageQueue = std::deque< std::string >;
 
+inline uint64_t invalidSessionId = 0 ;      /// Невалидный ID сессии.
 
 /// @brief Класс сессии.
 class Session

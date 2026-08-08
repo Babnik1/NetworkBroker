@@ -19,13 +19,13 @@ public:
     JsonTopicRepository( const std::string dbFile );
 
     /// @copydoc ITopicRepository::SaveTopic
-    virtual bool SaveTopic( Topic& topic, ClientId id );
+    virtual bool SaveTopic( const Topic& topic, const ClientId id );
 
     /// @copydoc ITopicRepository::LoadTopics
     virtual std::unordered_map< Topic, std::unordered_set< ClientId > > LoadTopics();
 
     /// @copydoc ITopicRepository::CreateTopic
-    virtual bool CreateTopic( Topic& topic, ClientId id );
+    virtual bool CreateTopic( const Topic& topic, const ClientId id );
 
 private:
 

@@ -37,7 +37,7 @@ void Server::DoAccept()
 {
     SessionId id = nextSessionId_++;
     auto socket = std::make_shared< boost::asio::ip::tcp::socket >( ioContext_ );
-    acceptor_.async_accept( *socket, [ this, socket ]( const boost::system::error_code& error )
+    acceptor_.async_accept( *socket, [ this, socket, id ]( const boost::system::error_code& error )
         {
             if ( !error )
             {

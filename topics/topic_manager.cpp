@@ -20,13 +20,13 @@ void TopicManager::LoadTopics()
     topics_ = db_->LoadTopics();
 }
 
-TopicCodes TopicManager::Publish( ClientId id, Topic& topic, std::string& message )
+TopicCodes TopicManager::Publish( const ClientId id, const Topic& topic, const std::string& message )
 {
     /// @todo Сделать.
     return TopicCodes::Ok;
 }
 
-TopicCodes TopicManager::Subscribe( ClientId id, Topic& topic )
+TopicCodes TopicManager::Subscribe( const ClientId id, const Topic& topic )
 {
     auto it = topics_.find( topic );
     if ( it == topics_.end() )
@@ -42,7 +42,7 @@ TopicCodes TopicManager::Subscribe( ClientId id, Topic& topic )
     return TopicCodes::Ok;
 }
 
-TopicCodes TopicManager::Create( ClientId id, Topic& topic )
+TopicCodes TopicManager::Create( const ClientId id, const Topic& topic )
 {
     auto it = topics_.find( topic );
     if ( it != topics_.end() )

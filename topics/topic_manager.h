@@ -29,19 +29,19 @@ public:
     /// @param[in] topic Название темы.
     /// @param[in] message Сообщение.
     /// @return Код возврата. 0 - Упех.
-    TopicCodes Publish( ClientId id, Topic& topic, std::string& message );
+    TopicCodes Publish( const ClientId id, const Topic& topic, const std::string& message );
 
     /// @brief Подписаться на тему.
     /// @param[in] id ID клиента.
     /// @param[in] topic Название темы.
     /// @return Код возврата. 0 - Упех.
-    TopicCodes Subscribe( ClientId id, Topic& topic );
+    TopicCodes Subscribe( const ClientId id, const Topic& topic );
 
     /// @brief Создать тему.
     /// @param[in] id ID клиента.
     /// @param[in] topic Название темы.
     /// @return Код возврата. 0 - Упех.
-    TopicCodes Create( ClientId id, Topic& topic );
+    TopicCodes Create( const ClientId id, const Topic& topic );
 
 private:
     ITopicRepositoryPtr db_;                                                /// Указатель на БД.

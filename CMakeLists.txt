@@ -10,11 +10,18 @@ find_package( Boost REQUIRED COMPONENTS program_options filesystem system )
 find_package( nlohmann_json REQUIRED )
 
 set( SOURCES 
+        configurator/configurator.cpp
         logs/log_manager.cpp 
         logs/shell_printer.cpp 
         logs/logger.cpp
         server/server.cpp
-        configurator/configurator.cpp
+        server/session.cpp 
+        broker/message_broker.cpp
+        clients/clients_manager.cpp
+        clients/client.cpp
+        topics/topic_manager.cpp 
+        db/json_client_repository.cpp 
+        db/json_topic_repository.cpp
         main.cpp 
 )
 

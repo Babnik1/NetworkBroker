@@ -43,6 +43,7 @@ ClientsCodes ClientManager::CreateClient( const std::string& name )
 
     clients_.emplace( clientId, client );
     db_->SaveClient( client ); 
+    return ClientsCodes::Ok;
 }
 
 
@@ -55,12 +56,13 @@ ClientsCodes ClientManager::RemoveClient( ClientId id )
         ERROR_ALL( "Failed to remove client: " << id );
         return ClientsCodes::ClientNotFound;
     }
-    if ( it->second.sesId )
+    if ( it->second.GetId() )
     {
         it->second.Disconnect();
     }
     db_->DeleteClient( it->second.GetId() );
     clients_.erase( it );
+    return ClientsCodes::Ok;
 }
 
 void ClientManager::LoadClients()
@@ -79,15 +81,14 @@ ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id
     {
         if ( client.GetName() == name )
         {
-            client.sesId = id;
-            client.session = session;
+            client.SetSession( session );
             return ClientsCodes::Ok;
         }
     }
     return ClientsCodes::ClientNotFound;
 }
 
-void ClientManager::DisconnectClient( ClientId id )
+void ClientManager::DisconnectClient( SessionId id )
 {
     auto it = clients_.find( id );
     if ( it == clients_.end() )
@@ -95,5 +96,18 @@ void ClientManager::DisconnectClient( ClientId id )
         ERROR_ALL( "Failed to disconnect client: " << id << ", not found" );
         return;
     }
-    it->second.sesId = std::nullopt;
+    it->second.Disconnect();
+}
+
+ClientsCodes ClientManager::GetClientId( SessionId id, ClientId& clientId )
+{
+    for ( const auto& client : clients_ )
+    {
+        if ( client.second.GetSessionId() == id )
+        {
+            clientId = client.second.GetId();
+            return ClientsCodes::Ok;
+        }
+    }
+    return ClientsCodes::ClientNotFound;
 }

@@ -23,7 +23,7 @@ public:
     /// @param[in] topic Название топика.
     /// @param[in] id ID клиента.
     /// @return false - неудача, true - успех.
-    virtual bool SaveTopic( Topic& topic, ClientId id ) = 0;
+    virtual bool SaveTopic( const Topic& topic, const ClientId id ) = 0;
 
     /// @brief Загрузка топиков из БД.
     /// @return Мапа топиков и их клиентов.
@@ -34,7 +34,7 @@ public:
     /// @param[in] id ID кдиента.
     /// @details Сразу подписывает клиента, создавшего топик.
     /// @return false - неудача, true - успех.
-    virtual bool CreateTopic( Topic& topic, ClientId id ) = 0;
+    virtual bool CreateTopic( const Topic& topic, const ClientId id ) = 0;
 };
 
 using ITopicRepositoryPtr = std::unique_ptr< ITopicRepository >;

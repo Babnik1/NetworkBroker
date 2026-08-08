@@ -55,6 +55,9 @@ std::string CodeToString( BrokerCodes rc )
         case BrokerCodes::AlreadySubscribed:
             return "ERROR Already subscribed\n";
 
+        case BrokerCodes::Unauthorized:
+            return "ERROR You are unauthorized\n";
+
         default:
             return "ERROR Internal error\n";
     }
@@ -180,22 +183,29 @@ BrokerCodes MessageBroker::Register( SessionId id, const std::string& name, Sess
     return BrokerCodes::Ok;
 }
 
-BrokerCodes MessageBroker::Publish( SessionId id, const std::string& topic, const std::string& message )
+BrokerCodes MessageBroker::Publish( SessionId id, const Topic& topic, const std::string& message )
 {
-    ClientId clientId = cliManager_->GetClientId( id );
-    if ( clientId == InvalidClientId )
+    ClientId clientId;
+    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
+    if ( clientId == invalidClientId )
     {
         return BrokerCodes::Unauthorized;
     }
     return static_cast< BrokerCodes >( topManager_->Publish( clientId, topic, message ) );
 }
 
-BrokerCodes MessageBroker::Subscribe( SessionId id, const std::string& topic )
+BrokerCodes MessageBroker::Subscribe( SessionId id, const Topic& topic )
 {
-    ClientId clientId = cliManager_->GetClientId( id );
-    if ( clientId == InvalidClientId )
+    ClientId clientId;
+    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
+    if ( clientId == invalidClientId )
     {
         return BrokerCodes::Unauthorized;
     }
     return static_cast< BrokerCodes >( topManager_->Subscribe( clientId, topic ) );
+}
+
+void MessageBroker::Disconnect( SessionId id )
+{
+    cliManager_->DisconnectClient( id );
 }

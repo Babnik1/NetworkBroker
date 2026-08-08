@@ -70,17 +70,17 @@ bool JsonRepository::SaveClient( const Client& client )
         ERROR_LOG( "Failed to parse database file: " << e.what() );
         return false;
     }
-    std::string clientIdStr = std::to_string( client.id );
+    std::string clientIdStr = std::to_string( client.GetId() );
     if ( jsonClients.contains( clientIdStr ) )
     {
-        jsonClients[ clientIdStr ][ "name" ] = client.name;
-        INFO_LOG( "Client " << client.name << " updated successfully" );
+        jsonClients[ clientIdStr ][ "name" ] = client.GetName();
+        INFO_LOG( "Client " << client.GetName() << " updated successfully" );
     }
     else 
     {
-        INFO_LOG( "Client " << client.name << " is not found. Creating new..." );
+        INFO_LOG( "Client " << client.GetName() << " is not found. Creating new..." );
         jsonClients[ clientIdStr ] = {
-            { "name", client.name }
+            { "name", client.GetName() }
         };
     }
     std::ofstream wFile( dbFile_ );
