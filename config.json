@@ -1,4 +1,6 @@
 {
   "log_file_name": "app.log",
+  "clients_database": "clients.json",
+  "topics_database": "topics.json",
   "server_port": 2000
 }
