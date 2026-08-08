@@ -42,7 +42,11 @@ ClientsCodes ClientManager::CreateClient( const std::string& name )
     Client client{ static_cast< uint64_t >( clientId ), name };
 
     clients_.emplace( clientId, client );
-    db_->SaveClient( client ); 
+    if ( !db_->SaveClient( client ) )
+    {
+        ERROR_ALL( "Failed to save client: " << name << ". DataBaseError." );
+        return ClientsCodes::InternalError;
+    } 
     return ClientsCodes::Ok;
 }
 
@@ -60,7 +64,11 @@ ClientsCodes ClientManager::RemoveClient( ClientId id )
     {
         it->second.Disconnect();
     }
-    db_->DeleteClient( it->second.GetId() );
+    if ( !db_->DeleteClient( it->second.GetId() ) )
+    {
+        ERROR_ALL( "Failed to delete client: " << id << ". DataBaseError." );
+        return ClientsCodes::InternalError;
+    } 
     clients_.erase( it );
     return ClientsCodes::Ok;
 }
