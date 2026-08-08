@@ -31,10 +31,16 @@ public:
 
     /// @brief Создание топика.
     /// @param[in] topic Название топика.
-    /// @param[in] id ID кдиента.
+    /// @param[in] id ID клиента.
     /// @details Сразу подписывает клиента, создавшего топик.
     /// @return false - неудача, true - успех.
     virtual bool CreateTopic( const Topic& topic, const ClientId id ) = 0;
+
+    /// @brief Удаление клиента из топика.
+    /// @param[in] topic Название топика.
+    /// @param[in] id ID клиента.
+    /// @return false - неудача, true - успех.
+    virtual bool RemoveFromTopic( const Topic& topic, const ClientId id ) = 0;
 };
 
 using ITopicRepositoryPtr = std::unique_ptr< ITopicRepository >;

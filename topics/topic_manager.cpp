@@ -44,7 +44,11 @@ TopicCodes TopicManager::Subscribe( const ClientId id, const Topic& topic )
     }
 
     it->second.insert( id );
-    db_->SaveTopic( topic , id );
+    if ( !db_->SaveTopic( topic , id ) )
+    {
+        ERROR_LOG( "Failed to subscribe on topic: " << topic << ". ID: " << id );
+        return TopicCodes::InternalError;
+    }
 
     INFO_LOG( "Topic " << topic << " changed successfully" );
     return TopicCodes::Ok;
@@ -60,8 +64,44 @@ TopicCodes TopicManager::Create( const ClientId id, const Topic& topic )
     }
 
     topics_[ topic ].insert( id );
-    db_->CreateTopic( topic, id );
+    if ( !db_->CreateTopic( topic, id ) )
+    {
+        ERROR_LOG( "Failed to create topic: " << topic << ". ID: " << id );
+        return TopicCodes::InternalError;
+    }
 
     INFO_LOG( "Topic " << topic << " created successfully" );
+    return TopicCodes::Ok;
+}
+
+TopicCodes TopicManager::Unsubscribe( const ClientId id, const Topic& topic )
+{
+    auto it = topics_.find( topic );
+    if ( it != topics_.end() )
+    {
+        auto& cliSet = it->second;
+        auto itCli = cliSet.find( id );
+
+        if ( itCli == cliSet.end() )
+        {
+            ERROR_LOG( "Not subscribed. Topic: " << topic << ". ID: " << id );
+            return TopicCodes::NotSubscribed;
+        }   
+
+        cliSet.erase( itCli );
+
+        if ( !db_->RemoveFromTopic( topic , id ) )
+        {
+            ERROR_LOG( "Failed to delete from topic: " << topic << ". ID: " << id );
+            return TopicCodes::InternalError;
+        }
+    }
+    else 
+    {
+        ERROR_LOG( "Topic " << topic << " is not found" );
+        return TopicCodes::TopicNotFound;
+    }
+
+    INFO_LOG( "Topic " << topic << " changed successfully" );
     return TopicCodes::Ok;
 }

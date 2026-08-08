@@ -75,7 +75,6 @@ std::string CodeToString( BrokerCodes rc )
     }
 }
 
-
 } // anonimous namespace
 
 MessageBroker::MessageBroker( ClientManagerPtr cliManager, TopicManagerPtr topManager )
@@ -171,6 +170,10 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
             rc = Create( id, argument );
             break;
         }
+        case Actions::UNSUBSCRIBE:
+        {
+            rc = Unsubscribe( id, argument );
+        }
     }
 
     return CodeToString( rc );
@@ -239,6 +242,17 @@ BrokerCodes MessageBroker::Create( SessionId id, const Topic& topic )
         return BrokerCodes::Unauthorized;
     }
     return static_cast< BrokerCodes >( topManager_->Create( clientId, topic ) );
+}
+
+BrokerCodes MessageBroker::Unsubscribe( SessionId id, const Topic& topic )
+{
+    ClientId clientId;
+    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
+    if ( rc == BrokerCodes::ClientNotFound )
+    {
+        return BrokerCodes::Unauthorized;
+    }
+    return static_cast< BrokerCodes >( topManager_->Unsubscribe( clientId, topic ) );
 }
 
 void MessageBroker::Disconnect( SessionId id )

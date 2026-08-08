@@ -27,6 +27,9 @@ public:
     /// @copydoc ITopicRepository::CreateTopic
     virtual bool CreateTopic( const Topic& topic, const ClientId id );
 
+    /// @copydoc ITopicRepository::RemoveFromTopic
+    virtual bool RemoveFromTopic( const Topic& topic, const ClientId id );
+
 private:
 
     std::string dbFile_;    /// Путь к файлу БД.

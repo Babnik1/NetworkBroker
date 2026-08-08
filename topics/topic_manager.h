@@ -43,6 +43,12 @@ public:
     /// @return Код возврата. 0 - Упех.
     TopicCodes Create( const ClientId id, const Topic& topic );
 
+    /// @brief Отписаться от темы.
+    /// @param[in] id ID клиента.
+    /// @param[in] topic Название темы.
+    /// @return Код возврата. 0 - Упех.
+    TopicCodes Unsubscribe( const ClientId id, const Topic& topic );
+
 private:
     ITopicRepositoryPtr db_;                                                /// Указатель на БД.
     std::unordered_map< Topic, std::unordered_set< ClientId > > topics_;    /// Мапа топиков и ее клиентов.

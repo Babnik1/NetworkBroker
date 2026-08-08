@@ -154,3 +154,53 @@ std::unordered_map< Topic, std::unordered_set< ClientId > > JsonTopicRepository:
     }
     return topics;
 }
+
+bool JsonTopicRepository::RemoveFromTopic( const Topic& topic, const ClientId id )
+{
+    nlohmann::json jsonTopics;
+    std::ifstream file( dbFile_ );
+    if ( !file.is_open() )
+    {
+        ERROR_LOG( "Failed to open database file for read: " << dbFile_ );
+        return false;
+    }
+    try
+    {
+        file >> jsonTopics;
+        file.close();
+    }
+    catch ( const nlohmann::json::exception& e )
+    {
+        ERROR_LOG( "Failed to parse database file: " << e.what() );
+        return false;
+    }
+
+    if ( !jsonTopics.contains( topic ) )
+    {
+        ERROR_LOG( "Topic " << topic << " is not found." );
+        return false;
+    }
+
+    auto& clients = jsonTopics[ topic ][ "clients" ];
+    
+    auto it = std::find( clients.begin(), clients.end(), id );
+    if ( it == clients.end() )
+    {
+        ERROR_LOG( "Client " << id << " was not subscribed to " << topic );
+        return false;
+    }
+
+    clients.erase( it );
+    INFO_LOG( "Topic " << topic << " updated successfully, removed client: " << id );
+
+    std::ofstream wFile( dbFile_ );
+    if ( !wFile.is_open() )
+    {
+        ERROR_LOG( "Failed to open database file for write: " << dbFile_ );
+        return false;
+    }
+
+    wFile << jsonTopics.dump( 4 );
+    wFile.close();
+    return true;
+}
