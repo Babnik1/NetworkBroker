@@ -1,6 +1,8 @@
 cmake_minimum_required( VERSION 3.12 )
 option( ENABLE_TESTS "Enable tests" ON )
 
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+
 project( Broker VERSION 1.0 LANGUAGES CXX )
 
 set( CMAKE_CXX_STANDARD 17 )
@@ -10,18 +12,18 @@ find_package( Boost REQUIRED COMPONENTS program_options filesystem system )
 find_package( nlohmann_json REQUIRED )
 
 set( SOURCES 
-        configurator/configurator.cpp
-        logs/log_manager.cpp 
-        logs/shell_printer.cpp 
-        logs/logger.cpp
-        server/server.cpp
-        server/session.cpp 
-        broker/message_broker.cpp
-        clients/clients_manager.cpp
-        clients/client.cpp
-        topics/topic_manager.cpp 
-        db/json_client_repository.cpp 
-        db/json_topic_repository.cpp
+        src/configurator/configurator.cpp
+        src/logs/log_manager.cpp 
+        src/logs/shell_printer.cpp 
+        src/logs/logger.cpp
+        src/server/server.cpp
+        src/server/session.cpp 
+        src/broker/message_broker.cpp
+        src/clients/clients_manager.cpp
+        src/clients/client.cpp
+        src/topics/topic_manager.cpp 
+        src/db/json_client_repository.cpp 
+        src/db/json_topic_repository.cpp
         main.cpp 
 )
 
@@ -30,10 +32,14 @@ add_executable( Broker ${SOURCES} )
 target_include_directories( Broker PRIVATE ${CMAKE_SOURCE_DIR} )
 
 target_include_directories( Broker PRIVATE 
-    logs 
-    server
-    sessions
-    configurator
+    src/logs 
+    src/server
+    src/sessions
+    src/configurator
+    src/clients
+    src/db
+    src/topics
+    srcbroker
 )
 
 target_include_directories( Broker PRIVATE ${Boost_INCLUDE_DIRS} )
