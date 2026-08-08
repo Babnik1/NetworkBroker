@@ -116,3 +116,23 @@ ClientsCodes ClientManager::GetClientId( SessionId id, ClientId& clientId )
     }
     return ClientsCodes::ClientNotFound;
 }
+
+void ClientManager::SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients )
+{
+    for ( const auto& id : clients )
+    {
+        auto it = clients_.find( id );
+        if ( it != clients_.end() )
+        {
+            if ( it->second.GetSessionId() != invalidSessionId )
+            {
+                DEBUG_LOG( "Message for client " << it->second.GetName() << ", ID: " << it->second.GetId() << " was sent" );
+                it->second.SendTopicMessage( message );
+            }
+            else 
+            {
+                DEBUG_LOG( "Client " << it->second.GetName() << ", ID: " << it->second.GetId() << " is not authorize. Message skipped" );
+            }
+        }
+    }
+}

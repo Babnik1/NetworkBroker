@@ -6,6 +6,7 @@
 
 #include "topic_manager.h"
 #include "../logs/log.h"
+#include <unordered_set>
 
 
 TopicManager::TopicManager( ITopicRepositoryPtr db )
@@ -20,9 +21,16 @@ void TopicManager::LoadTopics()
     topics_ = db_->LoadTopics();
 }
 
-TopicCodes TopicManager::Publish( const ClientId id, const Topic& topic, const std::string& message )
+TopicCodes TopicManager::Publish( const Topic& topic, const std::string& message, std::unordered_set< ClientId >& clients )
 {
-    /// @todo Сделать.
+    auto it = topics_.find( topic );
+    if ( it == topics_.end() )
+    {
+        ERROR_LOG( "Topic " << topic << " is not found" );
+        return TopicCodes::TopicNotFound;
+    }
+
+    clients = topics_[ topic ];
     return TopicCodes::Ok;
 }
 

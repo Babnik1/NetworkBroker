@@ -31,6 +31,8 @@ public:
     /// @return Код возврата. Ok - Успех.
     ClientsCodes GetClientId( SessionId id, ClientId& clientId );
 
+    void SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients );
+
 private:
     std::unordered_map< ClientId, Client > clients_;
     IClientRepositoryPtr db_;

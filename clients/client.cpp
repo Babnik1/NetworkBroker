@@ -41,3 +41,14 @@ void Client::Disconnect()
 {
     session_.reset();
 }
+
+void Client::SendTopicMessage( const std::string message )
+{
+    auto session = session_.lock();
+    if( !session )
+    {
+        return;
+    }
+
+    session->Send( message + "\n" );
+}

@@ -44,6 +44,8 @@ public:
     /// @brief Сообщение клиенту, что он деавторизован.
     void Disconnect();
 
+    void SendTopicMessage( const std::string message );
+
 private:
     ClientId id_;
     std::string name_;

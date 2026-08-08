@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <sys/types.h>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 #include "../topics/topic_manager.h"
 #include "../logs/log.h"
@@ -143,11 +144,6 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
             std::getline( pub, message );
 
-            if ( !message.empty() )
-            {
-                message.erase( 0, 1 );
-            }
-
             if ( message.empty() )
             {
                 DEBUG_LOG( "PUBLISH: Message is empty" );
@@ -192,31 +188,42 @@ BrokerCodes MessageBroker::Register( SessionId id, const std::string& name, Sess
     {
         return rc;
     }
+    INFO_ALL( "Client " << name << " registered successfully" );
     rc =  static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, session ) );
     if ( rc != BrokerCodes::Ok )
     {
         return rc;
     }
-
     return BrokerCodes::Ok;
 }
 
+/// @todo Сделать так, чтобы самому себе не отправлялось.
+/// Наверн надо передать айди сессии, которую исключаем и в сессии проверять есть ли он.
 BrokerCodes MessageBroker::Publish( SessionId id, const Topic& topic, const std::string& message )
 {
     ClientId clientId;
     BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
-    if ( clientId == invalidClientId )
+    if ( rc == BrokerCodes::ClientNotFound )
     {
         return BrokerCodes::Unauthorized;
     }
-    return static_cast< BrokerCodes >( topManager_->Publish( clientId, topic, message ) );
+
+    std::unordered_set< ClientId > clients;
+    rc = static_cast< BrokerCodes >( topManager_->Publish( topic, message, clients ) );
+    if ( rc == BrokerCodes::TopicNotFound )
+    {
+        return rc;
+    }
+
+    cliManager_->SendTopicMessage( message, clients );
+    return  BrokerCodes::Ok;
 }
 
 BrokerCodes MessageBroker::Subscribe( SessionId id, const Topic& topic )
 {
     ClientId clientId;
     BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
-    if ( clientId == invalidClientId )
+    if ( rc == BrokerCodes::ClientNotFound )
     {
         return BrokerCodes::Unauthorized;
     }
@@ -227,7 +234,7 @@ BrokerCodes MessageBroker::Create( SessionId id, const Topic& topic )
 {
     ClientId clientId;
     BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
-    if ( clientId == invalidClientId )
+    if ( rc == BrokerCodes::ClientNotFound )
     {
         return BrokerCodes::Unauthorized;
     }

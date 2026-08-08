@@ -25,11 +25,11 @@ public:
     TopicManager( ITopicRepositoryPtr db );
 
     /// @brief Опубликовать сообщение в тему.
-    /// @param[in] id ID клиента.
     /// @param[in] topic Название темы.
     /// @param[in] message Сообщение.
+    /// @param[out] clients Клиенты, принадлежащие конкретному топику.
     /// @return Код возврата. 0 - Упех.
-    TopicCodes Publish( const ClientId id, const Topic& topic, const std::string& message );
+    TopicCodes Publish( const Topic& topic, const std::string& message, std::unordered_set< ClientId >& clients );
 
     /// @brief Подписаться на тему.
     /// @param[in] id ID клиента.
