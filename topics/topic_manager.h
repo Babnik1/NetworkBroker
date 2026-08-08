@@ -1,4 +1,9 @@
+#pragma once
 
+/// @file topic_manager.h
+///
+/// Менеджер топиков. Объявление.
+///
 
 
 #include <memory>
@@ -9,19 +14,42 @@
 #include "../fwd.h"
 #include "../db/i_topic_repository.h"
 
+
+/// @brief Класс топик-менеджера.
 class TopicManager
 {
 public:
 
+    /// @brief Конструктор.
+    /// @param[in] db Путь к файлу БД.
     TopicManager( ITopicRepositoryPtr db );
 
-    TopicCodes Publish( ClientId id, Topic topic, std::string message );
+    /// @brief Опубликовать сообщение в тему.
+    /// @param[in] id ID клиента.
+    /// @param[in] topic Название темы.
+    /// @param[in] message Сообщение.
+    /// @return Код возврата. 0 - Упех.
+    TopicCodes Publish( ClientId id, Topic& topic, std::string& message );
 
-    TopicCodes Subscribe( ClientId id, Topic topic );
+    /// @brief Подписаться на тему.
+    /// @param[in] id ID клиента.
+    /// @param[in] topic Название темы.
+    /// @return Код возврата. 0 - Упех.
+    TopicCodes Subscribe( ClientId id, Topic& topic );
+
+    /// @brief Создать тему.
+    /// @param[in] id ID клиента.
+    /// @param[in] topic Название темы.
+    /// @return Код возврата. 0 - Упех.
+    TopicCodes Create( ClientId id, Topic& topic );
 
 private:
-    ITopicRepositoryPtr db_; 
-    std::unordered_map< Topic, std::unordered_set< ClientId > > topics_;
+    ITopicRepositoryPtr db_;                                                /// Указатель на БД.
+    std::unordered_map< Topic, std::unordered_set< ClientId > > topics_;    /// Мапа топиков и ее клиентов.
+
+    /// @brief Загрузка топиков из БД.
+    void LoadTopics();
+
 };
 
 using TopicManagerPtr = std::shared_ptr< TopicManager >;

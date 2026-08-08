@@ -1,6 +1,59 @@
+/// @file topic_manager.cpp
+///
+/// Менеджер топиков. Реализация.
+///
+
+
 #include "topic_manager.h"
+#include "../logs/log.h"
 
 
 TopicManager::TopicManager( ITopicRepositoryPtr db )
     : db_{ std::move( db ) }
-{}
+{
+    LoadTopics();
+}
+
+void TopicManager::LoadTopics()
+{
+    topics_.clear();
+    topics_ = db_->LoadTopics();
+}
+
+TopicCodes TopicManager::Publish( ClientId id, Topic& topic, std::string& message )
+{
+    /// @todo Сделать.
+    return TopicCodes::Ok;
+}
+
+TopicCodes TopicManager::Subscribe( ClientId id, Topic& topic )
+{
+    auto it = topics_.find( topic );
+    if ( it == topics_.end() )
+    {
+        ERROR_LOG( "Topic " << topic << " is not found" );
+        return TopicCodes::TopicNotFound;
+    }
+
+    it->second.insert( id );
+    db_->SaveTopic( topic , id );
+
+    INFO_LOG( "Topic " << topic << " changed successfully" );
+    return TopicCodes::Ok;
+}
+
+TopicCodes TopicManager::Create( ClientId id, Topic& topic )
+{
+    auto it = topics_.find( topic );
+    if ( it != topics_.end() )
+    {
+        ERROR_LOG( "Topic " << topic << " already exist" );
+        return TopicCodes::TopicAlreadyExists;
+    }
+
+    topics_[ topic ].insert( id );
+    db_->CreateTopic( topic, id );
+
+    INFO_LOG( "Topic " << topic << " created successfully" );
+    return TopicCodes::Ok;
+}
