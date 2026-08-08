@@ -116,7 +116,17 @@ std::unordered_map< Topic, std::unordered_set< ClientId > > JsonTopicRepository:
     std::ifstream file( dbFile_ );
     if ( !file.is_open() )
     {
-        ERROR_LOG( "Failed to open data base file for read: " << dbFile_ );
+        WARNING_LOG( "Topics database file not found. Creating a new empty topics database: " << dbFile_ );
+        std::ofstream newFile( dbFile_ );
+        if ( newFile.is_open() )
+        {
+            newFile << "{}"; 
+            newFile.close();
+        }
+        else
+        {
+            ERROR_LOG( "Failed to create empty topics database file: " << dbFile_ );
+        }
         return {};
     }
     try

@@ -24,7 +24,17 @@ std::vector< Client > JsonRepository::LoadClients()
     std::ifstream file( dbFile_ );
     if ( !file.is_open() )
     {
-        ERROR_LOG( "Failed to open data base file for read: " << dbFile_ );
+        WARNING_LOG( "Clients database file not found. Creating a new empty clients database: " << dbFile_ );
+        std::ofstream newFile( dbFile_ );
+        if ( newFile.is_open() )
+        {
+            newFile << "{}"; 
+            newFile.close();
+        }
+        else
+        {
+            ERROR_LOG( "Failed to create clients empty database file: " << dbFile_ );
+        }
         return {};
     }
     try
