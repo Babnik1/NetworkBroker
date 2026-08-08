@@ -53,7 +53,7 @@ target_link_libraries( Broker PRIVATE
 
 set_target_properties( Broker PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR} )
 
-#if( ENABLE_TESTS )
-#    enable_testing()
-#    add_subdirectory( tests )
-# endif()
+if( ENABLE_TESTS )
+    enable_testing()
+    add_subdirectory( tests )
+ endif()
