@@ -98,6 +98,7 @@ void ClientManager::DisconnectClient( SessionId id )
         {
             client.second.Disconnect();
             INFO_ALL( "Client ID: " << client.second.GetId() <<", name: " << client.second.GetName() << " disconnected successfully" );
+            return;
         }
     }
     ERROR_ALL( "Failed to disconnect session: " << id );
