@@ -1,5 +1,6 @@
 {
   "log_file_name": "app.log",
+  "log_level": "debug",
   "clients_database": "clients.json",
   "topics_database": "topics.json",
   "server_port": 2000
