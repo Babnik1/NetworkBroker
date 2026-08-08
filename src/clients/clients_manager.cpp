@@ -50,8 +50,6 @@ ClientsCodes ClientManager::CreateClient( const std::string& name )
     return ClientsCodes::Ok;
 }
 
-
-/// @todo В момент удаления клиента. База данных может записывать по аптайму.
 ClientsCodes ClientManager::RemoveClient( ClientId id )
 {
     auto it = clients_.find( id );

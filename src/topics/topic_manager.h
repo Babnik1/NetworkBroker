@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "rc.h"
-#include "../fwd.h"
+#include "fwd.h"
 #include "../db/i_topic_repository.h"
 
 

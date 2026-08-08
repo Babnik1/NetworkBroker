@@ -11,7 +11,7 @@
 #include <vector>
 #include "../logs/log.h"
 #include "session.h"
-#include "../fwd.h"
+#include "fwd.h"
 
 enum class AuthType
 {

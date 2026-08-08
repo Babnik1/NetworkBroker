@@ -1,28 +1,29 @@
-#include "logs/log_manager.h"
-#include "logs/log.h"
-#include "server/server.h"
-#include "configurator/configurator.h"
-#include "db/json_client_repository.h"
-#include "db/json_topic_repository.h"
-#include "clients/clients_manager.h"
-#include "topics/topic_manager.h"
-#include "broker/message_broker.h"
+#include "src/logs/log_manager.h"
+#include "src/logs/log.h"
+#include "src/server/server.h"
+#include "src/configurator/configurator.h"
+#include "src/db/json_client_repository.h"
+#include "src/db/json_topic_repository.h"
+#include "src/clients/clients_manager.h"
+#include "src/topics/topic_manager.h"
+#include "src/broker/message_broker.h"
 #include <memory>
 #include <string>
+#include <iostream>
 
 const std::string configFile = "config.json";
 
 int main()
 {
+    std::cout << "Application is running... ";
     ConfiguratorPtr configurator = std::make_unique< Configurator >( configFile );
     ConfigCodes rc = configurator->ReadConfig();
     if ( rc != ConfigCodes::Ok )
     {
         return 1;
     }
+    std::cout << "Configurator was started succesfully";
     LogManager::Init( configurator->GetConfigs().nameFileLog, configurator->GetConfigs().loglevel );
-    INFO_ALL( "Application is running... " );
-    INFO_LOG( "Configurator was started succesfully" );
     INFO_LOG( "Log manager was started succesfully" );
     INFO_SHELL( "Console log session was started" );
     INFO_LOG( "File log session was started" );

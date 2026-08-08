@@ -22,8 +22,6 @@ Logger::Logger( const std::string& file )
 
 
 /// @todo Conditional Variable, чтобы спать пока не придет, обрабатывать и потом снова спать.
-/// @todo Обрубать только названия файла а не весь путь, для красоты.
-/// @todo Добавить время срабатывания.
 void Logger::Log()
 {
     if ( !out_.is_open() )
