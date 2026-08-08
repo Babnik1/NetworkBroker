@@ -28,10 +28,10 @@ int main()
     INFO_SHELL( "Console log session was started" );
     INFO_LOG( "File log session was started" );
 
-    auto clientsRepository = std::make_unique< JsonRepository >( "clientsbase.json" ); 
+    auto clientsRepository = std::make_unique< JsonRepository >( configurator->GetConfigs().clientDb ); 
     auto clientManager = std::make_shared< ClientManager >( std::move( clientsRepository ) );
 
-    auto topicsRepository = std::make_unique< JsonTopicRepository >( "topicsbase.json" ); 
+    auto topicsRepository = std::make_unique< JsonTopicRepository >( configurator->GetConfigs().topicDb ); 
     auto topicManager = std::make_shared< TopicManager >( std::move( topicsRepository ) );
 
     auto broker = std::make_shared< MessageBroker >( clientManager, topicManager );

@@ -13,6 +13,8 @@
 struct Configs
 {
     std::string nameFileLog;
+    std::string clientDb;
+    std::string topicDb;
     short port;
 };
 

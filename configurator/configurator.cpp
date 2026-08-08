@@ -29,6 +29,8 @@ ConfigCodes Configurator::ReadConfig()
         nlohmann::json data = nlohmann::json::parse( file );
         configs.nameFileLog = data.at( "log_file_name" );
         configs.port = data.at( "server_port" ).get< short >();
+        configs.topicDb = data.at( "topics.json" );
+        configs.clientDb = data.at( "clients.json" );
     }
     catch ( const nlohmann::json::parse_error& e ) 
     {
