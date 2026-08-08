@@ -8,6 +8,9 @@
 #include <mutex>
 #include <thread>
 #include <iostream>
+#include <chrono>
+#include <iomanip>
+#include <sstream>
 
 
 Logger::Logger( const std::string& file )
@@ -55,10 +58,40 @@ void Logger::Log()
 
 void Logger::SetQueue( const LogLevels level, const char* file, const int line, const std::string& msg )
 {
-    std::string result = std::string( file ) + " - " +  std::to_string( line ) + " [ " + loggerMap.find( level )->second + " ] " + msg;
+    std::string fullPath( file );
+    size_t lastSlash = fullPath.find_last_of( "/\\" );
+    std::string fileName = ( lastSlash == std::string::npos ) ? fullPath : fullPath.substr( lastSlash + 1 );
+    std::string fileLocation = fileName + ":" + std::to_string( line );
+
+    auto now = std::chrono::system_clock::now();
+    auto timeTime = std::chrono::system_clock::to_time_t( now );
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>( now.time_since_epoch() ) % 1000;
+
+    std::tm buf;
+#if defined(_WIN32) || defined(_WIN64)
+    localtime_s( &buf, &timeTime ); // Windows
+#else
+    localtime_r( &timeTime, &buf ); // Linux / macOS
+#endif
+
+    std::ostringstream timeStream;
+    timeStream << std::put_time( &buf, "%H:%M:%S" ) << '.' << std::setfill( '0' ) << std::setw( 3 ) << ms.count();
+
+    std::ostringstream logStream;
+    
+    logStream << "[ " << timeStream.str() << " ]  ";
+    
+    logStream << std::left << std::setw( 35 ) << fileLocation;
+    
+    std::string levelStr = "[ " + loggerMap.find( level )->second + " ]";
+    logStream << std::left << std::setw( 11 ) << levelStr;
+    
+    logStream << msg;
+
+    std::string result = logStream.str();
+
     std::lock_guard< std::mutex > lock( mutex_ );
     queue_.push( result );
-    
 }
 
 Logger::~Logger()
