@@ -81,6 +81,11 @@ ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id
     {
         if ( client.GetName() == name )
         {
+            if ( client.GetSessionId() != 0 )
+            {
+                ERROR_ALL( "Client " << name << " already connected" );
+                return ClientsCodes::ClientAlreadyConnected;
+            }
             client.SetSession( session );
             INFO_ALL( "Client ID: " << client.GetId() <<", name: " << name << " authorized successfully" );
             return ClientsCodes::Ok;

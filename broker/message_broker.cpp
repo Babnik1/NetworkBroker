@@ -15,25 +15,33 @@
 #include "../topics/topic_manager.h"
 #include "../logs/log.h"
 
+
+namespace  
+{
+
+/// @brief Действия.
 enum class Actions
 {
-    PUBLISH     = 0,
-    SUBSCRIBE   = 1,
-    LOGIN       = 2,
-    REGISTER    = 3,
-    CREATE      = 4,
+    PUBLISH     = 0,    /// Публикация сообщения в топик.
+    SUBSCRIBE   = 1,    /// Подписка на топик.
+    LOGIN       = 2,    /// Аутентификация.
+    REGISTER    = 3,    /// Регистрация.
+    CREATE      = 4,    /// Создание нового топика.
+    UNSUBSCRIBE = 5,    /// Отписка от топика.
 };
 
+/// @brief Мапа коммант и действий.
 static const std::unordered_map< std::string, Actions > commands =
 {
-    { "LOGIN",      Actions::LOGIN      },
-    { "REGISTER",   Actions::REGISTER   },
-    { "PUBLISH",    Actions::PUBLISH    },
-    { "SUBSCRIBE",  Actions::SUBSCRIBE  },
-    { "CREATE",     Actions::CREATE     }
+    { "LOGIN",          Actions::LOGIN          },
+    { "REGISTER",       Actions::REGISTER       },
+    { "PUBLISH",        Actions::PUBLISH        },
+    { "SUBSCRIBE",      Actions::SUBSCRIBE      },
+    { "CREATE",         Actions::CREATE         },
+    { "UNSUBSCRIBE",    Actions::UNSUBSCRIBE    }
 };
 
-
+/// @brief Код ошибки в сообщение клиенту.
 std::string CodeToString( BrokerCodes rc )
 {
     switch ( rc )
@@ -68,13 +76,13 @@ std::string CodeToString( BrokerCodes rc )
 }
 
 
+} // anonimous namespace
+
 MessageBroker::MessageBroker( ClientManagerPtr cliManager, TopicManagerPtr topManager )
     : cliManager_{ cliManager }
     , topManager_{ topManager }
 {}
 
-
-/// @todo Обработать, если LOGINpasha - склеено.
 std::string MessageBroker::HandleCommand( SessionId id, const std::string& command, SessionWeakPtr session )
 {
     std::string action;
@@ -170,15 +178,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
 BrokerCodes MessageBroker::Login( SessionId id, const std::string& name, SessionWeakPtr session )
 {
-    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, session ) );
-    if ( rc != BrokerCodes::Ok )
-    {
-        return BrokerCodes::ClientNotFound;
-    }
-    else 
-    {
-        return BrokerCodes::Ok;
-    }
+    return static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, session ) );
 }
 
 BrokerCodes MessageBroker::Register( SessionId id, const std::string& name, SessionWeakPtr session )
