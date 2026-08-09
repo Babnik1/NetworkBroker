@@ -23,7 +23,8 @@ jobs:
         sudo apt-get install -y \
           doxygen \
           libboost-all-dev \
-          nlohmann-json3-dev
+          nlohmann-json3-dev \
+          libgtest-dev
 
     - name: Doxygen action
       uses: mattnotmitt/doxygen-action@v1.1.0
