@@ -1,5 +1,10 @@
-#include <gtest/gtest.h>
+/// @file json_topic_repository_test.cpp
+///
+/// Тесты БД топиков.
+///
 
+
+#include <gtest/gtest.h>
 #include <cstdio>
 #include <fstream>
 #include <string>
@@ -9,14 +14,18 @@
 namespace
 {
 
+/// @brief Тестовый файл БД.
 const std::string TestDb = "test_topics.json";
 
+/// @brief Запись в файл.
+/// @param[in] content Что записываем.
 void WriteFile( const std::string& content )
 {
     std::ofstream file( TestDb );
     file << content;
 }
 
+/// @brief Чтение из файлф.
 std::string ReadFile()
 {
     std::ifstream file( TestDb );
@@ -27,6 +36,7 @@ std::string ReadFile()
     };
 }
 
+/// @brief Класс тестов.
 class JsonTopicRepositoryTest : public ::testing::Test
 {
 protected:

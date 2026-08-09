@@ -1,3 +1,9 @@
+/// @file topic_manager_test.cpp
+///
+/// Тесты топик-менеджера.
+///
+
+
 #include <gtest/gtest.h>
 
 #include "topics/topic_manager.h"

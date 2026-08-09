@@ -1,11 +1,20 @@
+#pragma once
+/// @file mock_topic_manager.cpp
+///
+/// Мок топик-менеджера.
+///
+
 
 #include <string>
 #include "topics/i_topic_manager.h"
 
+
+/// @brief Мокнутый класс менеджера топиков.
 class MockTopicManager : public ITopicManager
 {
 public:
 
+    /// @copydoc ITopicManager::Publish
     TopicCodes Publish( const Topic& topic, const std::string& message, std::unordered_set< ClientId >& clients ) override
     {
         lastPublishTopic = topic;
@@ -18,6 +27,7 @@ public:
         return publishResult;
     }
 
+    /// @copydoc ITopicManager::Subscribe
     TopicCodes Subscribe( ClientId id, const Topic& topic ) override
     {
         lastSubscribeClientId = id;
@@ -28,6 +38,7 @@ public:
         return subscribeResult;
     }
 
+    /// @copydoc ITopicManager::Create
     TopicCodes Create( ClientId id, const Topic& topic ) override
     {
         lastCreateClientId = id;
@@ -38,6 +49,7 @@ public:
         return createResult;
     }
 
+    /// @copydoc ITopicManager::Unsubscribe
     TopicCodes Unsubscribe( ClientId id, const Topic& topic ) override
     {
         lastUnsubscribeClientId = id;
@@ -48,6 +60,7 @@ public:
         return unsubscribeResult;
     }
 
+    /// @brief Тестовые данные.
     TopicCodes publishResult = TopicCodes::Ok;
     TopicCodes subscribeResult = TopicCodes::Ok;
     TopicCodes createResult = TopicCodes::Ok;

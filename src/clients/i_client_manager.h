@@ -15,7 +15,7 @@ class IClientManager
 {
 public:
 
-    /// @brief Конструктор.
+    /// @brief Деструктор.
     virtual ~IClientManager() = default;
 
     /// @brief Создание клиента.

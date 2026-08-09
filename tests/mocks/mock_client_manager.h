@@ -1,16 +1,26 @@
+#pragma once
+/// @file mock_client_manager.cpp
+///
+/// Мок клиент-менеджера.
+///
+
+
 #include <string>
 #include "clients/i_client_manager.h"
 
+/// @brief Мокнутый класс клиент-менеджера.
 class MockClientManager : public IClientManager
 {
 public:
 
+    /// @copydoc IClientManager::CreateClient
     ClientsCodes CreateClient( const std::string& name ) override
     {
         lastCreatedName = name;
         return createResult;
     }
 
+    /// @copydoc IClientManager::ConnectClient
     ClientsCodes ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session ) override
     {
         lastConnectedName = name;
@@ -18,11 +28,13 @@ public:
         return connectResult;
     }
 
+    /// @copydoc IClientManager::DisconnectClient
     void DisconnectClient( SessionId id ) override
     {
         lastDisconnectedSessionId = id;
     }
 
+    /// @copydoc IClientManager::GetCLientId
     ClientsCodes GetClientId( SessionId id, ClientId& clientId ) override
     {
         lastGetClientIdSessionId = id;
@@ -35,6 +47,7 @@ public:
         return getClientIdResult;
     }
 
+    /// @copydoc IClientManager::SendTopicMessage
     void SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients ) override
     {
         lastMessage = message;
@@ -42,6 +55,7 @@ public:
         sendMessageCalled = true;
     }
 
+    /// @brief Тестовые данные.
     ClientsCodes createResult = ClientsCodes::Ok;
     ClientsCodes connectResult = ClientsCodes::Ok;
     ClientsCodes getClientIdResult = ClientsCodes::Ok;

@@ -1,3 +1,9 @@
+/// @file client_test.cpp
+///
+/// Тесты клиента.
+///
+
+
 #include <gtest/gtest.h>
 #include <boost/asio.hpp>
 #include "clients/client.h"
@@ -5,7 +11,10 @@
 namespace
 {
 
-/// @brief Создание Session для тестов Client.
+/// @brief Подмена создания сессии.
+/// @param[in] id ID сессии.
+/// @param[in] ioContext Контекст.
+/// @return Указатель на сессию.
 SessionPtr CreateSession(
     SessionId id,
     boost::asio::io_context& ioContext )

@@ -1,13 +1,20 @@
+/// @file client_manager_test.cpp
+///
+/// Тесты клиент-менеджера.
+///
+
 #include <gtest/gtest.h>
-
 #include <boost/asio.hpp>
-
 #include "clients/clients_manager.h"
 #include "mocks/mock_client_repository.h"
 
 namespace
 {
 
+/// @brief Подмена создания сессии.
+/// @param[in] id ID сессии.
+/// @param[in] ioContext Контекст.
+/// @return Указатель на сессию.
 SessionPtr CreateSession(
     SessionId id,
     boost::asio::io_context& ioContext )

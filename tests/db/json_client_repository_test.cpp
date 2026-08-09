@@ -1,5 +1,10 @@
-#include <gtest/gtest.h>
+/// @file json_client_repository_test.cpp
+///
+/// Тесты БД клиентов.
+///
 
+
+#include <gtest/gtest.h>
 #include <fstream>
 #include <string>
 
@@ -8,13 +13,16 @@
 namespace
 {
 
+/// @brief Тестовый файл БД.
 const std::string testDbFile = "test_clients.json";
 
+/// @brief Удаление тестового файла БД.
 void RemoveTestDatabase()
 {
     std::remove( testDbFile.c_str() );
 }
 
+/// @brief Создание тестового файла БД.
 void CreateDatabase( const std::string& content )
 {
     std::ofstream file( testDbFile );

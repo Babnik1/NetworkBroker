@@ -1,5 +1,10 @@
-#include <gtest/gtest.h>
+/// @file integration_test.cpp
+///
+/// Интеграционные тесты.
+///
 
+
+#include <gtest/gtest.h>
 #include <boost/asio.hpp>
 
 #include <cstdio>
@@ -17,9 +22,16 @@
 namespace
 {
 
+/// @brief Файл БД клиентов.
 const std::string ClientsDb = "test_integration_clients.json";
+
+/// @brief Файл БД топиков.
 const std::string TopicsDb = "test_integration_topics.json";
 
+/// @brief Подмена создания сессии.
+/// @param[in] id ID сессии.
+/// @param[in] ioContext Контекст.
+/// @return Указатель на сессию.
 SessionPtr CreateSession(
     SessionId id,
     boost::asio::io_context& ioContext )
@@ -32,6 +44,8 @@ SessionPtr CreateSession(
         nullptr );
 }
 
+/// @brief Создание брокера.
+/// @return Указатель на брокер.
 std::shared_ptr< MessageBroker > CreateBroker()
 {
     auto clientRepository =
@@ -53,12 +67,14 @@ std::shared_ptr< MessageBroker > CreateBroker()
         topicManager );
 }
 
+/// @brief Удаление тестового файла БД.
 void RemoveTestDatabases()
 {
     std::remove( ClientsDb.c_str() );
     std::remove( TopicsDb.c_str() );
 }
 
+/// @brief Структура соединения.
 struct TestConnection
 {
     boost::asio::ip::tcp::socket client;
@@ -82,6 +98,7 @@ struct TestConnection
     }
 };
 
+/// @brief Тестовый класс.
 class MessageBrokerIntegrationTest : public ::testing::Test
 {
 protected:

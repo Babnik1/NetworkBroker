@@ -1,3 +1,8 @@
+/// @file message_broker_test.cpp
+///
+/// Тесты месседж-брокера.
+///
+
 #include <gtest/gtest.h>
 #include "broker/message_broker.h"
 #include "mocks/mock_client_manager.h"

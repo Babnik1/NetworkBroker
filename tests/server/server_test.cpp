@@ -1,3 +1,9 @@
+/// @file server_test.cpp
+///
+/// Тесты сервера.
+///
+
+
 #include <gtest/gtest.h>
 #include <boost/asio.hpp>
 #include "server/server.h"
@@ -8,6 +14,7 @@ namespace
 {
 
 /// @brief Получение свободного TCP-порта.
+/// @return Порт.
 unsigned short GetFreePort()
 {
     boost::asio::io_context ioContext;
