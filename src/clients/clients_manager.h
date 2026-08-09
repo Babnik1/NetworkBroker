@@ -10,10 +10,11 @@
 #include "client.h"
 #include "fwd.h"
 #include "rc.h"
+#include "i_client_manager.h"
 
 
 /// @brief Класс клиент-менеджера.
-class ClientManager
+class ClientManager : public IClientManager
 {
 public:
 
@@ -21,38 +22,26 @@ public:
     /// @param[in] db Указатель на базу данных.
     ClientManager( IClientRepositoryPtr db );
 
-    /// @brief Создание клиента.
-    /// @param[in] name Имя клиента.
-    /// @return Код возврата. Ok - Успех.
+    /// @copydoc IClientManager::CreateClient
     ClientsCodes CreateClient( const std::string& name );
 
-    /// @brief Подсключение клиента.
-    /// @param[in] name Имя клиента.
-    /// @param[in] id ID сессии.
-    /// @param[in] session Слабый указатель на сессию.
-    /// @return Код возврата. Ok - Успех.
+    /// @copydoc IClientManager::ConnectClient
     ClientsCodes ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session );
 
-    /// @brief Отключение клиента.
-    /// @param[in] id ID сессии.
+    /// @copydoc IClientManager::DisconnectClient
     void DisconnectClient( SessionId id );
+
+    /// @copydoc IClientManager::GetClientId
+    ClientsCodes GetClientId( SessionId id, ClientId& clientId );
+
+    /// @copydoc IClientManager::SendTopicMessage
+    void SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients );
 
     /// @brief Удаление клиента.
     /// @details Не используется. Сделано на будущее.
     /// @param[in] id ID Клиента.
     /// @return Код возврата. Ok - Успех.
     ClientsCodes RemoveClient( const ClientId id );
-
-    /// @brief Получение ID клиента.
-    /// @param[in] id ID сессии.
-    /// @param[out] clientId ID клиента.
-    /// @return Код возврата. Ok - Успех.
-    ClientsCodes GetClientId( SessionId id, ClientId& clientId );
-
-    /// @brief Отправка сообщений клиентам.
-    /// @param[in] message Сообщение.
-    /// @param[in] clients Список клиентов.
-    void SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients );
 
 private:
 

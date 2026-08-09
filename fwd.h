@@ -9,6 +9,10 @@
 #include <memory>
 #include <cstdint>
 
+using ClientId = uint64_t;
+using Topic = std::string;
+using SessionId = uint64_t;
+
 class Session;
 class MessageBroker;
 class ClientManager;
@@ -17,10 +21,7 @@ class IClientRepository;
 class JsonRepository;
 class Server;
 class ITopicRepository;
-
-using ClientId = uint64_t;
-using Topic = std::string;
-using SessionId = uint64_t;
+class IClientManager;
 
 using TopicManagerPtr = std::shared_ptr< TopicManager >;
 
@@ -37,3 +38,5 @@ using SessionPtr = std::shared_ptr< Session >;
 using SessionWeakPtr = std::weak_ptr< Session >;
 
 using MessageBrokerPtr = std::shared_ptr< MessageBroker >;
+
+using IClientManagerPtr = std::shared_ptr< IClientManager >;

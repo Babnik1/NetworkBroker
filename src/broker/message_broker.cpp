@@ -77,7 +77,7 @@ std::string CodeToString( BrokerCodes rc )
 
 } // anonimous namespace
 
-MessageBroker::MessageBroker( ClientManagerPtr cliManager, TopicManagerPtr topManager )
+MessageBroker::MessageBroker( IClientManagerPtr cliManager, TopicManagerPtr topManager )
     : cliManager_{ cliManager }
     , topManager_{ topManager }
 {}
@@ -91,8 +91,8 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
     if ( !( iss >> action ) )
     {
-        return CodeToString( BrokerCodes::InvalidCommand );
         DEBUG_LOG( "Failed stream to action" );
+        return CodeToString( BrokerCodes::InvalidCommand );
     }
     
 
@@ -173,6 +173,7 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
         case Actions::UNSUBSCRIBE:
         {
             rc = Unsubscribe( id, argument );
+            break;
         }
     }
 
