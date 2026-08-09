@@ -15,7 +15,6 @@ Configurator::Configurator( std::string config )
     : configFile_{ config }
 {}
 
-/// @todo Добавить возможность выставления дефолта , если не прочитали.
 ConfigCodes Configurator::ReadConfig()
 {
     Configs configs;
@@ -27,11 +26,11 @@ ConfigCodes Configurator::ReadConfig()
     try
     {
         nlohmann::json data = nlohmann::json::parse( file );
-        configs.nameFileLog = data.at( "log_file_name" );
-        configs.port = data.at( "server_port" ).get< short >();
-        configs.topicDb = data.at( "topics_database" );
-        configs.clientDb = data.at( "clients_database" );
-        configs.loglevel = data.at( "log_level" );
+        configs.nameFileLog = data.value( "log_file_name", "app.log" );
+        configs.port = data.value( "server_port", 2000 );
+        configs.topicDb = data.value( "topics_database", "topic.json" );
+        configs.clientDb = data.value( "clients_database", "client.json" );
+        configs.loglevel = data.value( "log_level", "info" );
     }
     catch ( const nlohmann::json::parse_error& e ) 
     {
