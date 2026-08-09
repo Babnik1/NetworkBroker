@@ -63,12 +63,12 @@ TopicCodes TopicManager::Create( const ClientId id, const Topic& topic )
         return TopicCodes::TopicAlreadyExists;
     }
 
-    topics_[ topic ].insert( id );
     if ( !db_->CreateTopic( topic, id ) )
     {
         ERROR_LOG( "Failed to create topic: " << topic << ". ID: " << id );
         return TopicCodes::InternalError;
     }
+    topics_[ topic ].insert( id );
 
     INFO_LOG( "Topic " << topic << " created successfully" );
     return TopicCodes::Ok;
@@ -88,13 +88,13 @@ TopicCodes TopicManager::Unsubscribe( const ClientId id, const Topic& topic )
             return TopicCodes::NotSubscribed;
         }   
 
-        cliSet.erase( itCli );
-
         if ( !db_->RemoveFromTopic( topic , id ) )
         {
             ERROR_LOG( "Failed to delete from topic: " << topic << ". ID: " << id );
             return TopicCodes::InternalError;
         }
+
+        cliSet.erase( itCli );
     }
     else 
     {

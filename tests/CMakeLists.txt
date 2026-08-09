@@ -4,6 +4,7 @@ set( TEST_SOURCES
     broker/message_broker_test.cpp
     clients/client_test.cpp
     clients/client_manager_test.cpp
+    topics/topic_manager_test.cpp
 )
 
 set( APP_SOURCES_FOR_TESTS
