@@ -29,6 +29,8 @@ set( SOURCES
 
 add_executable( Broker ${SOURCES} )
 
+add_subdirectory( client )
+
 target_include_directories( Broker PRIVATE ${CMAKE_SOURCE_DIR} )
 
 target_include_directories( Broker PRIVATE 
@@ -37,9 +39,6 @@ target_include_directories( Broker PRIVATE
 )
 target_link_libraries( Broker PRIVATE 
     nlohmann_json::nlohmann_json
-#    Boost::program_options 
-#    Boost::filesystem
-#    Boost::system
 )
 
 set_target_properties( Broker PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR} )
