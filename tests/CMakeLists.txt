@@ -1,10 +1,12 @@
 find_package( GTest REQUIRED )
 
-set(TEST_SOURCES
+set( TEST_SOURCES
     broker/message_broker_test.cpp
+    clients/client_test.cpp
+    clients/client_manager_test.cpp
 )
 
-set(APP_SOURCES_FOR_TESTS
+set( APP_SOURCES_FOR_TESTS
     ../src/broker/message_broker.cpp
     ../src/clients/clients_manager.cpp
     ../src/clients/client.cpp

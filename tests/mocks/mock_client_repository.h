@@ -12,12 +12,22 @@ public:
 
     bool SaveClient( const Client& client ) override
     {
+        if ( !saveResult_ )
+        {
+            return false;
+        }
+
         clients_.push_back( client );
-        return saveResult_;
+        return true;
     }
 
     bool DeleteClient( ClientId id ) override
     {
+        if ( !deleteResult_ )
+        {
+            return false;
+        }
+
         auto it = std::remove_if(
             clients_.begin(),
             clients_.end(),
@@ -32,7 +42,7 @@ public:
         }
 
         clients_.erase( it, clients_.end() );
-        return deleteResult_;
+        return true;
     }
 
     void SetSaveResult( bool result )
