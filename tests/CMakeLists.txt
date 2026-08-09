@@ -5,6 +5,8 @@ set( TEST_SOURCES
     clients/client_test.cpp
     clients/client_manager_test.cpp
     topics/topic_manager_test.cpp
+    db/json_client_repository_test.cpp
+    db/json_topic_repository_test.cpp
 )
 
 set( APP_SOURCES_FOR_TESTS
@@ -16,6 +18,8 @@ set( APP_SOURCES_FOR_TESTS
     ../src/logs/shell_printer.cpp 
     ../src/logs/logger.cpp
     ../src/server/session.cpp
+    ../src/db/json_client_repository.cpp 
+    ../src/db/json_topic_repository.cpp
 )
 
 add_executable( BrokerTests ${TEST_SOURCES} ${APP_SOURCES_FOR_TESTS} )
