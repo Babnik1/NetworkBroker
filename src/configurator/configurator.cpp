@@ -3,13 +3,12 @@
 /// Загрузчик конфигурации. Реализация.
 ///
 
-#include "configurator.h"
 
+#include "configurator.h"
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <nlohmann/json_fwd.hpp>
-
 
 
 Configurator::Configurator( std::string config )

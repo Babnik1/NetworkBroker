@@ -4,8 +4,10 @@
 /// Объявление макросов для логирования.
 ///
 
+
 #include <sstream>
 #include "log_manager.h"
+
 
 /// @brief Вспомогательный макрос.
 #define LOG_INTERNAL( level, direction ) \

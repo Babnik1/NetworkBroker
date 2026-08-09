@@ -5,6 +5,7 @@
 /// Класс логгера, пишущего в консоль. Объявление.
 ///
 
+
 #include "log_configs.h"
 #include "log_configs.h"
 #include <atomic>

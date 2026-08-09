@@ -5,15 +5,15 @@
 
 
 #include "message_broker.h"
-#include "../clients//clients_manager.h"
+#include "clients/clients_manager.h"
 #include "rc.h"
 #include <cstddef>
 #include <sys/types.h>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include "../topics/topic_manager.h"
-#include "../logs/log.h"
+#include "topics/topic_manager.h"
+#include "logs/log.h"
 
 
 namespace  

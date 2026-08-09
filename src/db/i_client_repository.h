@@ -6,7 +6,8 @@
 
 
 #include <vector>
-#include "../clients/client.h"
+#include "clients/client.h"
+
 
 /// @brief Абстрактный класс базы данных клиентов.
 class IClientRepository

@@ -11,7 +11,8 @@
 #include <boost/asio/impl/write.hpp>
 #include <boost/system/detail/error_code.hpp>
 #include <memory>
-#include "../logs/log.h"
+#include "logs/log.h"
+
 
 Session::Session( SessionId id,
                   boost::asio::ip::tcp::socket socket,

@@ -5,8 +5,8 @@
 
 
 #include "clients_manager.h"
-#include "../db/i_client_repository.h"
-#include "../logs/log.h"
+#include "db/i_client_repository.h"
+#include "logs/log.h"
 #include <cstddef>
 #include <cstdint>
 #include <memory>

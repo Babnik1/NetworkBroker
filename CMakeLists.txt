@@ -32,18 +32,9 @@ add_executable( Broker ${SOURCES} )
 target_include_directories( Broker PRIVATE ${CMAKE_SOURCE_DIR} )
 
 target_include_directories( Broker PRIVATE 
-    src/logs 
-    src/server
-    src/sessions
-    src/configurator
-    src/clients
-    src/db
-    src/topics
-    srcbroker
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${Boost_INCLUDE_DIRS}
 )
-
-target_include_directories( Broker PRIVATE ${Boost_INCLUDE_DIRS} )
-
 target_link_libraries( Broker PRIVATE 
     nlohmann_json::nlohmann_json
 #    Boost::program_options 

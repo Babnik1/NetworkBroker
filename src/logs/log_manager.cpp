@@ -52,7 +52,6 @@ LogLevels ConfigToLevel( const std::string& level )
 } // anonimous namespace
 
 
-
 LogManager::LogManager( const std::string& file, const std::string& level )
 {
     level_ = ConfigToLevel( level );

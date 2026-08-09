@@ -5,6 +5,7 @@
 /// Класс логгера, пишущего в файл - лог. Объявление.
 ///
 
+
 #include "log_configs.h"
 #include <atomic>
 #include <memory>

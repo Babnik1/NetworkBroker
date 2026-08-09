@@ -5,7 +5,7 @@
 
 
 #include "topic_manager.h"
-#include "../logs/log.h"
+#include "logs/log.h"
 #include <unordered_set>
 
 

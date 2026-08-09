@@ -10,7 +10,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include "../logs/log.h"
+#include "logs/log.h"
 
 
 JsonRepository::JsonRepository( const std::string dbFile )

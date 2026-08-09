@@ -8,6 +8,7 @@
 #include "fwd.h"
 #include "rc.h"
 
+
 /// @brief Класс брокера.
 class MessageBroker
 {
@@ -32,6 +33,7 @@ public:
     void Disconnect( SessionId id );
 
 private:
+
     /// @brief Авторизация клиента.
     /// @param[in] id ID сессии.
     /// @param[in] name Имя пользователя.

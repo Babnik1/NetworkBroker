@@ -9,7 +9,8 @@
 #include <deque>
 #include <memory>
 #include <boost/asio.hpp>
-#include "../broker/message_broker.h"
+#include "broker/message_broker.h"
+
 
 /// @brief ID сессии.
 using SessionId = uint64_t;
@@ -18,6 +19,7 @@ using SessionId = uint64_t;
 using MessageQueue = std::deque< std::string >;
 
 inline uint64_t invalidSessionId = 0 ;      /// Невалидный ID сессии.
+
 
 /// @brief Класс сессии.
 class Session

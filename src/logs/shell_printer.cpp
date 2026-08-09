@@ -7,6 +7,7 @@
 #include "shell_printer.h"
 #include <iostream>
 
+
 ShellPrinter::ShellPrinter()
 {
     stop_.store( false );

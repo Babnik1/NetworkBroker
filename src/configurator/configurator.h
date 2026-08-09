@@ -3,10 +3,10 @@
 /// Загрузчик конфигурации. Объявление.
 ///
 
+
 #include <memory>
 #include <string>
 #include "rc.h"
-
 
 
 /// @brief Структура конфигурации.

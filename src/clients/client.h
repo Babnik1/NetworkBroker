@@ -6,20 +6,23 @@
 ///
 
 
-#include "../server/session.h"
-#include "../server/session.h"
+#include "server/session.h"
+#include "server/session.h"
 #include <cstdint>
 #include <memory>
 #include <optional>
 #include <unordered_set>
 
+
 using ClientId = uint64_t;    /// ID клиента.
 inline uint64_t invalidClientId = 0; /// Невалидный ID клиента.
+
 
 /// @brief Стуктура клиента.
 class Client
 {
 public:
+
     /// @brief Конструктор.
     /// @param[in] id ID клиента.
     /// @param[in] name Имя клиента.
@@ -44,13 +47,15 @@ public:
     /// @brief Сообщение клиенту, что он деавторизован.
     void Disconnect();
 
+    /// @brief Сигнал отправки сообщения клиенту.
+    /// @param[in] message Сообщение.
     void SendTopicMessage( const std::string message );
 
 private:
-    ClientId id_;
-    std::string name_;
-    /// std::unordered_set< Topic > subscriptions;
-    SessionWeakPtr session_; 
+
+    ClientId id_;               /// ID Клиента.
+    std::string name_;          /// Имя клиента.
+    SessionWeakPtr session_;    /// Слабая ссылка на сессию.
 };
 
 

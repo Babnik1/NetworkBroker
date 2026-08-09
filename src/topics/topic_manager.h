@@ -12,7 +12,7 @@
 #include <unordered_set>
 #include "rc.h"
 #include "fwd.h"
-#include "../db/i_topic_repository.h"
+#include "db/i_topic_repository.h"
 
 
 /// @brief Класс топик-менеджера.

@@ -4,7 +4,6 @@
 ///
 
 
-
 #include "json_topic_repository.h"
 #include <algorithm>
 #include <nlohmann/json.hpp>
@@ -12,7 +11,8 @@
 #include <exception>
 #include <string>
 #include <unordered_set>
-#include "../logs/log.h"
+#include "logs/log.h"
+
 
 JsonTopicRepository::JsonTopicRepository( const std::string dbFile_ )
     : dbFile_{ dbFile_ }

@@ -5,6 +5,7 @@
 /// Класс менеджера логирования. Объявление.
 ///
 
+
 #include "log_configs.h"
 #include "logger.h"
 #include "shell_printer.h"
