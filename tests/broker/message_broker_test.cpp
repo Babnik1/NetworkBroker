@@ -1,130 +1,529 @@
 #include <gtest/gtest.h>
-
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
-
 #include "broker/message_broker.h"
-#include "clients/clients_manager.h"
-#include "topics/topic_manager.h"
-#include "db/i_client_repository.h"
-#include "db/i_topic_repository.h"
+#include "mocks/mock_client_manager.h"
+#include "mocks/mock_topic_manager.h"
 
 
-class FakeClientRepository : public IClientRepository
+///
+/// Тесты связанные с клиентом.
+///
+
+
+/// @brief Тест: Пустая комнада.
+TEST( MessageBrokerTest, EmptyCommand )
 {
-public:
-    std::vector<Client> LoadClients() override
-    {
-        return clients_;
-    }
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
 
-    bool SaveClient(const Client& client) override
-    {
-        for (auto& current : clients_)
-        {
-            if (current.GetId() == client.GetId())
-            {
-                current = client;
-                return true;
-            }
-        }
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
 
-        clients_.push_back(client);
-        return true;
-    }
+    EXPECT_EQ(
+        broker.HandleCommand( 1, "", {} ),
+        "ERROR Invalid command\n" );
+}
 
-    bool DeleteClient(ClientId id) override
-    {
-        for (auto it = clients_.begin(); it != clients_.end(); ++it)
-        {
-            if (it->GetId() == id)
-            {
-                clients_.erase(it);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-private:
-    std::vector<Client> clients_;
-};
-
-
-class FakeTopicRepository : public ITopicRepository
+/// @brief Тест: Неверная команда.
+TEST( MessageBrokerTest, InvalidCommand )
 {
-public:
-    bool SaveTopic(const Topic& topic, ClientId id) override
-    {
-        topics_[topic].insert(id);
-        return true;
-    }
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
 
-    std::unordered_map<Topic, std::unordered_set<ClientId>>
-    LoadTopics() override
-    {
-        return topics_;
-    }
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
 
-    bool CreateTopic(const Topic& topic, ClientId id) override
-    {
-        if (topics_.find(topic) != topics_.end())
-        {
-            return false;
-        }
+    EXPECT_EQ(
+        broker.HandleCommand( 1, "FOO alex", {} ),
+        "ERROR Invalid command\n" );
+}
 
-        topics_[topic].insert(id);
-        return true;
-    }
-
-    bool RemoveFromTopic(const Topic& topic, ClientId id) override
-    {
-        auto it = topics_.find(topic);
-
-        if (it == topics_.end())
-        {
-            return false;
-        }
-
-        it->second.erase(id);
-        return true;
-    }
-
-private:
-    std::unordered_map<Topic, std::unordered_set<ClientId>> topics_;
-};
-
-
-class MessageBrokerTest : public ::testing::Test
+/// @brief Тест: Успешный логин.
+TEST( MessageBrokerTest, Login )
 {
-protected:
-    void SetUp() override
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    auto* clientManagerPtr = clientManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "LOGIN alex", {} ),
+        "OK\n" );
+
+    EXPECT_EQ(
+        clientManagerPtr->lastConnectedName,
+        "alex" );
+
+    EXPECT_EQ(
+        clientManagerPtr->lastSessionId,
+        42 );
+}
+
+/// @brief Тест: Неуспешный логин. Несуществующий клиент.
+TEST( MessageBrokerTest, LoginClientNotFound )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->connectResult =
+        ClientsCodes::ClientNotFound;
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "LOGIN alex", {} ),
+        "ERROR Client not found\n" );
+}
+
+/// @brief Тест: Неуспешный логин. Клиент уже подключен.
+TEST( MessageBrokerTest, LoginAlreadyConnected )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->connectResult =
+        ClientsCodes::ClientAlreadyConnected;
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "LOGIN alex", {} ),
+        "ERROR Client already connected\n" );
+}
+
+/// @brief Тест: Успешная регистрация.
+TEST( MessageBrokerTest, Register )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    auto* clientManagerPtr = clientManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "REGISTER alex", {} ),
+        "OK\n" );
+
+    EXPECT_EQ(
+        clientManagerPtr->lastCreatedName,
+        "alex" );
+
+    EXPECT_EQ(
+        clientManagerPtr->lastConnectedName,
+        "alex" );
+
+    EXPECT_EQ(
+        clientManagerPtr->lastSessionId,
+        42 );
+}
+
+/// @brief Тест: Неуспешная регистрация. Клиент уже существует.
+TEST( MessageBrokerTest, RegisterExistingClient )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->createResult =
+        ClientsCodes::ClientAlreadyExists;
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "REGISTER alex", {} ),
+        "ERROR Client already exists\n" );
+}
+
+/// @brief Тест:: Неуспешная регистрация.
+TEST( MessageBrokerTest, RegisterInternalError )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->createResult =
+        ClientsCodes::InternalError;
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "REGISTER alex", {} ),
+        "ERROR Internal error\n" );
+}
+
+/// @todo LOGOUT
+
+///
+/// Тесты связанные с топиками.
+///
+
+/// @brief Тест: Успешное создание топика.
+TEST( MessageBrokerTest, CreateTopic )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    auto* clientManagerPtr = clientManager.get();
+    auto* topicManagerPtr = topicManager.get();
+
+    clientManagerPtr->clientIdToReturn = 100;
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "CREATE test", {} ),
+        "OK\n" );
+
+    EXPECT_TRUE(
+        topicManagerPtr->createCalled );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastCreateClientId,
+        100 );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastCreateTopic,
+        "test" );
+}
+
+/// @brief Тест: Неуспешное создание топика. Клиент не авторизован.
+TEST( MessageBrokerTest, CreateTopicUnauthorized )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->getClientIdResult =
+        ClientsCodes::ClientNotFound;
+
+    auto* topicManagerPtr = topicManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "CREATE test", {} ),
+        "ERROR You are unauthorized\n" );
+
+    EXPECT_FALSE(
+        topicManagerPtr->createCalled );
+}
+
+/// @brief Тест: Успешная подписка на топик.
+TEST( MessageBrokerTest, Subscribe )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->clientIdToReturn = 100;
+
+    auto* topicManagerPtr = topicManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "SUBSCRIBE test", {} ),
+        "OK\n" );
+
+    EXPECT_TRUE(
+        topicManagerPtr->subscribeCalled );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastSubscribeClientId,
+        100 );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastSubscribeTopic,
+        "test" );
+}
+
+/// @brief Тест: Неуспешная подписка на топик. Топика не существует.
+TEST( MessageBrokerTest, SubscribeTopicNotFound )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    topicManager->subscribeResult =
+        TopicCodes::TopicNotFound;
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 42, "SUBSCRIBE test", {} ),
+        "ERROR Topic not found\n" );
+}
+
+/// @todo Неуспешная подписка. Уже подписан.
+
+/// @brief Тест: Успешная публикация сообщения.
+TEST( MessageBrokerTest, Publish )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->clientIdToReturn = 100;
+
+    topicManager->publishClients =
     {
-        auto clientRepository =
-            std::make_unique<FakeClientRepository>();
+        200,
+        300
+    };
 
-        auto topicRepository =
-            std::make_unique<FakeTopicRepository>();
+    auto* clientManagerPtr = clientManager.get();
+    auto* topicManagerPtr = topicManager.get();
 
-        clientManager_ =
-            std::make_unique<ClientManager>(
-                std::move(clientRepository));
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
 
-        topicManager_ =
-            std::make_unique<TopicManager>(
-                std::move(topicRepository));
+    EXPECT_EQ(
+        broker.HandleCommand(
+            42,
+            "PUBLISH test Hello world",
+            {} ),
+        "OK\n" );
 
-        broker_ =
-            std::make_unique<MessageBroker>(
-                std::move(clientManager_),
-                std::move(topicManager_));
-    }
+    EXPECT_TRUE(
+        topicManagerPtr->publishCalled );
 
-    std::unique_ptr<ClientManager> clientManager_;
-    std::unique_ptr<TopicManager> topicManager_;
-    std::unique_ptr<MessageBroker> broker_;
-};
+    EXPECT_EQ(
+        topicManagerPtr->lastPublishTopic,
+        "test" );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastPublishMessage,
+        "Hello world" );
+
+    EXPECT_TRUE(
+        clientManagerPtr->sendMessageCalled );
+
+    EXPECT_EQ(
+        clientManagerPtr->lastMessage,
+        "Hello world" );
+
+    EXPECT_EQ(
+        clientManagerPtr->lastClients,
+        topicManagerPtr->publishClients );
+}
+
+/// @brief Тест: Неуспешная публикация сообщения. Клиент не авторизован.
+TEST( MessageBrokerTest, PublishUnauthorized )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->getClientIdResult =
+        ClientsCodes::ClientNotFound;
+
+    auto* topicManagerPtr = topicManager.get();
+    auto* clientManagerPtr = clientManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand(
+            42,
+            "PUBLISH test Hello",
+            {} ),
+        "ERROR You are unauthorized\n" );
+
+    EXPECT_FALSE(
+        topicManagerPtr->publishCalled );
+
+    EXPECT_FALSE(
+        clientManagerPtr->sendMessageCalled );
+}
+
+/// @brief Тест: Неуспешная публикация сообщения. Топика не существует.
+TEST( MessageBrokerTest, PublishTopicNotFound )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->clientIdToReturn = 100;
+    topicManager->publishResult =
+        TopicCodes::TopicNotFound;
+
+    auto* clientManagerPtr = clientManager.get();
+    auto* topicManagerPtr = topicManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand(
+            42,
+            "PUBLISH test Hello",
+            {} ),
+        "ERROR Topic not found\n" );
+
+    EXPECT_TRUE(
+        topicManagerPtr->publishCalled );
+
+    EXPECT_FALSE(
+        clientManagerPtr->sendMessageCalled );
+}
+
+/// @brief Тест: Успешная отписка от топика.
+TEST( MessageBrokerTest, Unsubscribe )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->clientIdToReturn = 100;
+
+    auto* topicManagerPtr = topicManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand(
+            42,
+            "UNSUBSCRIBE test",
+            {} ),
+        "OK\n" );
+
+    EXPECT_TRUE(
+        topicManagerPtr->unsubscribeCalled );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastUnsubscribeClientId,
+        100 );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastUnsubscribeTopic,
+        "test" );
+}
+
+/// @brief Тест: Отписка от топика без авторизации.
+TEST( MessageBrokerTest, UnsubscribeUnauthorized )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->getClientIdResult =
+        ClientsCodes::ClientNotFound;
+
+    auto* topicManagerPtr = topicManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand(
+            42,
+            "UNSUBSCRIBE test",
+            {} ),
+        "ERROR You are unauthorized\n" );
+
+    EXPECT_FALSE(
+        topicManagerPtr->unsubscribeCalled );
+}
+
+/// @brief Тест: Отписка от несуществующего топика.
+TEST( MessageBrokerTest, UnsubscribeTopicNotFound )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    clientManager->clientIdToReturn = 100;
+    topicManager->unsubscribeResult =
+        TopicCodes::TopicNotFound;
+
+    auto* topicManagerPtr = topicManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand(
+            42,
+            "UNSUBSCRIBE test",
+            {} ),
+        "ERROR Topic not found\n" );
+
+    EXPECT_TRUE(
+        topicManagerPtr->unsubscribeCalled );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastUnsubscribeClientId,
+        100 );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastUnsubscribeTopic,
+        "test" );
+}
+
+/// @brief Тест: Парсинг сообщения.
+TEST( MessageBrokerTest, PublishMessageWithSpaces )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    auto* topicManagerPtr = topicManager.get();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand(
+            1,
+            "PUBLISH test Hello this is a message",
+            {} ),
+        "OK\n" );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastPublishTopic,
+        "test" );
+
+    EXPECT_EQ(
+        topicManagerPtr->lastPublishMessage,
+        "Hello this is a message" );
+}
+
+///
+/// Общие тесты.
+///
+
+/// @brief Команда без аргумента.
+TEST( MessageBrokerTest, CommandWithoutArgument )
+{
+    auto clientManager = std::make_unique< MockClientManager >();
+    auto topicManager = std::make_unique< MockTopicManager >();
+
+    MessageBroker broker(
+        std::move( clientManager ),
+        std::move( topicManager ) );
+
+    EXPECT_EQ(
+        broker.HandleCommand( 1, "LOGIN", {} ),
+        "ERROR Invalid command\n" );
+}
