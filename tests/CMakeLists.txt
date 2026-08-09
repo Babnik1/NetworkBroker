@@ -7,6 +7,8 @@ set( TEST_SOURCES
     topics/topic_manager_test.cpp
     db/json_client_repository_test.cpp
     db/json_topic_repository_test.cpp
+    server/server_test.cpp
+    integration/integration_test.cpp
 )
 
 set( APP_SOURCES_FOR_TESTS
@@ -20,6 +22,7 @@ set( APP_SOURCES_FOR_TESTS
     ../src/server/session.cpp
     ../src/db/json_client_repository.cpp 
     ../src/db/json_topic_repository.cpp
+    ../src/server/server.cpp
 )
 
 add_executable( BrokerTests ${TEST_SOURCES} ${APP_SOURCES_FOR_TESTS} )

@@ -14,41 +14,35 @@
 #include "session.h"
 #include "fwd.h"
 
-
-enum class AuthType
-{
-    Authorized      = 0,
-    NonAuthorized   = 1,
-};
-
-/// @todo Не нужно так наверн. Подумать.
-struct SessionData
-{
-    AuthType auth;
-    SessionPtr session;
-    ClientId id;
-};
-
-
+/// @brief Класс сервера.
 class Server
 {
 public:
 
+    /// @brief Конструктор.
+    /// @param[in] port Порт.
+    /// @param[in] broker Брокер.
     Server( short port, std::shared_ptr< MessageBroker > broker );
 
+    /// @brief Запуск сервера.
     void Start();
 
+    /// @brief Остановка сервера.
     void Stop();
 
+    /// @brief Отключение сессии.
+    /// @param[in] id ID Сессии.
     void RemoveSession( SessionId id );
 
 private:
-    SessionId nextSessionId_{ 1 };
-    boost::asio::io_context ioContext_; 
-    boost::asio::ip::tcp::acceptor acceptor_;
-    std::unordered_map< SessionId, SessionData > sessions_;
-    std::shared_ptr< MessageBroker > broker_;
 
+    SessionId nextSessionId_{ 1 };                              /// Счетчик ID сессий.
+    boost::asio::io_context ioContext_;                         /// Контекст ввода-вывода.
+    boost::asio::ip::tcp::acceptor acceptor_;                   /// Ацептор.
+    std::unordered_map< SessionId, SessionPtr > sessions_;      /// Активные сессии.
+    std::shared_ptr< MessageBroker > broker_;                   /// Брокер.
+
+    /// @brief Ожидание нового подключения.
     void DoAccept();
     
 };

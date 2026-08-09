@@ -7,7 +7,6 @@
 #include "server.h"
 #include <boost/asio/io_context.hpp>
 #include <boost/system/detail/error_code.hpp>
-#include <cstdint>
 #include <memory>
 
 #include "broker/message_broker.h"
@@ -31,6 +30,18 @@ void Server::Start()
 void Server::Stop()
 {
     INFO_ALL( "Stopping server..." );
+
+    boost::system::error_code error;
+
+    acceptor_.close( error );
+
+    if ( error )
+    {
+        ERROR_LOG(
+            "Failed to stop server: "
+            << error.message() );
+    }
+
     ioContext_.stop();
 }
 
@@ -45,16 +56,14 @@ void Server::DoAccept()
                 INFO_ALL( "Client " << socket->remote_endpoint().address() << " connected succesfully" );
                 auto session = std::make_shared< Session >( id, std::move( *socket ), broker_ );
                 sessions_.emplace(
-                    session->GetId(),
-                    SessionData{ AuthType::NonAuthorized, 
-                              session, 
-                                   0 } );
+                    session->GetId(), 
+                    session );
                 session->SetSelf( session );
                 session->Start();
             }
             else
             {
-                ERROR_LOG( "Connection error. Client: " << socket );
+                ERROR_LOG( "Connection error." << error.message() );
             }
 
             if ( !acceptor_.is_open() )

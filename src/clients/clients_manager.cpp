@@ -59,7 +59,7 @@ ClientsCodes ClientManager::RemoveClient( ClientId id )
         ERROR_ALL( "Failed to remove client: " << id );
         return ClientsCodes::ClientNotFound;
     }
-    if ( it->second.GetId() != invalidSessionId )
+    if ( it->second.GetSessionId() != invalidSessionId )
     {
         it->second.Disconnect();
     }
@@ -92,6 +92,11 @@ ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id
             {
                 ERROR_ALL( "Client " << name << " already connected" );
                 return ClientsCodes::ClientAlreadyConnected;
+            }
+
+            if ( session.expired() )
+            {
+                return ClientsCodes::InternalError;
             }
             client.SetSession( session );
             INFO_ALL( "Client ID: " << client.GetId() <<", name: " << name << " authorized successfully" );
