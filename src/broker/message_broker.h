@@ -18,7 +18,7 @@ public:
     /// @param[in] cliManager Менеджер клиентов.
     /// @param[in] topManager Менеджер топиков.
     /// @return Код возврата.
-    MessageBroker( IClientManagerPtr cliManager, TopicManagerPtr topManager );
+    MessageBroker( IClientManagerPtr cliManager, ITopicManagerPtr topManager );
 
     /// @brief Обработка команды.
     /// @param[in] id ID сессии.
@@ -75,5 +75,5 @@ private:
 
 private:
     IClientManagerPtr cliManager_;       /// Менеджер клиентов.
-    TopicManagerPtr topManager_;        /// Менеджер топиков.
+    ITopicManagerPtr topManager_;        /// Менеджер топиков.
 };

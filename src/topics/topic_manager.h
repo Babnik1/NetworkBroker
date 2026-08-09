@@ -13,10 +13,11 @@
 #include "rc.h"
 #include "fwd.h"
 #include "db/i_topic_repository.h"
+#include "topics/i_topic_manager.h"
 
 
 /// @brief Класс топик-менеджера.
-class TopicManager
+class TopicManager : public ITopicManager
 {
 public:
 
@@ -24,29 +25,16 @@ public:
     /// @param[in] db Путь к файлу БД.
     TopicManager( ITopicRepositoryPtr db );
 
-    /// @brief Опубликовать сообщение в тему.
-    /// @param[in] topic Название темы.
-    /// @param[in] message Сообщение.
-    /// @param[out] clients Клиенты, принадлежащие конкретному топику.
-    /// @return Код возврата. 0 - Упех.
+    /// @copydoc ITopicManager::Publish
     TopicCodes Publish( const Topic& topic, const std::string& message, std::unordered_set< ClientId >& clients );
 
-    /// @brief Подписаться на тему.
-    /// @param[in] id ID клиента.
-    /// @param[in] topic Название темы.
-    /// @return Код возврата. 0 - Упех.
+    /// @copydoc ITopicManager::Subscribe
     TopicCodes Subscribe( const ClientId id, const Topic& topic );
 
-    /// @brief Создать тему.
-    /// @param[in] id ID клиента.
-    /// @param[in] topic Название темы.
-    /// @return Код возврата. 0 - Упех.
+    /// @copydoc ITopicManager::Create
     TopicCodes Create( const ClientId id, const Topic& topic );
 
-    /// @brief Отписаться от темы.
-    /// @param[in] id ID клиента.
-    /// @param[in] topic Название темы.
-    /// @return Код возврата. 0 - Упех.
+    /// @copydoc ITopicManager::Unsubscribe
     TopicCodes Unsubscribe( const ClientId id, const Topic& topic );
 
 private:

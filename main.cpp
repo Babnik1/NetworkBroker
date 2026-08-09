@@ -7,6 +7,7 @@
 #include "clients/i_client_manager.h"
 #include "clients/clients_manager.h"
 #include "topics/topic_manager.h"
+#include "topics/i_topic_manager.h"
 #include "broker/message_broker.h"
 #include <memory>
 #include <string>

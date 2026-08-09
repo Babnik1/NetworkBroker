@@ -22,6 +22,7 @@ class JsonRepository;
 class Server;
 class ITopicRepository;
 class IClientManager;
+class ITopicManager;
 
 using TopicManagerPtr = std::shared_ptr< TopicManager >;
 
@@ -40,3 +41,5 @@ using SessionWeakPtr = std::weak_ptr< Session >;
 using MessageBrokerPtr = std::shared_ptr< MessageBroker >;
 
 using IClientManagerPtr = std::shared_ptr< IClientManager >;
+
+using ITopicManagerPtr = std::shared_ptr< ITopicManager >;

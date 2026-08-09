@@ -45,5 +45,5 @@ public:
     /// @brief Отправка сообщений клиентам.
     /// @param[in] message Сообщение.
     /// @param[in] clients Список клиентов.
-    virtual void SendTopicMessage( const std::string& message, std::unordered_set<ClientId>& clients ) = 0;
+    virtual void SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients ) = 0;
 };

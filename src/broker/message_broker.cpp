@@ -77,7 +77,7 @@ std::string CodeToString( BrokerCodes rc )
 
 } // anonimous namespace
 
-MessageBroker::MessageBroker( IClientManagerPtr cliManager, TopicManagerPtr topManager )
+MessageBroker::MessageBroker( IClientManagerPtr cliManager, ITopicManagerPtr topManager )
     : cliManager_{ cliManager }
     , topManager_{ topManager }
 {}
