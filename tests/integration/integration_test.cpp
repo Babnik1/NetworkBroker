@@ -17,8 +17,8 @@
 namespace
 {
 
-const std::string ClientsDb = "test_clients.json";
-const std::string TopicsDb = "test_topics.json";
+const std::string ClientsDb = "test_integration_clients.json";
+const std::string TopicsDb = "test_integration_topics.json";
 
 SessionPtr CreateSession(
     SessionId id,
@@ -82,12 +82,25 @@ struct TestConnection
     }
 };
 
+class MessageBrokerIntegrationTest : public ::testing::Test
+{
+protected:
+    void SetUp() override
+    {
+        RemoveTestDatabases();
+    }
+
+    void TearDown() override
+    {
+        RemoveTestDatabases();
+    }
+};
 
 } // namespace
 
 
 /// @brief Тест: регистрация клиента и создание топика.
-TEST( MessageBrokerIntegrationTest, CreateTopic )
+TEST_F( MessageBrokerIntegrationTest, CreateTopic )
 {
     RemoveTestDatabases();
 
@@ -133,7 +146,7 @@ TEST( MessageBrokerIntegrationTest, CreateTopic )
 
 
 /// @brief Тест: создание и подписка на топик.
-TEST( MessageBrokerIntegrationTest, SubscribeTopic )
+TEST_F( MessageBrokerIntegrationTest, SubscribeTopic )
 {
     RemoveTestDatabases();
 
@@ -192,7 +205,7 @@ TEST( MessageBrokerIntegrationTest, SubscribeTopic )
 
 
 /// @brief Тест: отписка клиента от топика.
-TEST( MessageBrokerIntegrationTest, UnsubscribeTopic )
+TEST_F( MessageBrokerIntegrationTest, UnsubscribeTopic )
 {
     RemoveTestDatabases();
 
@@ -258,7 +271,7 @@ TEST( MessageBrokerIntegrationTest, UnsubscribeTopic )
 
 
 /// @brief Тест: публикация сообщения.
-TEST( MessageBrokerIntegrationTest, Publish )
+TEST_F( MessageBrokerIntegrationTest, Publish )
 {
     RemoveTestDatabases();
 
@@ -310,7 +323,7 @@ TEST( MessageBrokerIntegrationTest, Publish )
 
 
 /// @brief Тест: полный сценарий работы брокера.
-TEST( MessageBrokerIntegrationTest, FullScenario )
+TEST_F( MessageBrokerIntegrationTest, FullScenario )
 {
     RemoveTestDatabases();
 
@@ -374,7 +387,7 @@ TEST( MessageBrokerIntegrationTest, FullScenario )
 }
 
 
-TEST( MessageBrokerIntegrationTest, PublishToSubscriber )
+TEST_F( MessageBrokerIntegrationTest, PublishToSubscriber )
 {
     RemoveTestDatabases();
 
