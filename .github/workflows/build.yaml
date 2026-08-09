@@ -17,8 +17,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Doxygen
-      run: sudo apt-get install doxygen -y
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          doxygen \
+          libboost-all-dev \
+          nlohmann-json3-dev
 
     - name: Doxygen action
       uses: mattnotmitt/doxygen-action@v1.1.0
@@ -31,6 +36,9 @@ jobs:
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build
+
+    - name: Run tests
+      run: ctest --test-dir build --output-on-failure
 
     - name: Create Release
       uses: softprops/action-gh-release@v2
