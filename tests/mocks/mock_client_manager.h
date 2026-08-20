@@ -55,6 +55,11 @@ public:
         sendMessageCalled = true;
     }
 
+    ClientsCodes UnloginClient( ClientId clientId )
+    {
+        return ClientsCodes::Ok;
+    }
+
     /// @brief Тестовые данные.
     ClientsCodes createResult = ClientsCodes::Ok;
     ClientsCodes connectResult = ClientsCodes::Ok;

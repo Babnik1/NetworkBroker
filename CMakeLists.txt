@@ -1,4 +1,6 @@
 cmake_minimum_required( VERSION 3.12 )
+cmake_policy( SET CMP0167 NEW )
+
 option( ENABLE_TESTS "Enable tests" ON )
 
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
@@ -8,7 +10,7 @@ project( Broker VERSION 1.0 LANGUAGES CXX )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
-find_package( Boost REQUIRED COMPONENTS program_options filesystem system )
+find_package( Boost REQUIRED COMPONENTS program_options filesystem )
 find_package( nlohmann_json REQUIRED )
 
 set( SOURCES 
@@ -39,6 +41,8 @@ target_include_directories( Broker PRIVATE
 )
 target_link_libraries( Broker PRIVATE 
     nlohmann_json::nlohmann_json
+    Boost::program_options
+    Boost::filesystem
 )
 
 set_target_properties( Broker PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR} )

@@ -25,4 +25,6 @@ enum class BrokerCodes
     Unauthorized            = 8,    /// Не авторизован.
 
     InternalError           = 9,    /// Другая ошибка.
+
+    Unloged                 = 11,   /// Клиент успешно разлогинен.
 };

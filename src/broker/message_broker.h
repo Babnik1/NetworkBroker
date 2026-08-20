@@ -73,6 +73,11 @@ private:
     /// @return Код возврата.
     BrokerCodes Unsubscribe( SessionId id, const Topic& topic );
 
+    /// @brief Делогирование.
+    /// @param id ID сессии.
+    /// @return Код возврата.
+    BrokerCodes Unlogin( SessionId id );
+
 private:
     IClientManagerPtr cliManager_;       /// Менеджер клиентов.
     ITopicManagerPtr topManager_;        /// Менеджер топиков.

@@ -36,6 +36,11 @@ public:
     /// @return Код возврата. Ok - Успех.
     virtual ClientsCodes GetClientId( SessionId id, ClientId& clientId ) = 0;
 
+    /// @brief Делогирование клиента.
+    /// @param id ID клиента.
+    /// @return Код возврата. Ok - Успех.
+    virtual ClientsCodes UnloginClient( const ClientId clientId ) = 0;
+
     /// @brief Удаление клиента.
     /// @details Не используется. Сделано на будущее.
     /// @param[in] id ID Клиента.

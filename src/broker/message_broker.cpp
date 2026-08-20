@@ -28,6 +28,7 @@ enum class Actions
     REGISTER    = 3,    /// Регистрация.
     CREATE      = 4,    /// Создание нового топика.
     UNSUBSCRIBE = 5,    /// Отписка от топика.
+    UNLOGIN     = 6,    /// Делогирование.
 };
 
 /// @brief Мапа коммант и действий.
@@ -38,7 +39,8 @@ static const std::unordered_map< std::string, Actions > commands =
     { "PUBLISH",        Actions::PUBLISH        },
     { "SUBSCRIBE",      Actions::SUBSCRIBE      },
     { "CREATE",         Actions::CREATE         },
-    { "UNSUBSCRIBE",    Actions::UNSUBSCRIBE    }
+    { "UNSUBSCRIBE",    Actions::UNSUBSCRIBE    },
+    { "UNLOGIN",        Actions::UNLOGIN        }
 };
 
 /// @brief Код ошибки в сообщение клиенту.
@@ -70,6 +72,9 @@ std::string CodeToString( BrokerCodes rc )
         case BrokerCodes::Unauthorized:
             return "ERROR You are unauthorized\n";
 
+        case BrokerCodes::Unloged:
+            return "SUCCESS You are unloged\n";
+
         default:
             return "ERROR Internal error\n";
     }
@@ -82,6 +87,7 @@ MessageBroker::MessageBroker( IClientManagerPtr cliManager, ITopicManagerPtr top
     , topManager_{ topManager }
 {}
 
+/// @todo Посмотреть как убрать эти бесконечные if в case
 std::string MessageBroker::HandleCommand( SessionId id, const std::string& command, SessionWeakPtr session )
 {
     std::string action;
@@ -98,15 +104,9 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
     std::getline( iss, argument );
 
-   if ( !argument.empty() )
+    if ( !argument.empty() )
     {
         argument.erase( 0, 1 );
-    }
-
-    if ( argument.empty() )
-    {
-        DEBUG_LOG( "Argument is empty" );
-        return CodeToString( BrokerCodes::InvalidCommand );
     }
 
     auto it = commands.find( action );
@@ -122,21 +122,41 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
     {
         case Actions::LOGIN:
         {
+            if ( argument.empty() )
+            {
+                DEBUG_LOG( "Argument is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
             rc = Login( id, argument, session );
             break;
         }
         case Actions::REGISTER:
         {
+            if ( argument.empty() )
+            {
+                DEBUG_LOG( "Argument is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
             rc = Register( id, argument, session );
             break;
         }
         case Actions::SUBSCRIBE:
         {
+            if ( argument.empty() )
+            {
+                DEBUG_LOG( "Argument is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
             rc = Subscribe( id, argument );
             break;
         }
         case Actions::PUBLISH:
         {
+            if ( argument.empty() )
+            {
+                DEBUG_LOG( "Argument is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
             std::istringstream pub( argument );
 
             std::string topic;
@@ -167,12 +187,27 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
         }
         case Actions::CREATE:
         {
+            if ( argument.empty() )
+            {
+                DEBUG_LOG( "Argument is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
             rc = Create( id, argument );
             break;
         }
         case Actions::UNSUBSCRIBE:
         {
+            if ( argument.empty() )
+            {
+                DEBUG_LOG( "Argument is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
             rc = Unsubscribe( id, argument );
+            break;
+        }
+        case Actions::UNLOGIN:
+        {
+            rc = Unlogin( id );
             break;
         }
     }
@@ -254,6 +289,22 @@ BrokerCodes MessageBroker::Unsubscribe( SessionId id, const Topic& topic )
         return BrokerCodes::Unauthorized;
     }
     return static_cast< BrokerCodes >( topManager_->Unsubscribe( clientId, topic ) );
+}
+
+BrokerCodes MessageBroker::Unlogin( SessionId id )
+{
+    ClientId clientId;
+    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->GetClientId( id, clientId ) );
+    if ( rc == BrokerCodes::ClientNotFound )
+    {
+        return BrokerCodes::Unauthorized;
+    }
+    rc = static_cast< BrokerCodes >( cliManager_->UnloginClient( clientId ) );
+    if ( rc == BrokerCodes::Ok )
+    {
+        return BrokerCodes::Unloged;
+    }
+    return rc;
 }
 
 void MessageBroker::Disconnect( SessionId id )

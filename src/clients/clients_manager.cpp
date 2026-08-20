@@ -53,16 +53,12 @@ ClientsCodes ClientManager::CreateClient( const std::string& name )
 
 ClientsCodes ClientManager::RemoveClient( ClientId id )
 {
+    auto rc = UnloginClient( id );
+    if ( rc != ClientsCodes::Ok )
+    {
+        return rc;
+    }
     auto it = clients_.find( id );
-    if ( it == clients_.end() )
-    {
-        ERROR_ALL( "Failed to remove client: " << id );
-        return ClientsCodes::ClientNotFound;
-    }
-    if ( it->second.GetSessionId() != invalidSessionId )
-    {
-        it->second.Disconnect();
-    }
     if ( !db_->DeleteClient( it->second.GetId() ) )
     {
         ERROR_ALL( "Failed to delete client: " << id << ". DataBaseError." );
@@ -132,6 +128,22 @@ ClientsCodes ClientManager::GetClientId( SessionId id, ClientId& clientId )
         }
     }
     return ClientsCodes::ClientNotFound;
+}
+
+ClientsCodes ClientManager::UnloginClient( const ClientId clientId )
+{
+    auto it = clients_.find( clientId );
+    if ( it == clients_.end() )
+    {
+        ERROR_ALL( "Failed to remove client: " << clientId );
+        return ClientsCodes::ClientNotFound;
+    }
+    if ( it->second.GetSessionId() != invalidSessionId )
+    {
+        it->second.Disconnect();
+    }
+
+    return ClientsCodes::Ok;
 }
 
 void ClientManager::SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients )

@@ -37,6 +37,9 @@ public:
     /// @copydoc IClientManager::SendTopicMessage
     void SendTopicMessage( const std::string& message, std::unordered_set< ClientId >& clients );
 
+    /// @copydoc IClientManager::UnloginClient
+    ClientsCodes UnloginClient( const ClientId clientId );
+
     /// @brief Удаление клиента.
     /// @details Не используется. Сделано на будущее.
     /// @param[in] id ID Клиента.
