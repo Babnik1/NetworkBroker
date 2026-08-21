@@ -326,3 +326,49 @@ TEST( ClientManagerTest, RemoveClientDatabaseError )
         manager.RemoveClient( 100 ),
         ClientsCodes::InternalError );
 }
+
+/// @brief Тест: успешное разлогирование.
+TEST( ClientManagerTest, UnloginClient )
+{
+    auto repository = std::make_unique< MockClientRepository >();
+
+    repository->AddClient(
+        Client( 100, "alex" ) );
+
+    ClientManager manager(
+        std::move( repository ) );
+
+    boost::asio::io_context ioContext;
+    auto session = CreateSession( 42, ioContext );
+
+    EXPECT_EQ(
+        manager.ConnectClient(
+            "alex",
+            42,
+            session ),
+        ClientsCodes::Ok );
+
+    ClientId clientId = invalidClientId;
+
+    EXPECT_EQ(
+        manager.GetClientId(
+            42,
+            clientId ),
+        ClientsCodes::Ok );
+
+    EXPECT_EQ(
+        clientId,
+        100 );
+
+    EXPECT_EQ(
+        manager.UnloginClient(
+            100 ),
+        ClientsCodes::Ok );
+
+    EXPECT_EQ(
+        manager.ConnectClient(
+            "alex",
+            42,
+            session ),
+        ClientsCodes::Ok );
+}
