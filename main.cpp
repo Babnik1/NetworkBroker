@@ -12,6 +12,7 @@
 #include <memory>
 #include <string>
 #include <iostream>
+#include <thread>
 
 const std::string configFile = "config.json";
 
@@ -35,10 +36,12 @@ int main()
 
     auto topicsRepository = std::make_unique< JsonTopicRepository >( configurator->GetConfigs().topicDb ); 
     auto topicManager = std::make_shared< TopicManager >( std::move( topicsRepository ) );
-
     auto broker = std::make_shared< MessageBroker >( clientManager, topicManager );
-
+    
     ServerPtr server = std::make_unique< Server >( configurator->GetConfigs().port, broker );
-    server->Start();
+    std::thread serverThread( [ & ]() { server->Start(); } );
+
+    serverThread.join();
+    
     return 0;
 }
