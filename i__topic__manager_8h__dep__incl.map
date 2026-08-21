@@ -1,0 +1,17 @@
+<map id="src/topics/i_topic_manager.h" name="src/topics/i_topic_manager.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="508,5,628,46"/>
+<area shape="rect" id="Node000002" href="$topic__manager_8h.html" title=" " alt="" coords="382,102,560,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="536,59,486,103,482,99,533,55"/>
+<area shape="rect" id="Node000007" href="$mock__topic__manager_8h_source.html" title=" " alt="" coords="657,94,821,135"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="621,51,701,91,699,96,619,56"/>
+<area shape="rect" id="Node000003" href="$message__broker_8cpp.html" title=" " alt="" coords="5,183,142,223"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,133,154,185,143,188,141,183,153,180,396,128"/>
+<area shape="rect" id="Node000004" href="$topic__manager_8cpp.html" title=" " alt="" coords="166,190,357,216"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="428,136,292,192,290,187,426,131"/>
+<area shape="rect" id="Node000005" href="$integration__test_8cpp.html" title=" " alt="" coords="382,183,560,223"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="474,143,474,183,468,183,468,143"/>
+<area shape="rect" id="Node000006" href="$topic__manager__test_8cpp.html" title=" " alt="" coords="584,183,715,223"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="511,132,610,180,608,185,508,137"/>
+<area shape="rect" id="Node000008" href="$message__broker__test_8cpp.html" title=" " alt="" coords="740,183,887,223"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="768,145,799,180,795,184,764,148"/>
+</map>

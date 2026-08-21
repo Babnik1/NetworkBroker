@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['cd_0',['CD',['../md_docs_2architecture.html#autotoc_md48',1,'20. CI/CD'],['../md_ReadMe.html#autotoc_md153',1,'CI/CD']]],
+  ['ci_20cd_1',['CI CD',['../md_docs_2architecture.html#autotoc_md48',1,'20. CI/CD'],['../md_ReadMe.html#autotoc_md153',1,'CI/CD']]],
+  ['client_2',['Client',['../classClient.html',1,'Client'],['../classClient.html#a52350265ebb44969e90cff4512252633',1,'Client::Client()']]],
+  ['client_2ecpp_3',['client.cpp',['../client_8cpp.html',1,'']]],
+  ['client_2eh_4',['client.h',['../client_8h.html',1,'']]],
+  ['client_5fmanager_5ftest_2ecpp_5',['client_manager_test.cpp',['../client__manager__test_8cpp.html',1,'']]],
+  ['client_5ftest_2ecpp_6',['client_test.cpp',['../client__test_8cpp.html',1,'']]],
+  ['clientalreadyconnected_7',['ClientAlreadyConnected',['../broker_2rc_8h.html#a16bdd08e20485cd871bb8451afa9b7f8a53e74b9baf74113a44bda984afb2a2eb',1,'ClientAlreadyConnected:&#160;rc.h'],['../clients_2rc_8h.html#a7ff4826c81ad5fa00b395fd9f0197be8a53e74b9baf74113a44bda984afb2a2eb',1,'ClientAlreadyConnected:&#160;rc.h']]],
+  ['clientalreadyexists_8',['ClientAlreadyExists',['../broker_2rc_8h.html#a16bdd08e20485cd871bb8451afa9b7f8a9a86c891f39c987d48d57e34a0a5b585',1,'ClientAlreadyExists:&#160;rc.h'],['../clients_2rc_8h.html#a7ff4826c81ad5fa00b395fd9f0197be8a9a86c891f39c987d48d57e34a0a5b585',1,'ClientAlreadyExists:&#160;rc.h']]],
+  ['clientmanager_9',['ClientManager',['../md_docs_2architecture.html#autotoc_md20',1,'7. ClientManager'],['../classClientManager.html',1,'ClientManager'],['../classClientManager.html#aca9ffa87fd38966e4f19b867579c5309',1,'ClientManager::ClientManager()']]],
+  ['clientnotfound_10',['ClientNotFound',['../broker_2rc_8h.html#a16bdd08e20485cd871bb8451afa9b7f8a7acd777e15c252739655492b599f1a95',1,'ClientNotFound:&#160;rc.h'],['../clients_2rc_8h.html#a7ff4826c81ad5fa00b395fd9f0197be8a7acd777e15c252739655492b599f1a95',1,'ClientNotFound:&#160;rc.h']]],
+  ['clients_11',['&lt;span class=&quot;tt&quot;&gt;clients&lt;/span&gt;',['../md_docs_2architecture.html#autotoc_md6',1,'']]],
+  ['clientscodes_12',['ClientsCodes',['../clients_2rc_8h.html#a7ff4826c81ad5fa00b395fd9f0197be8',1,'rc.h']]],
+  ['configcodes_13',['ConfigCodes',['../configurator_2rc_8h.html#a5b9de617cf68fde965204b36e2baf4e2',1,'rc.h']]],
+  ['configs_14',['Configs',['../structConfigs.html',1,'']]],
+  ['configurator_15',['Configurator',['../classConfigurator.html',1,'Configurator'],['../classConfigurator.html#a690ebd9bf6fdcfdd52198b4e585fb872',1,'Configurator::Configurator()']]],
+  ['configurator_16',['&lt;span class=&quot;tt&quot;&gt;configurator&lt;/span&gt;',['../md_docs_2architecture.html#autotoc_md10',1,'']]],
+  ['configurator_2ecpp_17',['configurator.cpp',['../configurator_8cpp.html',1,'']]],
+  ['configurator_2eh_18',['configurator.h',['../configurator_8h.html',1,'']]],
+  ['connectclient_19',['ConnectClient',['../classClientManager.html#a95df56d04b6c84b3a73dd43dc9c68fbb',1,'ClientManager::ConnectClient()'],['../classIClientManager.html#af8be6988a252756549e21b7610ea4031',1,'IClientManager::ConnectClient()'],['../classMockClientManager.html#a67ea442d527155670cc23c1696c1efe2',1,'MockClientManager::ConnectClient()']]],
+  ['create_20',['Create',['../classITopicManager.html#a990fa6b4ad80d8eabf9b6fad1be94b97',1,'ITopicManager::Create()'],['../classTopicManager.html#a1959154fd7c3c5485b5277717cac7ebf',1,'TopicManager::Create()'],['../classMockTopicManager.html#a846682e741c4b869f20ad1610e261971',1,'MockTopicManager::Create()']]],
+  ['createclient_21',['CreateClient',['../classClientManager.html#a2d148d0e5049ad0de25fc1ab29679114',1,'ClientManager::CreateClient()'],['../classIClientManager.html#a0bce811fedf67f098d5cb58d72496333',1,'IClientManager::CreateClient()'],['../classMockClientManager.html#a4821c11768c9add83243c8d28b2a0580',1,'MockClientManager::CreateClient(const std::string &amp;name) override']]],
+  ['createresult_22',['createResult',['../classMockClientManager.html#a74fc7a2cbce5c965e95a8542d04c0060',1,'MockClientManager']]],
+  ['createtopic_23',['CreateTopic',['../classITopicRepository.html#a3902f5d4ff1bb638b103e43c1f2added',1,'ITopicRepository::CreateTopic()'],['../classJsonTopicRepository.html#a6b9d857f5f8029d7418dad11d0c2ce77',1,'JsonTopicRepository::CreateTopic()'],['../classMockTopicRepository.html#a7cf857aeff78c4d074ec90cf4e26dc68',1,'MockTopicRepository::CreateTopic()']]]
+];

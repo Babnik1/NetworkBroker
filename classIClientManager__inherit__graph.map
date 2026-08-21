@@ -1,0 +1,7 @@
+<map id="IClientManager" name="IClientManager">
+<area shape="rect" id="Node000001" title="Абстрактный класс клиент&#45;менеджера." alt="" coords="75,5,184,31"/>
+<area shape="rect" id="Node000002" href="$classClientManager.html" title="Класс клиент&#45;менеджера." alt="" coords="5,79,110,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,44,72,80,68,77,105,40"/>
+<area shape="rect" id="Node000003" href="$classMockClientManager.html" title="Мокнутый класс клиент&#45;менеджера." alt="" coords="133,79,270,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,40,191,77,187,80,150,44"/>
+</map>

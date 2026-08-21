@@ -1,0 +1,19 @@
+<map id="src/configurator/configurator.cpp" name="src/configurator/configurator.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="218,5,423,31"/>
+<area shape="rect" id="Node000002" href="$configurator_8h.html" title=" " alt="" coords="74,79,172,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="288,34,172,76,170,71,286,29"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="196,79,261,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="306,34,257,72,254,67,303,29"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="285,79,356,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="323,31,323,63,318,63,318,31"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="380,79,509,105"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="343,29,412,69,409,73,340,34"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="534,79,691,105"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="370,29,548,72,547,77,369,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,73,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="110,107,66,144,63,140,107,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="96,153,150,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="126,105,126,137,120,137,120,105"/>
+<area shape="rect" id="Node000005" href="$configurator_2rc_8h.html" title=" " alt="" coords="174,153,216,178"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="137,103,174,140,170,143,133,107"/>
+</map>

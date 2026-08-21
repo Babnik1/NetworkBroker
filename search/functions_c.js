@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['saveclient_0',['SaveClient',['../classIClientRepository.html#a05b154ac086e0a72cbbfd12389a478c7',1,'IClientRepository::SaveClient()'],['../classJsonRepository.html#a311327f21b433c34d6d10194ed8f40b5',1,'JsonRepository::SaveClient()'],['../classMockClientRepository.html#a3e064cd2adb979732c554d19a7c79a4b',1,'MockClientRepository::SaveClient()']]],
+  ['savetopic_1',['SaveTopic',['../classITopicRepository.html#abb2324637a93420a051250f374e3ef62',1,'ITopicRepository::SaveTopic()'],['../classJsonTopicRepository.html#a874ae437a4cdf89ed2a4473ef9950011',1,'JsonTopicRepository::SaveTopic()'],['../classMockTopicRepository.html#a3573551f2a22f8cef4c53672bc0e3f1c',1,'MockTopicRepository::SaveTopic()']]],
+  ['send_2',['Send',['../classSession.html#ac52f2567a3829d15d0257b1dc8904b94',1,'Session']]],
+  ['sendtopicmessage_3',['SendTopicMessage',['../classClient.html#abbe6f72b03c4acd1628206369db29aef',1,'Client::SendTopicMessage()'],['../classClientManager.html#a39def3ba4a8d602dc7882a342a73c9c2',1,'ClientManager::SendTopicMessage()'],['../classIClientManager.html#a1207e7acb0f9ab2a9b3f5fb8f04c60d9',1,'IClientManager::SendTopicMessage()'],['../classMockClientManager.html#a7ec3352a7a91d1829dfb32ed63c4f7fd',1,'MockClientManager::SendTopicMessage()']]],
+  ['server_4',['Server',['../classServer.html#a92b77b1481e8b3b56a32ec886d7efe2b',1,'Server']]],
+  ['session_5',['Session',['../classSession.html#aed7ca2c4c6d6cdeea3ae673f2f13244d',1,'Session']]],
+  ['setcreateresult_6',['SetCreateResult',['../classMockTopicRepository.html#aa5ba003b01246f9bb5e31a78b7dd76d9',1,'MockTopicRepository']]],
+  ['setdeleteresult_7',['SetDeleteResult',['../classMockClientRepository.html#a66cad23ca5b8769487cfa2b15c6a0d07',1,'MockClientRepository']]],
+  ['setqueue_8',['SetQueue',['../classLogger.html#ab8b3667a0ad38dedce71c000b06aac67',1,'Logger::SetQueue()'],['../classShellPrinter.html#a94972c3f555443e871c0da3830b50d3f',1,'ShellPrinter::SetQueue()']]],
+  ['setremoveresult_9',['SetRemoveResult',['../classMockTopicRepository.html#ac1eabff0365b9306e0b68ef9912828af',1,'MockTopicRepository']]],
+  ['setsaveresult_10',['SetSaveResult',['../classMockClientRepository.html#ac6938f9d845e9362ab02dd8aa59b97b7',1,'MockClientRepository::SetSaveResult()'],['../classMockTopicRepository.html#a7db26e229801297eb17c2ee1bf57e707',1,'MockTopicRepository::SetSaveResult()']]],
+  ['setself_11',['SetSelf',['../classSession.html#aeb7d2e542d753de3e0d41ed96c1300f6',1,'Session']]],
+  ['setsession_12',['SetSession',['../classClient.html#a0877d506980f49b735b7f71c78070e37',1,'Client']]],
+  ['shellprinter_13',['ShellPrinter',['../classShellPrinter.html#a4bf6b0c0dc5aacdaac454717b6bce4df',1,'ShellPrinter']]],
+  ['start_14',['Start',['../classServer.html#acaea883b722927c7d8299a74447c8d1b',1,'Server::Start()'],['../classSession.html#a68020021e9d13c85b641d853646e8b7a',1,'Session::Start()']]],
+  ['stop_15',['Stop',['../classServer.html#ae8e1a31c647c9bfc9e1e6fd794b820fc',1,'Server']]],
+  ['subscribe_16',['Subscribe',['../classITopicManager.html#a288990cbc733ba80e78726bc692bd2c1',1,'ITopicManager::Subscribe()'],['../classTopicManager.html#a3afd61e97481a5580cc63d3ffa7ae13a',1,'TopicManager::Subscribe()'],['../classMockTopicManager.html#a314cce878debfa2a19eac2fdcab3c76a',1,'MockTopicManager::Subscribe()']]]
+];

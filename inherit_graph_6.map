@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classITopicRepository.html" title="Абстрактный класс базы данных топиков." alt="" coords="5,31,124,56"/>
+<area shape="rect" id="Node000001" href="$classJsonTopicRepository.html" title="Класс базы данных топиков." alt="" coords="174,5,316,31"/>
+<area shape="poly" id="edge7_Node000000_Node000001" title=" " alt="" coords="139,30,173,26,174,31,140,36"/>
+<area shape="rect" id="Node000002" href="$classMockTopicRepository.html" title="Мокнутый класс JSON репозитория топиков." alt="" coords="172,55,318,80"/>
+<area shape="poly" id="edge8_Node000000_Node000002" title=" " alt="" coords="139,51,172,55,171,60,139,56"/>
+</map>
