@@ -42,6 +42,6 @@ int main()
     std::thread serverThread( [ & ]() { server->Start(); } );
 
     serverThread.join();
-    
+
     return 0;
 }
