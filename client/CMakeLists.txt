@@ -4,7 +4,7 @@ set( CLIENT_SOURCES
 
 add_executable( BrokerClient ${CLIENT_SOURCES} )
 
-target_include_directories( BrokerClient PRIVATE
+target_link_libraries( BrokerClient PRIVATE
     CONAN_PKG::boost
 )
 
