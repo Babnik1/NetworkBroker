@@ -10,11 +10,8 @@ project( Broker VERSION 1.0 LANGUAGES CXX )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
-list( APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} )
-list( APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR} )
-
-find_package( Boost REQUIRED COMPONENTS program_options filesystem )
-find_package( nlohmann_json REQUIRED )
+include( ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake )
+conan_basic_setup( TARGETS )
 
 set( SOURCES 
         src/configurator/configurator.cpp
@@ -42,10 +39,10 @@ target_include_directories( Broker PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${Boost_INCLUDE_DIRS}
 )
+
 target_link_libraries( Broker PRIVATE 
-    nlohmann_json::nlohmann_json
-    Boost::program_options
-    Boost::filesystem
+    CONAN_PKG::nlohmann_json
+    CONAN_PKG::boost
 )
 
 set_target_properties( Broker PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR} )

@@ -1,4 +1,3 @@
-find_package( GTest REQUIRED )
 
 set( TEST_SOURCES
     broker/message_broker_test.cpp
@@ -36,9 +35,8 @@ target_include_directories(BrokerTests PRIVATE
 )
 
 target_link_libraries( BrokerTests PRIVATE 
-    nlohmann_json::nlohmann_json
-    GTest::GTest
-    GTest::Main
+    CONAN_PKG::nlohmann_json
+    CONAN_PKG::gtest
 )
 
 add_test( NAME AllBrokerTests COMMAND BrokerTests )
