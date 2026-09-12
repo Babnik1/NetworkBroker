@@ -17,14 +17,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install dependencies
+    - name: Set up Python
+      uses: actions/actions-setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install tools and Conan
       run: |
         sudo apt-get update
-        sudo apt-get install -y \
-          doxygen \
-          libboost-all-dev \
-          nlohmann-json3-dev \
-          libgtest-dev
+        sudo apt-get install -y doxygen
+        pip install "conan<2.0"
 
     - name: Doxygen action
       uses: mattnotmitt/doxygen-action@v1.1.0
@@ -32,11 +34,8 @@ jobs:
           doxyfile-path: ./Doxyfile
           working-directory: .
 
-    - name: Configure CMake
-      run: cmake -B build -S .
-
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build
+    - name: Build project
+      run: make all
 
     - name: Run tests
       run: ctest --test-dir build --output-on-failure
