@@ -24,7 +24,13 @@ debug:
 	$(eval MODE := Debug)
 	@true
 
+# Дефолтный путь сборки.
 all: conan-profile fetch build
 
+# Очистка.
+clean:
+	@rm -rf build
+	@rm -rf Broker
+	@rm -rf BrokerClient
 
 .PHONY : conan-profile fetch build all debug
