@@ -5,7 +5,7 @@ set( CLIENT_SOURCES
 add_executable( BrokerClient ${CLIENT_SOURCES} )
 
 target_include_directories( BrokerClient PRIVATE
-    ${Boost_INCLUDE_DIRS}
+    CONAN_PKG::boost
 )
 
 set_target_properties( BrokerClient PROPERTIES
