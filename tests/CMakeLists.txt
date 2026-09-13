@@ -35,6 +35,7 @@ target_include_directories(BrokerTests PRIVATE
 )
 
 target_link_libraries( BrokerTests PRIVATE 
+    CONAN_PKG::boost
     CONAN_PKG::nlohmann_json
     CONAN_PKG::gtest
 )
