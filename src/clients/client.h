@@ -12,6 +12,7 @@
 #include <memory>
 #include <optional>
 #include <unordered_set>
+#include <queue>
 
 
 using ClientId = uint64_t;    /// ID клиента.
@@ -51,11 +52,20 @@ public:
     /// @param[in] message Сообщение.
     void SendTopicMessage( const std::string message );
 
+    /// @brief Буферизировать сообщение, при неавторизованным клиентам.
+    /// @param[in] message Сообщение.
+    void BufferTopicMessage( const std::string message );
+
+    /// @brief Отправить буффер сообщений.
+    void SendBuffer();
+
 private:
 
     ClientId id_;               /// ID Клиента.
     std::string name_;          /// Имя клиента.
     SessionWeakPtr session_;    /// Слабая ссылка на сессию.
+
+    std::queue< std::string > buffer_;   /// Клиентский буфер.
 };
 
 

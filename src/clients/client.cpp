@@ -52,3 +52,17 @@ void Client::SendTopicMessage( const std::string message )
 
     session->Send( message + "\n" );
 }
+
+void Client::BufferTopicMessage( const std::string message )
+{
+    buffer_.push( message );
+}
+
+void Client::SendBuffer()
+{
+    SendTopicMessage( "You have new messages:");
+    for ( ; !buffer_.empty(); buffer_.pop() )
+    {
+        SendTopicMessage( buffer_.front() );
+    }
+}

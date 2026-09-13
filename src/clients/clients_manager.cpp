@@ -96,6 +96,9 @@ ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id
             }
             client.SetSession( session );
             INFO_ALL( "Client ID: " << client.GetId() <<", name: " << name << " authorized successfully" );
+            /// При подключении, клиент получает все отправленные сообщения ему, пока он был офлайн.
+            client.SendBuffer();
+
             return ClientsCodes::Ok;
         }
     }
@@ -160,7 +163,8 @@ void ClientManager::SendTopicMessage( const std::string& message, std::unordered
             }
             else 
             {
-                DEBUG_LOG( "Client " << it->second.GetName() << ", ID: " << it->second.GetId() << " is not authorize. Message skipped" );
+                DEBUG_LOG( "Client " << it->second.GetName() << ", ID: " << it->second.GetId() << " is not authorize. Message buffered" );
+                it->second.BufferTopicMessage( message );
             }
         }
     }
