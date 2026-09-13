@@ -7,6 +7,9 @@ class NetworkBrokerConan( ConanFile ):
 
     generators = "cmake"
 
+    def configure( self ):
+        self.options[ "boost" ].without_test = True
+
     def requirements( self ):
         self.requires( "bzip2/1.0.8" )
         self.requires( "nlohmann_json/3.11.3" )
