@@ -1,0 +1,13 @@
+<map id="src/clients/i_client_manager.h" name="src/clients/i_client_manager.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="35,5,162,46"/>
+<area shape="rect" id="Node000002" href="$clients_2rc_8h.html" title=" " alt="" coords="5,94,48,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,48,50,84,46,80,79,45"/>
+<area shape="rect" id="Node000003" href="$fwd_8h.html" title=" " alt="" coords="72,94,125,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,46,101,78,96,78,96,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="148,94,252,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="125,44,174,82,171,86,122,49"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="21,168,88,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,121,72,156,68,153,89,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="112,168,173,193"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="108,118,129,153,125,156,103,121"/>
+</map>

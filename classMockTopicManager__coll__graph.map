@@ -1,0 +1,5 @@
+<map id="MockTopicManager" name="MockTopicManager">
+<area shape="rect" id="Node000001" title="Мокнутый класс менеджера топиков." alt="" coords="5,79,141,105"/>
+<area shape="rect" id="Node000002" href="$classITopicManager.html" title="Абстрактный класс топик&#45;менеджера." alt="" coords="19,5,127,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,46,76,79,70,79,70,46"/>
+</map>

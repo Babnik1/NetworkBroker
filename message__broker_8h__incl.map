@@ -1,0 +1,11 @@
+<map id="src/broker/message_broker.h" name="src/broker/message_broker.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="51,5,187,46"/>
+<area shape="rect" id="Node000002" href="$fwd_8h.html" title=" " alt="" coords="57,94,109,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,48,97,81,92,78,108,45"/>
+<area shape="rect" id="Node000005" href="$broker_2rc_8h.html" title=" " alt="" coords="134,94,176,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="130,45,146,78,141,81,125,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,73,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="78,121,57,156,52,153,73,118"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="97,168,157,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="93,118,114,153,109,156,88,121"/>
+</map>
