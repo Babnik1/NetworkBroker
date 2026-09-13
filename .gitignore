@@ -1,1 +1,6 @@
 build/
+clients.json
+topics.json
+app.log
+BrokerClient
+Broker
