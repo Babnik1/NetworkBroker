@@ -462,3 +462,5 @@ TEST_F( MessageBrokerIntegrationTest, PublishToSubscriber )
             alexSession ),
         "OK\n" );
 }
+
+/// @todo Добавить тесты очереди сообщений отключенному пользоватьелю.
