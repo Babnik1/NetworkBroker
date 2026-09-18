@@ -15,6 +15,7 @@ class NetworkBrokerConan( ConanFile ):
         self.requires( "nlohmann_json/3.11.3" )
         self.requires( "boost/1.86.0" )
         self.requires( "gtest/1.15.0")
+        self.requires( "openssl/3.3.2" )
         pass
 
     def build( self ):

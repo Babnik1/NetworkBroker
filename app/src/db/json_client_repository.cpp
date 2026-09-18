@@ -47,7 +47,8 @@ std::vector< Client > JsonRepository::LoadClients()
             Client client
             {  
                 std::stoull( key ), 
-                value[ "name" ].get< std::string >() 
+                value[ "name" ].get< std::string >(),
+                value[ "secret" ].get< std::string >() 
             };
 
             clients.push_back( client );
@@ -84,13 +85,15 @@ bool JsonRepository::SaveClient( const Client& client )
     if ( jsonClients.contains( clientIdStr ) )
     {
         jsonClients[ clientIdStr ][ "name" ] = client.GetName();
+        jsonClients[ clientIdStr ][ "secret" ] = client.GetHash();
         INFO_LOG( "Client " << client.GetName() << " updated successfully" );
     }
     else 
     {
         INFO_LOG( "Client " << client.GetName() << " is not found. Creating new..." );
         jsonClients[ clientIdStr ] = {
-            { "name", client.GetName() }
+            { "name", client.GetName() },
+            { "secret", client.GetHash() }
         };
     }
     std::ofstream wFile( dbFile_ );

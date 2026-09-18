@@ -25,6 +25,8 @@
 * интеграционные тесты;
 * автоматическая сборка и тестирование через GitHub Actions;
 * автоматическая генерация документации Doxygen.
+* управление зависимостями при помощи пакетного менеджера Conan;
+* автоматизация сборки при помощи Make;
 
 ---
 
@@ -129,6 +131,12 @@ LOGIN <name>
 
 ```text
 LOGIN alex
+```
+
+### Деавторизация
+
+```text
+UNLOGIN
 ```
 
 ### Создание топика
@@ -252,20 +260,7 @@ ERROR Invalid command
 * Boost.Program_options;
 * nlohmann/json;
 * GoogleTest.
-
-На Ubuntu зависимости можно установить командой:
-
-```bash
-sudo apt update
-
-sudo apt install -y \
-    build-essential \
-    cmake \
-    libboost-all-dev \
-    nlohmann-json3-dev \
-    libgtest-dev \
-    doxygen
-```
+* Conan 1.66
 
 ---
 
@@ -278,17 +273,41 @@ git clone <repository-url>
 cd NetworkBroker
 ```
 
-Создание директории сборки:
+Запуск скачивание пакетов и сборки:
 
 ```bash
-cmake -B build -S .
+make all
 ```
+Автоматически подготавливает все, что нужно для успешной сборки.
+Для запуска сборки в дебаг режиме, нужен аргумент "debug" перед all.
+
+
+Создание нужного conan-профиля:
+
+```bash
+make conan-profile
+```
+
+
+Скачивание и сборка зависимостей:
+```bash
+make fetch
+```
+
 
 Сборка проекта:
 
 ```bash
-cmake --build build
+make build
 ```
+
+
+Очистка проекта:
+
+```bash
+make clean
+```
+
 
 После сборки будут доступны:
 
@@ -321,6 +340,8 @@ LOGIN alex
 CREATE news
 SUBSCRIBE news
 PUBLISH news Hello world
+UNSUBSCRIBE news
+UNLOGIN
 ```
 
 ---
@@ -493,7 +514,9 @@ BrokerClient
 ├── Doxyfile
 ├── config.json
 ├── clients.json
-└── topics.json
+├── topics.json
+├── .gitignore
+└── Makefile
 ```
 
 ---
@@ -509,6 +532,8 @@ BrokerClient
 | **GoogleTest**            | Модульные и интеграционные тесты  |
 | **CMake**                 | Система сборки                    |
 | **Doxygen**               | Генерация документации            |
+| **Conan**                 | Управление зависимостями          |
+| **Make**                  | Автоматизация сборки              |
 | **GitHub Actions**        | CI/CD                             |
 
 ---

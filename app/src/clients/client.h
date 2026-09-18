@@ -27,7 +27,8 @@ public:
     /// @brief Конструктор.
     /// @param[in] id ID клиента.
     /// @param[in] name Имя клиента.
-    Client( ClientId id, std::string name );
+    /// @param[in] hash Хеш пароля клиента.
+    Client( ClientId id, const std::string& name, const std::string& hash );
 
     /// @brief Получение ID клиента.
     /// @return ID клиента.
@@ -36,6 +37,10 @@ public:
     /// @brief Получение имени клиента.
     /// @return Имя клиента.
     std::string GetName() const;
+
+    /// @brief Получение хеша пароля.
+    /// @return Хеш пароля.
+    std::string GetHash() const;
 
     /// @brief Получение ID сессии клиента.
     /// @return ID сессии клиента.
@@ -63,6 +68,7 @@ private:
 
     ClientId id_;               /// ID Клиента.
     std::string name_;          /// Имя клиента.
+    std::string hash_;          /// Хеш пароля клиента.
     SessionWeakPtr session_;    /// Слабая ссылка на сессию.
 
     std::queue< std::string > buffer_;   /// Клиентский буфер.

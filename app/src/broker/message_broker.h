@@ -46,7 +46,7 @@ private:
     /// @param[in] name Имя пользователя.
     /// @param[in] session Слабая ссылка на сессию.
     /// @return Код возврата.
-    BrokerCodes Register( SessionId id, const std::string& name, SessionWeakPtr session );
+    BrokerCodes Register( SessionId id, const std::string& name, const std::string& passwd, SessionWeakPtr session );
 
     /// @brief Публикация от клиента.
     /// @param[in] id ID сессии.
