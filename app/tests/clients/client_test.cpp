@@ -33,7 +33,7 @@ SessionPtr CreateSession(
 /// @brief Тест: получение ID клиента.
 TEST( ClientTest, GetId )
 {
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     EXPECT_EQ(
         client.GetId(),
@@ -44,7 +44,7 @@ TEST( ClientTest, GetId )
 /// @brief Тест: получение имени клиента.
 TEST( ClientTest, GetName )
 {
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     EXPECT_EQ(
         client.GetName(),
@@ -55,7 +55,7 @@ TEST( ClientTest, GetName )
 /// @brief Тест: новый клиент не подключён.
 TEST( ClientTest, SessionIdWhenDisconnected )
 {
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     EXPECT_EQ(
         client.GetSessionId(),
@@ -70,7 +70,7 @@ TEST( ClientTest, SetSession )
 
     auto session = CreateSession( 42, ioContext );
 
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     client.SetSession( session );
 
@@ -87,7 +87,7 @@ TEST( ClientTest, Disconnect )
 
     auto session = CreateSession( 42, ioContext );
 
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     client.SetSession( session );
 
@@ -108,7 +108,7 @@ TEST( ClientTest, SessionDestroyed )
 {
     boost::asio::io_context ioContext;
 
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     {
         auto session = CreateSession( 42, ioContext );
@@ -129,7 +129,7 @@ TEST( ClientTest, SessionDestroyed )
 /// @brief Тест: отправка сообщения отключённому клиенту.
 TEST( ClientTest, SendTopicMessageWhenDisconnected )
 {
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     EXPECT_NO_THROW(
         client.SendTopicMessage( "Hello" ) );
@@ -141,7 +141,7 @@ TEST( ClientTest, SendTopicMessageAfterSessionDestroyed )
 {
     boost::asio::io_context ioContext;
 
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     {
         auto session = CreateSession( 42, ioContext );

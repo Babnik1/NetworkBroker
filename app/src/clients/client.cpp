@@ -7,15 +7,21 @@
 #include "client.h"
 
 
-Client::Client( ClientId id, std::string name )
+Client::Client( ClientId id, const std::string& name, const std::string& hash )
     : id_{ id }
     , name_{ name }
     , session_{ }
+    , hash_{ hash }
 {}
 
 ClientId Client::GetId() const
 {
     return id_;
+}
+
+std::string Client::GetHash() const
+{
+    return hash_;
 }
 
 std::string Client::GetName() const

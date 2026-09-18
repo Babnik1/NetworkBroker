@@ -23,6 +23,7 @@ class Server;
 class ITopicRepository;
 class IClientManager;
 class ITopicManager;
+class IPasswordVerifier;
 
 using TopicManagerPtr = std::shared_ptr< TopicManager >;
 
@@ -43,3 +44,5 @@ using MessageBrokerPtr = std::shared_ptr< MessageBroker >;
 using IClientManagerPtr = std::shared_ptr< IClientManager >;
 
 using ITopicManagerPtr = std::shared_ptr< ITopicManager >;
+
+using IPasswordVerifierPtr = std::shared_ptr< IPasswordVerifier >;
