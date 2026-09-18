@@ -1,0 +1,200 @@
+[
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/configurator/configurator.cpp.o -c /home/pasha/otus/NetworkBroker/src/configurator/configurator.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/configurator/configurator.cpp",
+  "output": "CMakeFiles/Broker.dir/src/configurator/configurator.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/logs/log_manager.cpp.o -c /home/pasha/otus/NetworkBroker/src/logs/log_manager.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/logs/log_manager.cpp",
+  "output": "CMakeFiles/Broker.dir/src/logs/log_manager.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/logs/shell_printer.cpp.o -c /home/pasha/otus/NetworkBroker/src/logs/shell_printer.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/logs/shell_printer.cpp",
+  "output": "CMakeFiles/Broker.dir/src/logs/shell_printer.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/logs/logger.cpp.o -c /home/pasha/otus/NetworkBroker/src/logs/logger.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/logs/logger.cpp",
+  "output": "CMakeFiles/Broker.dir/src/logs/logger.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/server/server.cpp.o -c /home/pasha/otus/NetworkBroker/src/server/server.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/server/server.cpp",
+  "output": "CMakeFiles/Broker.dir/src/server/server.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/server/session.cpp.o -c /home/pasha/otus/NetworkBroker/src/server/session.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/server/session.cpp",
+  "output": "CMakeFiles/Broker.dir/src/server/session.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/broker/message_broker.cpp.o -c /home/pasha/otus/NetworkBroker/src/broker/message_broker.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/broker/message_broker.cpp",
+  "output": "CMakeFiles/Broker.dir/src/broker/message_broker.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/clients/clients_manager.cpp.o -c /home/pasha/otus/NetworkBroker/src/clients/clients_manager.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/clients/clients_manager.cpp",
+  "output": "CMakeFiles/Broker.dir/src/clients/clients_manager.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/clients/client.cpp.o -c /home/pasha/otus/NetworkBroker/src/clients/client.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/clients/client.cpp",
+  "output": "CMakeFiles/Broker.dir/src/clients/client.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/topics/topic_manager.cpp.o -c /home/pasha/otus/NetworkBroker/src/topics/topic_manager.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/topics/topic_manager.cpp",
+  "output": "CMakeFiles/Broker.dir/src/topics/topic_manager.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/db/json_client_repository.cpp.o -c /home/pasha/otus/NetworkBroker/src/db/json_client_repository.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/db/json_client_repository.cpp",
+  "output": "CMakeFiles/Broker.dir/src/db/json_client_repository.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/src/db/json_topic_repository.cpp.o -c /home/pasha/otus/NetworkBroker/src/db/json_topic_repository.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/db/json_topic_repository.cpp",
+  "output": "CMakeFiles/Broker.dir/src/db/json_topic_repository.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -I/home/pasha/otus/NetworkBroker -I/home/pasha/otus/NetworkBroker/src -std=gnu++17 -o CMakeFiles/Broker.dir/main.cpp.o -c /home/pasha/otus/NetworkBroker/main.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/main.cpp",
+  "output": "CMakeFiles/Broker.dir/main.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/client",
+  "command": "/usr/bin/c++   -std=gnu++17 -o CMakeFiles/BrokerClient.dir/main.cpp.o -c /home/pasha/otus/NetworkBroker/client/main.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/client/main.cpp",
+  "output": "client/CMakeFiles/BrokerClient.dir/main.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/broker/message_broker_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/broker/message_broker_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/broker/message_broker_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/broker/message_broker_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/clients/client_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/clients/client_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/clients/client_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/clients/client_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/clients/client_manager_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/clients/client_manager_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/clients/client_manager_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/clients/client_manager_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/topics/topic_manager_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/topics/topic_manager_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/topics/topic_manager_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/topics/topic_manager_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/db/json_client_repository_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/db/json_client_repository_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/db/json_client_repository_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/db/json_client_repository_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/db/json_topic_repository_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/db/json_topic_repository_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/db/json_topic_repository_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/db/json_topic_repository_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/server/server_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/server/server_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/server/server_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/server/server_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/integration/integration_test.cpp.o -c /home/pasha/otus/NetworkBroker/tests/integration/integration_test.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/tests/integration/integration_test.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/integration/integration_test.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/broker/message_broker.cpp.o -c /home/pasha/otus/NetworkBroker/src/broker/message_broker.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/broker/message_broker.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/broker/message_broker.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/clients/clients_manager.cpp.o -c /home/pasha/otus/NetworkBroker/src/clients/clients_manager.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/clients/clients_manager.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/clients/clients_manager.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/clients/client.cpp.o -c /home/pasha/otus/NetworkBroker/src/clients/client.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/clients/client.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/clients/client.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/topics/topic_manager.cpp.o -c /home/pasha/otus/NetworkBroker/src/topics/topic_manager.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/topics/topic_manager.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/topics/topic_manager.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/logs/log_manager.cpp.o -c /home/pasha/otus/NetworkBroker/src/logs/log_manager.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/logs/log_manager.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/logs/log_manager.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/logs/shell_printer.cpp.o -c /home/pasha/otus/NetworkBroker/src/logs/shell_printer.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/logs/shell_printer.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/logs/shell_printer.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/logs/logger.cpp.o -c /home/pasha/otus/NetworkBroker/src/logs/logger.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/logs/logger.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/logs/logger.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/server/session.cpp.o -c /home/pasha/otus/NetworkBroker/src/server/session.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/server/session.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/server/session.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/db/json_client_repository.cpp.o -c /home/pasha/otus/NetworkBroker/src/db/json_client_repository.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/db/json_client_repository.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/db/json_client_repository.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/db/json_topic_repository.cpp.o -c /home/pasha/otus/NetworkBroker/src/db/json_topic_repository.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/db/json_topic_repository.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/db/json_topic_repository.cpp.o"
+},
+{
+  "directory": "/home/pasha/otus/NetworkBroker/tests",
+  "command": "/usr/bin/c++  -I/home/pasha/otus/NetworkBroker/tests -I/home/pasha/otus/NetworkBroker/tests/.. -I/home/pasha/otus/NetworkBroker/tests/../src -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/BrokerTests.dir/__/src/server/server.cpp.o -c /home/pasha/otus/NetworkBroker/src/server/server.cpp",
+  "file": "/home/pasha/otus/NetworkBroker/src/server/server.cpp",
+  "output": "tests/CMakeFiles/BrokerTests.dir/__/src/server/server.cpp.o"
+}
+]
