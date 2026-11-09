@@ -6,6 +6,7 @@
 
 #include "clients_manager.h"
 #include "db/i_client_repository.h"
+#include "passwd/crypto_password_verifier.h"
 #include "logs/log.h"
 #include <cstddef>
 #include <cstdint>
@@ -16,11 +17,12 @@
 
 ClientManager::ClientManager( IClientRepositoryPtr db )
     : db_{ std::move( db ) }
+    , passVer_{ std::make_shared< CryptoPasswordVerifier >() }
 {
     LoadClients();
 }
 
-ClientsCodes ClientManager::CreateClient( const std::string& name )
+ClientsCodes ClientManager::CreateClient( const std::string& name, const std::string& passwd )
 {
     std::random_device rd;
     std::mt19937 gen( rd() );
@@ -39,7 +41,15 @@ ClientsCodes ClientManager::CreateClient( const std::string& name )
     }
     while ( !complete );
 
-    Client client{ static_cast< uint64_t >( clientId ), name };
+    std::string hash = passVer_->CreateHash( passwd );
+
+    if ( hash.empty() )
+    {
+        ERROR_ALL( "Failed to create password hash for client: " << name );
+        return ClientsCodes::InternalError;
+    }
+
+    Client client{ static_cast< uint64_t >( clientId ), name, hash };
 
     if ( !db_->SaveClient( client ) )
     {
@@ -78,15 +88,21 @@ void ClientManager::LoadClients()
     }
 }
 
-ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session )
+ClientsCodes ClientManager::ConnectClient( const std::string& name, SessionId id, const std::string& passwd, SessionWeakPtr session )
 {
     for( auto& [ id, client ] : clients_ )
     {
         if ( client.GetName() == name )
         {
+            std::string reference = client.GetHash();
+            if ( !passVer_->CheckHash( passwd, reference ) )
+            {
+                ERROR_LOG( "Invalid password for " << name );
+                return ClientsCodes::InvalidPassword;
+            }
             if ( client.GetSessionId() != 0 )
             {
-                ERROR_ALL( "Client " << name << " already connected" );
+                ERROR_LOG( "Client " << name << " already connected" );
                 return ClientsCodes::ClientAlreadyConnected;
             }
 

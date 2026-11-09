@@ -14,6 +14,7 @@ set( APP_SOURCES_FOR_TESTS
     ../src/broker/message_broker.cpp
     ../src/clients/clients_manager.cpp
     ../src/clients/client.cpp
+    ../src/clients/passwd/crypto_password_verifier.cpp
     ../src/topics/topic_manager.cpp
     ../src/logs/log_manager.cpp 
     ../src/logs/shell_printer.cpp 
@@ -26,7 +27,7 @@ set( APP_SOURCES_FOR_TESTS
 
 add_executable( BrokerTests ${TEST_SOURCES} ${APP_SOURCES_FOR_TESTS} )
 
-target_include_directories(BrokerTests PRIVATE 
+target_include_directories( BrokerTests PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}   
     ${CMAKE_CURRENT_SOURCE_DIR}/..    
     ${CMAKE_CURRENT_SOURCE_DIR}/../src 
@@ -38,6 +39,7 @@ target_link_libraries( BrokerTests PRIVATE
     CONAN_PKG::boost
     CONAN_PKG::nlohmann_json
     CONAN_PKG::gtest
+    CONAN_PKG::openssl
 )
 
 add_test( NAME AllBrokerTests COMMAND BrokerTests )

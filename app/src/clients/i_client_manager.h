@@ -20,15 +20,17 @@ public:
 
     /// @brief Создание клиента.
     /// @param[in] name Имя клиента.
+    /// @param[in] passwd Пароль клиента.
     /// @return Код возврата. Ok - Успех.
-    virtual ClientsCodes CreateClient( const std::string& name ) = 0;
+    virtual ClientsCodes CreateClient( const std::string& name, const std::string& passwd ) = 0;
 
     /// @brief Подсключение клиента.
     /// @param[in] name Имя клиента.
-    /// @param[in] id ID сессии.
+    /// @param[in] id ID сессии.    
+    /// @param[in] passwd Пароль.
     /// @param[in] session Слабый указатель на сессию.
     /// @return Код возврата. Ok - Успех.
-    virtual ClientsCodes ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session ) = 0;
+    virtual ClientsCodes ConnectClient( const std::string& name, SessionId id, const std::string& passwd, SessionWeakPtr session ) = 0;
 
     /// @brief Получение ID клиента.
     /// @param[in] id ID сессии.

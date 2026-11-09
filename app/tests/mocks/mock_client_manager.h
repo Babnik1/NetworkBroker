@@ -14,14 +14,14 @@ class MockClientManager : public IClientManager
 public:
 
     /// @copydoc IClientManager::CreateClient
-    ClientsCodes CreateClient( const std::string& name ) override
+    ClientsCodes CreateClient( const std::string& name, const std::string& passwd ) override
     {
         lastCreatedName = name;
         return createResult;
     }
 
     /// @copydoc IClientManager::ConnectClient
-    ClientsCodes ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session ) override
+    ClientsCodes ConnectClient( const std::string& name, SessionId id, const std::string& passwd, SessionWeakPtr session ) override
     {
         lastConnectedName = name;
         lastSessionId = id;

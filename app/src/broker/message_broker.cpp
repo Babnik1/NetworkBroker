@@ -137,7 +137,30 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
                 DEBUG_LOG( "Argument is empty" );
                 return CodeToString( BrokerCodes::InvalidCommand );
             }
-            rc = Register( id, argument, session );
+
+            std::istringstream pub( argument );
+
+            std::string name;
+            std::string passwd;
+
+            pub >> name;
+            if ( name.empty() )
+            {
+                DEBUG_LOG( "REGISTER: Name is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
+
+            std::getline( pub, passwd );
+
+            if ( passwd.empty() )
+            {
+                DEBUG_LOG( "REGISTER: Password is empty" );
+                return CodeToString( BrokerCodes::InvalidCommand );
+            }
+
+            passwd.erase( 0, 1 );
+
+            rc = Register( id, name, passwd, session );
             break;
         }
         case Actions::SUBSCRIBE:
@@ -217,18 +240,19 @@ std::string MessageBroker::HandleCommand( SessionId id, const std::string& comma
 
 BrokerCodes MessageBroker::Login( SessionId id, const std::string& name, SessionWeakPtr session )
 {
-    return static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, session ) );
+    const std::string placeholder; // @todo 
+    return static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, placeholder, session ) );
 }
 
-BrokerCodes MessageBroker::Register( SessionId id, const std::string& name, SessionWeakPtr session )
+BrokerCodes MessageBroker::Register( SessionId id, const std::string& name, const std::string& passwd, SessionWeakPtr session )
 {
-    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->CreateClient( name ) );
+    BrokerCodes rc = static_cast< BrokerCodes >( cliManager_->CreateClient( name, passwd ) );
     if ( rc != BrokerCodes::Ok )
     {
         return rc;
     }
     INFO_ALL( "Client " << name << " registered successfully" );
-    rc =  static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, session ) );
+    rc =  static_cast< BrokerCodes >( cliManager_->ConnectClient( name , id, passwd, session ) );
     if ( rc != BrokerCodes::Ok )
     {
         return rc;

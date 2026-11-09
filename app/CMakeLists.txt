@@ -8,6 +8,7 @@ set( SOURCES
         src/broker/message_broker.cpp
         src/clients/clients_manager.cpp
         src/clients/client.cpp
+        src/clients/passwd/crypto_password_verifier.cpp
         src/topics/topic_manager.cpp 
         src/db/json_client_repository.cpp 
         src/db/json_topic_repository.cpp
@@ -26,6 +27,7 @@ target_include_directories( Broker PRIVATE
 target_link_libraries( Broker PRIVATE 
     CONAN_PKG::nlohmann_json
     CONAN_PKG::boost
+    CONAN_PKG::openssl
 )
 
 set_target_properties( Broker PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR} )

@@ -17,4 +17,5 @@ enum class ClientsCodes
     Unauthorized            = 8,    /// Не авторизован.
 
     InternalError           = 9,    /// Другая ошибка.
+    InvalidPassword         = 12,   /// Неверный пароль.
 };

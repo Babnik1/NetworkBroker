@@ -40,7 +40,7 @@ TEST( ClientManagerTest, CreateClient )
         std::move( repository ) );
 
     EXPECT_EQ(
-        manager.CreateClient( "alex" ),
+        manager.CreateClient( "alex", "placeholder" ),
         ClientsCodes::Ok );
 
     auto clients = repositoryPtr->LoadClients();
@@ -70,7 +70,7 @@ TEST( ClientManagerTest, CreateClientDatabaseError )
         std::move( repository ) );
 
     EXPECT_EQ(
-        manager.CreateClient( "alex" ),
+        manager.CreateClient( "alex", "placeholder" ),
         ClientsCodes::InternalError );
 }
 
@@ -81,7 +81,7 @@ TEST( ClientManagerTest, ConnectClient )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     ClientManager manager(
         std::move( repository ) );
@@ -93,6 +93,7 @@ TEST( ClientManagerTest, ConnectClient )
         manager.ConnectClient(
             "alex",
             42,
+            "placeholder",
             session ),
         ClientsCodes::Ok );
 
@@ -125,6 +126,7 @@ TEST( ClientManagerTest, ConnectClientNotFound )
         manager.ConnectClient(
             "alex",
             42,
+            "placeholder",
             session ),
         ClientsCodes::ClientNotFound );
 }
@@ -136,7 +138,7 @@ TEST( ClientManagerTest, ConnectClientAlreadyConnected )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     ClientManager manager(
         std::move( repository ) );
@@ -153,6 +155,7 @@ TEST( ClientManagerTest, ConnectClientAlreadyConnected )
         manager.ConnectClient(
             "alex",
             42,
+            "placeholder",
             firstSession ),
         ClientsCodes::Ok );
 
@@ -160,6 +163,7 @@ TEST( ClientManagerTest, ConnectClientAlreadyConnected )
         manager.ConnectClient(
             "alex",
             43,
+            "placeholder",
             secondSession ),
         ClientsCodes::ClientAlreadyConnected );
 }
@@ -171,7 +175,7 @@ TEST( ClientManagerTest, GetClientId )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     ClientManager manager(
         std::move( repository ) );
@@ -183,6 +187,7 @@ TEST( ClientManagerTest, GetClientId )
         manager.ConnectClient(
             "alex",
             42,
+            "placeholder",
             session ),
         ClientsCodes::Ok );
 
@@ -206,7 +211,7 @@ TEST( ClientManagerTest, GetClientIdNotFound )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     ClientManager manager(
         std::move( repository ) );
@@ -231,7 +236,7 @@ TEST( ClientManagerTest, DisconnectClient )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     ClientManager manager(
         std::move( repository ) );
@@ -243,6 +248,7 @@ TEST( ClientManagerTest, DisconnectClient )
         manager.ConnectClient(
             "alex",
             42,
+            "placeholder",
             session ),
         ClientsCodes::Ok );
 
@@ -264,7 +270,7 @@ TEST( ClientManagerTest, DisconnectClientNotFound )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     ClientManager manager(
         std::move( repository ) );
@@ -280,7 +286,7 @@ TEST( ClientManagerTest, RemoveClient )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     auto* repositoryPtr = repository.get();
 
@@ -315,7 +321,7 @@ TEST( ClientManagerTest, RemoveClientDatabaseError )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     repository->SetDeleteResult( false );
 
@@ -333,7 +339,7 @@ TEST( ClientManagerTest, UnloginClient )
     auto repository = std::make_unique< MockClientRepository >();
 
     repository->AddClient(
-        Client( 100, "alex" ) );
+        Client( 100, "alex", "placeholder" ) );
 
     ClientManager manager(
         std::move( repository ) );
@@ -345,6 +351,7 @@ TEST( ClientManagerTest, UnloginClient )
         manager.ConnectClient(
             "alex",
             42,
+            "placeholder",
             session ),
         ClientsCodes::Ok );
 
@@ -369,6 +376,7 @@ TEST( ClientManagerTest, UnloginClient )
         manager.ConnectClient(
             "alex",
             42,
+            "placeholder",
             session ),
         ClientsCodes::Ok );
 }

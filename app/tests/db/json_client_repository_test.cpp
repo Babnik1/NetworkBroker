@@ -126,7 +126,7 @@ TEST( JsonClientRepositoryTest, SaveClient )
 
     JsonRepository repository( testDbFile );
 
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     EXPECT_TRUE(
         repository.SaveClient( client ) );
@@ -162,7 +162,7 @@ TEST( JsonClientRepositoryTest, SaveClientUpdate )
 
     JsonRepository repository( testDbFile );
 
-    Client client( 100, "bob" );
+    Client client( 100, "bob", "placeholder" );
 
     EXPECT_TRUE(
         repository.SaveClient( client ) );
@@ -191,7 +191,7 @@ TEST( JsonClientRepositoryTest, SaveClientFileNotFound )
 
     JsonRepository repository( testDbFile );
 
-    Client client( 100, "alex" );
+    Client client( 100, "alex", "placeholder" );
 
     EXPECT_FALSE(
         repository.SaveClient( client ) );
@@ -212,7 +212,7 @@ TEST( JsonClientRepositoryTest, SaveClientInvalidJson )
 
     JsonRepository repository( testDbFile );
 
-    Client client( 200, "bob" );
+    Client client( 200, "bob", "placeholder" );
 
     EXPECT_FALSE(
         repository.SaveClient( client ) );

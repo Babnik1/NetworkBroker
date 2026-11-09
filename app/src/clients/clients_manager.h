@@ -11,6 +11,7 @@
 #include "fwd.h"
 #include "rc.h"
 #include "i_client_manager.h"
+#include "passwd/i_password_verifier.h"
 
 
 /// @brief Класс клиент-менеджера.
@@ -23,10 +24,10 @@ public:
     ClientManager( IClientRepositoryPtr db );
 
     /// @copydoc IClientManager::CreateClient
-    ClientsCodes CreateClient( const std::string& name );
+    ClientsCodes CreateClient( const std::string& name, const std::string& passwd );
 
     /// @copydoc IClientManager::ConnectClient
-    ClientsCodes ConnectClient( const std::string& name, SessionId id, SessionWeakPtr session );
+    ClientsCodes ConnectClient( const std::string& name, SessionId id, const std::string& passwd, SessionWeakPtr session );
 
     /// @copydoc IClientManager::DisconnectClient
     void DisconnectClient( SessionId id );
@@ -50,6 +51,7 @@ private:
 
     std::unordered_map< ClientId, Client > clients_;    /// Список клиентов и их ID.
     IClientRepositoryPtr db_;                           /// Указатель на базу данных.
+    IPasswordVerifierPtr passVer_;                      /// Указатель на интерфейс обработчика паролей.
 
     /// @brief Загрузка клиентов из БД.
     void LoadClients();

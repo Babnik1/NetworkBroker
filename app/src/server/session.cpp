@@ -31,7 +31,7 @@ void Session::Start()
 {
     std::string msg = "Welcome to MessageBroker\n"
                       "Available commands:\n"
-                      "REGISTER <name>\n"
+                      "REGISTER <name> <password>\n"
                       "LOGIN <name>\n";
     Send( msg );
     Read();
