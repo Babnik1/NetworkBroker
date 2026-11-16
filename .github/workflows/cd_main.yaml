@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
 
@@ -44,7 +44,6 @@ jobs:
       with:
         files: |
           Broker
-          BrokerClient
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
