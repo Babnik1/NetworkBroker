@@ -32,6 +32,5 @@ all: conan-profile fetch build
 clean:
 	@rm -rf build
 	@rm -rf Broker
-	@rm -rf BrokerClient
 
 .PHONY : conan-profile fetch build all debug
